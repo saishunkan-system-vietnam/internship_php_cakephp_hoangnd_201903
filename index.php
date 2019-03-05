@@ -14,4 +14,3 @@
  */
 
 require 'webroot' . DIRECTORY_SEPARATOR . 'index.php';
-// echo 'frist";

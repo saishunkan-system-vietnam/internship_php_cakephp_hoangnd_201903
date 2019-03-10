@@ -23,12 +23,13 @@ class LoginController extends AppController {
 
     public function initialize() {
         parent::initialize();
-        $this->viewBuilder()->layout('loginLayout');
+        $this->viewBuilder()->setLayout('loginLayout');
         $this->loadModel('Users');
         $this->session = $this->request->session();
     }
 
     public function index() {
+        $this->set('title','a');
 
         $data = $this->request->getData();
         if (count($data) > 0) {
@@ -51,50 +52,7 @@ class LoginController extends AppController {
             }
             $this->set('data', $data);
         }
-        //INSERT DATA
-        //cách 1
-//         $usersObj=$this->Users->newEntity();
-//         $usersObj->username="nguyenDinhHoang";
-//         $usersObj->password="123";
-//         $this->Users->Save($usersObj);
-        //cách 2
-//         $userObjQuery=  $this->Users->query();
-//         $userObjQuery->insert(['username','password'])->values([
-//             "username"=>"NguyenDinhHoang2",
-//             "password"=>"1231232"
-//         ])->execute();
-        //SELECT DATA
-//         $data=  $this->Users->find()->toArray();
-//         $data=  $this->Users->find("all",[
-//             //"conditions"=>['username'=>"NguyenDinhHoang"],
-//             'limit'=>1,
-//             'order'=>['username'=>'desc']
-//         ])->toArray();
-//         echo '<pre>';
-//         var_dump($data);
-        //UPDATE DATA
-//         $data=  $this->Users->get('nguyendinhhoang2');
-//         $data->password='456';
-//         $this->Users->save($data);
-//         
-//         $data=  $this->Users->query();
-//         $data->update()->set([
-//             'password'=>'123456789'             
-//         ])->where([
-//             'username'=>'nguyendinhhoang2'
-//         ])->execute();       
-//         
-//          echo '<pre>';
-//         var_dump($data);
-        //DELETE
-//         $data=$this->Users->get('nguyendinhhoang');
-//         $this->Users->delete($data);
-//         $data=  $this->Users->query();
-//         $data->delete()->where([
-//             'username'=>'nguyendinhhoang'
-//         ])->execute();
-//         
-//         $this->autoRender=FALSE;
+        
     }
 
     public function testdatavalidate() {

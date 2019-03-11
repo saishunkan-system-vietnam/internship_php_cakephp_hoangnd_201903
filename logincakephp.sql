@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2019 at 02:59 PM
+-- Generation Time: Mar 11, 2019 at 05:34 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.26
 
@@ -45,6 +45,14 @@ CREATE TABLE `role_details` (
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `role_details`
+--
+
+INSERT INTO `role_details` (`ID`, `name`) VALUES
+(3, 'Administrator'),
+(4, 'User');
+
 -- --------------------------------------------------------
 
 --
@@ -57,11 +65,17 @@ CREATE TABLE `users` (
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `sex` tinyint(1) NOT NULL,
-  `age` int(11) NOT NULL,
   `birthday` date NOT NULL,
   `phonenumber` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`ID`, `username`, `password`, `name`, `sex`, `birthday`, `phonenumber`, `address`) VALUES
+(1, 'hoangnguyenit98@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đình Hoàng', 0, '1998-09-03', '984554856', 'Hà Nội');
 
 --
 -- Indexes for dumped tables
@@ -102,13 +116,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_details`
 --
 ALTER TABLE `role_details`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

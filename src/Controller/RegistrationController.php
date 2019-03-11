@@ -18,7 +18,9 @@ class RegistrationController extends AppController
     }
 
     public function index(){
-
+        if($this->request->isPost()){
+            
+        }
     }
 
 }

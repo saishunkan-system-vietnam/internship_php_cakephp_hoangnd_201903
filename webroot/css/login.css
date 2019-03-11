@@ -1,0 +1,7 @@
+.form{
+    width: 600px;
+    margin: 150px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px silver;
+}

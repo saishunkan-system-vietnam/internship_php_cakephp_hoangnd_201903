@@ -12,7 +12,6 @@ class HomesController extends LoggedController
     {
         parent::initialize();
         $this->viewBuilder()->setLayout('homeLayout');
-        $this->loadComponent('test');
     }
 
     public function index()

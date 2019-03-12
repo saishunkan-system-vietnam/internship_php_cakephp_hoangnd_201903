@@ -1,3 +1,13 @@
+
+<div class="login_fail">
+    <p>
+    <?php
+        if(isset($loginFail)){
+            echo $loginFail;
+        }
+    ?>
+    </p>
+</div>
 <div class="form">
     <?=$this->Form->create();?>
     <?=$this->Form->control('username',['label'=>'Username:'])?>

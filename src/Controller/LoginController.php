@@ -15,57 +15,40 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 
 class LoginController extends AppController {
-
     public $session;
-
     public function initialize() {
         parent::initialize();
         $this->viewBuilder()->setLayout('loginLayout');
-        $this->loadModel('Users');
-        $this->session = $this->request->session();
+        $this->session=$this->getRequest()->getSession();
     }
 
     public function index() {
-        $this->set('title','a');
 
-        $data = $this->request->getData();
-        if (count($data) > 0) {
-            $getUser = $this->Users->find('all', [
-                        'conditions' => ['username' => $data['username'],
-                            'and' => [
-                                'password' => $data['pass']
-                            ]]
-                    ])->toArray();
-            if (count($getUser) > 0) {
-                $this->session->write('username', $getUser[0]['username']);
-                $this->session->write('pass', $getUser[0]['password']);
-                $this->session->write('role', $getUser[0]['role']);
-                return $this->redirect([
-                            'controller' => 'Homes',
-                            'action' => 'index'
-                ]);
-            } else {
-                $this->set('thongbao', 'Tài khoản hoặc mật khẩu không chính xác');
-            }
-            $this->set('data', $data);
+        if($this->request->isPost()){
+         $reqUser=$this->request->getData();
+         $passwordMd5=md5($reqUser['password']);
+         $userTable=TableRegistry::getTableLocator()->get('Users');
+         $getUser=$userTable->find('all',[
+             'conditions'=>[
+                 'username'=>$reqUser['username'],
+                 'and'=>['password'=>$passwordMd5]
+             ]
+         ])->first();
+         if(count($getUser)>0){
+             $roleTable=TableRegistry::getTableLocator()->get('Roles');
+             $getRole=$roleTable->find('all',[
+                 'conditions'=>['users_id'=>$getUser['id']]
+             ])->toArray();
+             $this->session->write('username',$getUser['username']);
+             $this->session->write('roles',$getRole);
+             $this->redirect('/home');
+         }else{
+             $this->set('loginFail','Tài khoản hoặc mật khẩu không chính xác');
+         }
         }
-        
     }
-
-    public function testdatavalidate() {
-        $this->autoRender = FALSE;
-        $validator = new Validator;
-        $req_data = [
-            'username' => '',
-            'password' => ''
-        ];
-    }
-
-    public function login() {
-        
-    }
-
 }

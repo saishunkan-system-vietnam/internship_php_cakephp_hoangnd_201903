@@ -28,7 +28,6 @@ class RegistrationController extends AppController {
             $birthDay = date_format(date_create($strBirthDay), 'Y/m/d');
             
             $passwordMd5= md5($req_user['password']);
-            var_dump($passwordMd5);
             $userTable = TableRegistry::getTableLocator()->get('Users');
             $newUser = $userTable->newEntity();
             $newUser->username = $req_user['username'];

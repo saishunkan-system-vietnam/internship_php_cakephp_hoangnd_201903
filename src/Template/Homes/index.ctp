@@ -1,1 +1,0 @@
-<?=$this->Html->link('Logout',['action'=>'logout'])?>

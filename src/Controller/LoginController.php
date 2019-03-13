@@ -24,6 +24,7 @@ class LoginController extends AppController {
         parent::initialize();
         $this->viewBuilder()->setLayout('loginLayout');
         $this->session=$this->getRequest()->getSession();
+        $this->loadComponent('roles');
     }
 
     public function index() {
@@ -45,10 +46,16 @@ class LoginController extends AppController {
              ])->toArray();
              $this->session->write('username',$getUser['username']);
              $this->session->write('roles',$getRole);
-             $this->redirect('/home');
+             $loginSystem=$this->roles->checkLoginSystem($getRole);
+             if($loginSystem===true){
+                 $this->redirect('/manager');
+             }else{
+                 $this->redirect('/home');
+             }
          }else{
              $this->set('loginFail','Tài khoản hoặc mật khẩu không chính xác');
          }
         }
     }
+
 }

@@ -1,31 +1,22 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: HoangND
+ * Date: 2019/03/13
+ * Time: 13:42
+ */
 
 namespace App\Controller;
 
-use App\Controller\AppController;
 
-class HomesController extends LoggedController
+class HomesController extends AppController
 {
-    //public $components=array('test');
-
-    public function initialize()
-    {
-        parent::initialize();
-        $this->viewBuilder()->setLayout('homeLayout');
-    }
-
-    public function index()
-    {
-
-    }
-
-    public function logout()
-    {
+    public function index(){
         $this->autoRender=false;
-        $this->session->destroy('username');
-        $this->session->destroy('roles');
-        $this->redirect('/login');
+        echo 'day là trang chu user';
+//        $session=$this->getRequest()->getSession();
+//        $session->destroy('username');
+//        $session->destroy('roles');
+//        $this->redirect('/login');
     }
-
-
 }

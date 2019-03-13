@@ -1,11 +1,11 @@
 ﻿-- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2019 at 05:13 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.1.26
+-- Generation Time: 2019 年 3 朁E13 日 12:03
+-- サーバのバージョン： 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chitietloaihang`
+-- テーブルの構造 `chitietloaihang`
 --
 
 CREATE TABLE `chitietloaihang` (
@@ -34,21 +34,44 @@ CREATE TABLE `chitietloaihang` (
   `loaihang_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- テーブルのデータのダンプ `chitietloaihang`
+--
+
+INSERT INTO `chitietloaihang` (`id`, `tenchitietloaihang`, `loaihang_id`) VALUES
+(5, '6', 3),
+(6, '6s', 3),
+(7, '6s Plus', 3),
+(8, '6 Plus', 3),
+(9, 'f5', 1),
+(10, 'f7', 1),
+(11, 'f9', 1),
+(12, 'a3s', 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loaihang`
+-- テーブルの構造 `loaihang`
 --
 
 CREATE TABLE `loaihang` (
   `id` int(11) NOT NULL,
-  `tenloaihang` int(11) NOT NULL
+  `tenloaihang` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- テーブルのデータのダンプ `loaihang`
+--
+
+INSERT INTO `loaihang` (`id`, `tenloaihang`) VALUES
+(1, 'Oppo'),
+(2, 'Samsung'),
+(3, 'Iphone');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mathang`
+-- テーブルの構造 `mathang`
 --
 
 CREATE TABLE `mathang` (
@@ -65,7 +88,7 @@ CREATE TABLE `mathang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nhomhang`
+-- テーブルの構造 `nhomhang`
 --
 
 CREATE TABLE `nhomhang` (
@@ -73,50 +96,61 @@ CREATE TABLE `nhomhang` (
   `tennhomhang` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- テーブルのデータのダンプ `nhomhang`
+--
+
+INSERT INTO `nhomhang` (`id`, `tennhomhang`) VALUES
+(1, 'Hot'),
+(2, 'mới'),
+(3, 'bình thường');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- テーブルの構造 `roles`
 --
 
 CREATE TABLE `roles` (
-  `ID` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `role_details_id` int(11) NOT NULL,
   `users_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `roles`
+-- テーブルのデータのダンプ `roles`
 --
 
-INSERT INTO `roles` (`ID`, `role_details_id`, `users_id`) VALUES
-(1, 0, 1),
-(2, 1, 2);
+INSERT INTO `roles` (`id`, `role_details_id`, `users_id`) VALUES
+(8, 0, 1),
+(9, 1, 2),
+(10, 1, 3),
+(11, 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role_details`
+-- テーブルの構造 `role_details`
 --
 
 CREATE TABLE `role_details` (
-  `ID` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `role_details`
+-- テーブルのデータのダンプ `role_details`
 --
 
-INSERT INTO `role_details` (`ID`, `name`) VALUES
+INSERT INTO `role_details` (`id`, `name`) VALUES
 (0, 'Administrator'),
 (1, 'User'),
-(6, 'hoang');
+(2, 'system');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thongso`
+-- テーブルの構造 `thongso`
 --
 
 CREATE TABLE `thongso` (
@@ -139,11 +173,11 @@ CREATE TABLE `thongso` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- テーブルの構造 `users`
 --
 
 CREATE TABLE `users` (
-  `ID` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -154,12 +188,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- テーブルのデータのダンプ `users`
 --
 
-INSERT INTO `users` (`ID`, `username`, `password`, `name`, `sex`, `birthday`, `phonenumber`, `address`) VALUES
+INSERT INTO `users` (`id`, `username`, `password`, `name`, `sex`, `birthday`, `phonenumber`, `address`) VALUES
 (1, 'hoangnguyenit98@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đình Hoàng', 0, '1998-09-03', '984554856', 'Hà Nội'),
-(2, 'hoangnguyen03091998@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đinh Hoàng', 0, '1998-09-03', '984554856', 'Hà Nội');
+(2, 'hoangnguyen03091998@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đinh Hoàng', 0, '1998-09-03', '984554856', 'Hà Nội'),
+(3, 'ng.hoang9898@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đình Hoàng', 0, '1998-09-03', '0981056713', 'Hà Nội');
 
 --
 -- Indexes for dumped tables
@@ -196,7 +231,7 @@ ALTER TABLE `nhomhang`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`ID`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `role_details_id` (`role_details_id`),
   ADD KEY `users_id` (`users_id`);
 
@@ -204,7 +239,7 @@ ALTER TABLE `roles`
 -- Indexes for table `role_details`
 --
 ALTER TABLE `role_details`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `thongso`
@@ -217,7 +252,7 @@ ALTER TABLE `thongso`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`ID`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
@@ -228,65 +263,64 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chitietloaihang`
 --
 ALTER TABLE `chitietloaihang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `loaihang`
 --
 ALTER TABLE `loaihang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `mathang`
 --
 ALTER TABLE `mathang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `nhomhang`
 --
 ALTER TABLE `nhomhang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `role_details`
 --
 ALTER TABLE `role_details`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `thongso`
 --
 ALTER TABLE `thongso`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- ダンプしたテーブルの制約
+--
 
 --
--- Constraints for dumped tables
---
-
---
--- Constraints for table `chitietloaihang`
+-- テーブルの制約 `chitietloaihang`
 --
 ALTER TABLE `chitietloaihang`
   ADD CONSTRAINT `fk_chitietloaihang_loaihang_id` FOREIGN KEY (`loaihang_id`) REFERENCES `loaihang` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `mathang`
+-- テーブルの制約 `mathang`
 --
 ALTER TABLE `mathang`
   ADD CONSTRAINT `fk_mathang_chitietloaihang_id` FOREIGN KEY (`chitietloaihang_id`) REFERENCES `chitietloaihang` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- テーブルの制約 `roles`
+--
+ALTER TABLE `roles`
+  ADD CONSTRAINT `fk_roles_role_details_id` FOREIGN KEY (`role_details_id`) REFERENCES `role_details` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_roles_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

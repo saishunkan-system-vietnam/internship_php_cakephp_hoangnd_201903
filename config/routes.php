@@ -18,6 +18,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
@@ -90,14 +91,16 @@ Router::scope('/', function (RouteBuilder $routes) {
      * routes you want in your application.
      */
 
-    Router::scope('/home',function (RouteBuilder $routes){
-        $routes->connect('/', ['controller' => 'Homes', 'action' => 'index']);
-        $routes->connect('/login', ['controller' => 'Login', 'action' => 'index']);
+    Router::scope('/manager', function (RouteBuilder $routes) {
+        $routes->connect('/', ['controller' => 'Managers', 'action' => 'index']);
+        $routes->connect('/logout', ['controller' => 'Managers', 'action' => 'logout']);
+        $routes->connect('/phone_manager', ['controller' => 'PhoneManager', 'action' => 'index']);
     });
 
-    Router::scope('/manager',function (RouteBuilder $routes){
-        $routes->connect('/', ['controller' => 'Managers', 'action' => 'index']);
-        $routes->connect('/phone_manager', ['controller' => 'PhoneManager', 'action' => 'index']);
+    Router::scope('/', function (RouteBuilder $routes) {
+        $routes->connect('/', ['controller' => 'Homes', 'action' => 'index']);
+        $routes->connect('/login', ['controller' => 'Login', 'action' => 'index']);
+        $routes->connect('/registration', ['controller' => 'Registration', 'action' => 'index']);
     });
     $routes->fallbacks(DashedRoute::class);
 });
@@ -113,3 +116,16 @@ Router::scope('/', function (RouteBuilder $routes) {
  * });
  * ```
  */
+//Router::scope('/manager', function (RouteBuilder $routes) {
+//    $routes->connect('/', ['controller' => 'Managers', 'action' => 'index']);
+//    $routes->connect('/logout', ['controller' => 'Managers', 'action' => 'logout']);
+//    Router::scope('/phonemanager', function (RouteBuilder $routesPhoneManager) {
+//        $routesPhoneManager->connect('/', ['controller' => 'PhoneManager', 'action' => 'index']);
+//    });
+//});
+//
+//Router::scope('/', function (RouteBuilder $routes) {
+//    $routes->connect('/', ['controller' => 'Homes', 'action' => 'index']);
+//    $routes->connect('/login', ['controller' => 'Login', 'action' => 'index']);
+//    $routes->connect('/registration', ['controller' => 'Registration', 'action' => 'index']);
+//});

@@ -1,13 +1,25 @@
-
-(function ($) {
-    "use strict";
-$.(document).ready(function () {
+$(document).ready(function () {
+    if($('#loaihang').val()!=='chon'){
+        loadlstchitietloaihang();
+    }
     $('#loaihang').change(function () {
-        $.ajax({
-            method:'post',
-            url:''
-        });
+        loadlstchitietloaihang();
     });
 });
-
-})(jQuery);
+function loadlstchitietloaihang() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_csrfToken"]').val()
+        }
+    });
+    $.ajax({
+        method: 'post',
+        url: "/logincakephp/Ajax/getlstchitietloaihang",
+        data: {loaihang_id: $('#loaihang').val()}
+    }).done(function (rp) {
+        $('#chitietloaihang').removeAttr('disabled');
+        $('#chitietloaihang').html(rp);
+    }).fail(function () {
+        alert('Fail load');
+    });
+}

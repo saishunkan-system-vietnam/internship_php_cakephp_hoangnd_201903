@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2019 年 3 朁E13 日 12:03
--- サーバのバージョン： 10.1.25-MariaDB
+-- Generation Time: Mar 14, 2019 at 11:57 AM
+-- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `chitietloaihang`
+-- Table structure for table `chitietloaihang`
 --
 
 CREATE TABLE `chitietloaihang` (
@@ -35,7 +35,7 @@ CREATE TABLE `chitietloaihang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- テーブルのデータのダンプ `chitietloaihang`
+-- Dumping data for table `chitietloaihang`
 --
 
 INSERT INTO `chitietloaihang` (`id`, `tenchitietloaihang`, `loaihang_id`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `chitietloaihang` (`id`, `tenchitietloaihang`, `loaihang_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `loaihang`
+-- Table structure for table `loaihang`
 --
 
 CREATE TABLE `loaihang` (
@@ -60,7 +60,7 @@ CREATE TABLE `loaihang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- テーブルのデータのダンプ `loaihang`
+-- Dumping data for table `loaihang`
 --
 
 INSERT INTO `loaihang` (`id`, `tenloaihang`) VALUES
@@ -71,7 +71,7 @@ INSERT INTO `loaihang` (`id`, `tenloaihang`) VALUES
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `mathang`
+-- Table structure for table `mathang`
 --
 
 CREATE TABLE `mathang` (
@@ -85,10 +85,18 @@ CREATE TABLE `mathang` (
   `nhomhang_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `mathang`
+--
+
+INSERT INTO `mathang` (`id`, `tenmathang`, `soluong`, `giaban`, `hinhanh`, `hienthi`, `chitietloaihang_id`, `nhomhang_id`) VALUES
+(1, 'Điện thoại iPhone 6s Plus 32GB', 10, 9000000, 'ip6plus.jpeg', 1, 7, 3),
+(2, 'Điện thoại iPhone 6 Plus 32GB', 70, 7000000, 'ip6plus.jpeg', 0, 5, 3);
+
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `nhomhang`
+-- Table structure for table `nhomhang`
 --
 
 CREATE TABLE `nhomhang` (
@@ -97,7 +105,7 @@ CREATE TABLE `nhomhang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- テーブルのデータのダンプ `nhomhang`
+-- Dumping data for table `nhomhang`
 --
 
 INSERT INTO `nhomhang` (`id`, `tennhomhang`) VALUES
@@ -108,7 +116,7 @@ INSERT INTO `nhomhang` (`id`, `tennhomhang`) VALUES
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -118,7 +126,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- テーブルのデータのダンプ `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `role_details_id`, `users_id`) VALUES
@@ -130,7 +138,7 @@ INSERT INTO `roles` (`id`, `role_details_id`, `users_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `role_details`
+-- Table structure for table `role_details`
 --
 
 CREATE TABLE `role_details` (
@@ -139,7 +147,7 @@ CREATE TABLE `role_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- テーブルのデータのダンプ `role_details`
+-- Dumping data for table `role_details`
 --
 
 INSERT INTO `role_details` (`id`, `name`) VALUES
@@ -150,7 +158,7 @@ INSERT INTO `role_details` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `thongso`
+-- Table structure for table `thongso`
 --
 
 CREATE TABLE `thongso` (
@@ -173,7 +181,7 @@ CREATE TABLE `thongso` (
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -188,7 +196,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- テーブルのデータのダンプ `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `sex`, `birthday`, `phonenumber`, `address`) VALUES
@@ -273,7 +281,7 @@ ALTER TABLE `loaihang`
 -- AUTO_INCREMENT for table `mathang`
 --
 ALTER TABLE `mathang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `nhomhang`
 --
@@ -300,23 +308,23 @@ ALTER TABLE `thongso`
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- ダンプしたテーブルの制約
+-- Constraints for dumped tables
 --
 
 --
--- テーブルの制約 `chitietloaihang`
+-- Constraints for table `chitietloaihang`
 --
 ALTER TABLE `chitietloaihang`
   ADD CONSTRAINT `fk_chitietloaihang_loaihang_id` FOREIGN KEY (`loaihang_id`) REFERENCES `loaihang` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- テーブルの制約 `mathang`
+-- Constraints for table `mathang`
 --
 ALTER TABLE `mathang`
   ADD CONSTRAINT `fk_mathang_chitietloaihang_id` FOREIGN KEY (`chitietloaihang_id`) REFERENCES `chitietloaihang` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- テーブルの制約 `roles`
+-- Constraints for table `roles`
 --
 ALTER TABLE `roles`
   ADD CONSTRAINT `fk_roles_role_details_id` FOREIGN KEY (`role_details_id`) REFERENCES `role_details` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,

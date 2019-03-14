@@ -17,6 +17,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Application Controller
@@ -29,6 +30,15 @@ use Cake\Event\Event;
 class LoggedController extends Controller
 {
     protected $session;
+
+    protected $chiTietLoaiHangTable;
+    protected $loaiHangTable;
+    protected $matHangTable;
+    protected $nhomHangTable;
+    protected $thongSoTable;
+
+
+
 
     /**
      * Initialization hook method.
@@ -59,6 +69,15 @@ class LoggedController extends Controller
         if ($this->session->check('username') === false) {
             $this->redirect('/login');
         }
+
+
+        $this->loadModel('Chitietloaihang');
+        $this->loadModel('Loaihang');
+        $this->loadModel('Mathang');
+        $this->loaiHangTable = TableRegistry::getTableLocator()->get('Loaihang');
+        $this->matHangTable = TableRegistry::getTableLocator()->get('Mathang');
+        $this->nhomHangTable = TableRegistry::getTableLocator()->get('Nhomhang');
+        $this->thongSoTable = TableRegistry::getTableLocator()->get('Thongso');
 
     }
 }

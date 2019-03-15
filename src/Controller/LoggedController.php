@@ -50,8 +50,7 @@ class LoggedController extends Controller
      * @return void
      */
     public function initialize()
-    {
-
+    {      
         parent::initialize();
 
         $this->loadComponent('RequestHandler', [

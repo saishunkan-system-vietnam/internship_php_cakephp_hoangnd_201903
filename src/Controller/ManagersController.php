@@ -16,7 +16,7 @@ class ManagersController extends LoggedController
 
     public function index()
     {
-
+        
     }
 
     public function logout()

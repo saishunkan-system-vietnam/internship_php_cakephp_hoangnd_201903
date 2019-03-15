@@ -1,10 +1,20 @@
 $(document).ready(function () {
-    if($('#loaihang').val()!=='chon'){
-        loadlstchitietloaihang();
+     $('#hinhanhmoi').hide();
+    if ($('#loaihang').val()& $('#chitietloaihang').attr('title')==='add') {
+        if ($('#loaihang').val() !== 'chon') {
+            loadlstchitietloaihang();
+        }
     }
+
     $('#loaihang').change(function () {
         loadlstchitietloaihang();
     });
+    
+    $('#doianhmoi').click(function (){
+        $('#doianhmoi').hide();
+        $('#anh').hide();
+        $('#hinhanhmoi').show();
+    })
 });
 function loadlstchitietloaihang() {
     $.ajaxSetup({
@@ -22,4 +32,24 @@ function loadlstchitietloaihang() {
     }).fail(function () {
         alert('Fail load');
     });
+}
+function deletePhone(id) {
+    var r = confirm("Xóa mặt hàng?");
+    if (r == true) {
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_csrfToken"]').val()
+        }
+        });
+        $.ajax({
+            method:'post',
+            url:"/logincakephp/Ajax/deletemathang",
+            data:{mathang_id:id}
+        }).done(function (rq){            
+             location.reload();
+             alert('xóa thành công');
+        }).fail(function (rq){
+            alert('xóa không thành công');
+        });
+    }
 }

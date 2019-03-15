@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2019 at 11:57 AM
+-- Generation Time: Mar 15, 2019 at 11:31 AM
 -- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7d
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -90,8 +90,10 @@ CREATE TABLE `mathang` (
 --
 
 INSERT INTO `mathang` (`id`, `tenmathang`, `soluong`, `giaban`, `hinhanh`, `hienthi`, `chitietloaihang_id`, `nhomhang_id`) VALUES
-(1, 'Điện thoại iPhone 6s Plus 32GB', 10, 9000000, 'ip6plus.jpeg', 1, 7, 3),
-(2, 'Điện thoại iPhone 6 Plus 32GB', 70, 7000000, 'ip6plus.jpeg', 0, 5, 3);
+(1, 'Điện thoại iPhone 6s Plus 32GBb', 100, 9000000, 'oppa3s.jpg', 1, 7, 3),
+(5, 'Điện thoại OPPO A3s 32GB', 10, 4000000, 'oppa3s.jpg', 0, 12, 1),
+(6, 'Điện thoại iPhone 6 Plus 32GB ppp', 100, 10000000, 'ip6plus.jpeg', 0, 7, 2),
+(7, 'Điện thoại iPhone 6s Plus 128GB', 100, 10000000, 'ip6plus.jpeg', 0, 7, 3);
 
 -- --------------------------------------------------------
 
@@ -281,7 +283,7 @@ ALTER TABLE `loaihang`
 -- AUTO_INCREMENT for table `mathang`
 --
 ALTER TABLE `mathang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `nhomhang`
 --
@@ -291,44 +293,16 @@ ALTER TABLE `nhomhang`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `role_details`
---
-ALTER TABLE `role_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `thongso`
---
-ALTER TABLE `thongso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `chitietloaihang`
---
-ALTER TABLE `chitietloaihang`
-  ADD CONSTRAINT `fk_chitietloaihang_loaihang_id` FOREIGN KEY (`loaihang_id`) REFERENCES `loaihang` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Constraints for table `mathang`
---
-ALTER TABLE `mathang`
-  ADD CONSTRAINT `fk_mathang_chitietloaihang_id` FOREIGN KEY (`chitietloaihang_id`) REFERENCES `chitietloaihang` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
 -- Constraints for table `roles`
 --
 ALTER TABLE `roles`
-  ADD CONSTRAINT `fk_roles_role_details_id` FOREIGN KEY (`role_details_id`) REFERENCES `role_details` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_roles_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_roles_role_details_id` FOREIGN KEY (`role_details_id`) REFERENCES `role_details` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -13,7 +13,6 @@ use Cake\Controller\Component;
 class rolesComponent extends Component
 {
     public function checkLoginSystem(array $role){
-
         if(count($role)>0){
             foreach ($role as $item){
                 if($item['role_details_id']===2){

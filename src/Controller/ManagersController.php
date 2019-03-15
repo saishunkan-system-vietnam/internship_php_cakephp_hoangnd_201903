@@ -21,7 +21,7 @@ class ManagersController extends LoggedController
 
     public function logout()
     {
-        $this->autoRender=false;
+         $this->autoRender=false;
         $this->session->destroy('username');
         $this->session->destroy('roles');
         $this->redirect('/login');

@@ -31,15 +31,6 @@ class LoggedController extends Controller
 {
     protected $session;
 
-    protected $chiTietLoaiHangTable;
-    protected $loaiHangTable;
-    protected $matHangTable;
-    protected $nhomHangTable;
-    protected $thongSoTable;
-
-
-
-
     /**
      * Initialization hook method.
      *
@@ -74,10 +65,8 @@ class LoggedController extends Controller
         $this->loadModel('Chitietloaihang');
         $this->loadModel('Loaihang');
         $this->loadModel('Mathang');
-        $this->loaiHangTable = TableRegistry::getTableLocator()->get('Loaihang');
-        $this->matHangTable = TableRegistry::getTableLocator()->get('Mathang');
-        $this->nhomHangTable = TableRegistry::getTableLocator()->get('Nhomhang');
-        $this->thongSoTable = TableRegistry::getTableLocator()->get('Thongso');
+        $this->loadModel('Nhomhang');
+        $this->loadModel('Thongso');
 
     }
 }

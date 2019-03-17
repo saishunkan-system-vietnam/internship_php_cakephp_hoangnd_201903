@@ -1,4 +1,7 @@
-<div class="form">    
+<div class="login_fail">
+    <?=$this->Flash->render()?>
+</div>
+<div class="form">   
     <?=$this->Form->create()?>
     <?=$this->Form->control('username',['label'=>'Username:'])?>
     <?=$this->Form->control('name',['label'=>'Name:'])?>

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -18,8 +19,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\User[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\User findOrCreate($search, callable $callback = null, $options = [])
  */
-class UsersTable extends Table
-{
+class UsersTable extends Table {
 
     /**
      * Initialize method
@@ -27,8 +27,7 @@ class UsersTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->setTable('users');
@@ -42,52 +41,31 @@ class UsersTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('id')
-            ->allowEmptyString('id', 'create');
+    public function validationDefault(Validator $validator) {
 
-        $validator
-            ->scalar('username')
-            ->maxLength('username', 100)
-            ->requirePresence('username', 'create')
-            ->allowEmptyString('username', false)
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+        $validator->requirePresence('username', 'Users', 'cần nhập vào username')
+                ->maxLength('username', 100, 'Tối đa cho phép nhập 100 kí tự')
+                ->allowEmptyString('username', FALSE, 'username không được để trống');
+//                ->add('username', [
+//                    'unique'=>[
+//                        'rule'=>'validateUnique',
+//                        'provider'=>'table',
+//                        'message'=>'username đã tồn tại, vui lòng nhập tên khác'
+//                    ]
+//                ]);
 
-        $validator
-            ->scalar('password')
-            ->maxLength('password', 100)
-            ->requirePresence('password', 'create')
-            ->allowEmptyString('password', false);
+        $validator->maxLength('name', 30, 'Tối đa nhập cho phép nhập 30 kí tự')
+                ->allowEmptyString('name', False, 'Họ tên không được để trống');
+        $validator->requirePresence('password', 'Users', 'cần nhập vào password')
+                ->allowEmptyString('password', FALSE, 'password không được để chống');
+        $validator->allowEmptyString('passwordAgain', False, 'Xác nhận password không được để trống')
+                ->add('passwordAgain', [
+                    'password_mismatch' => [
+                        'rule' => ['compareWith', 'password'],
+                        'message' => 'Hai password nhập vào phải giống nhau'
+                    ]
+        ]);
 
-        $validator
-            ->scalar('name')
-            ->maxLength('name', 30)
-            ->requirePresence('name', 'create')
-            ->allowEmptyString('name', false);
-
-        $validator
-            ->boolean('sex')
-            ->requirePresence('sex', 'create')
-            ->allowEmptyString('sex', false);
-
-        $validator
-            ->date('birthday')
-            ->requirePresence('birthday', 'create')
-            ->allowEmptyDate('birthday', false);
-
-        $validator
-            ->scalar('phonenumber')
-            ->maxLength('phonenumber', 10)
-            ->requirePresence('phonenumber', 'create')
-            ->allowEmptyString('phonenumber', false);
-
-        $validator
-            ->scalar('address')
-            ->maxLength('address', 255)
-            ->requirePresence('address', 'create')
-            ->allowEmptyString('address', false);
 
         return $validator;
     }
@@ -99,10 +77,9 @@ class UsersTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->isUnique(['username']));
-
-        return $rules;
-    }
+//    public function buildRules(RulesChecker $rules) {
+//        $rules->add($rules->isUnique(['username']));
+//
+//        return $rules;
+//    }
 }

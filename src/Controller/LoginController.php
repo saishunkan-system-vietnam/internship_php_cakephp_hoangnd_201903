@@ -19,42 +19,61 @@ use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 
 class LoginController extends AppController {
+
     public $session;
+
     public function initialize() {
         parent::initialize();
         $this->viewBuilder()->setLayout('loginLayout');
-        $this->session=$this->getRequest()->getSession();
+        $this->session = $this->getRequest()->getSession();
         $this->loadComponent('roles');
+        $this->loadModel('Users');
     }
 
     public function index() {
 
-        if($this->request->isPost()){
-         $reqUser=$this->request->getData();
-         $passwordMd5=md5($reqUser['password']);
-         $userTable=TableRegistry::getTableLocator()->get('Users');
-         $getUser=$userTable->find('all',[
-             'conditions'=>[
-                 'username'=>$reqUser['username'],
-                 'and'=>['password'=>$passwordMd5]
-             ]
-         ])->first();
-         if(count($getUser)>0){
-             $roleTable=TableRegistry::getTableLocator()->get('Roles');
-             $getRole=$roleTable->find('all',[
-                 'conditions'=>['users_id'=>$getUser['id']]
-             ])->toArray();
-             $this->session->write('username',$getUser['username']);
-             $this->session->write('roles',$getRole);
-             $loginSystem=$this->roles->checkLoginSystem($getRole);
-             if($loginSystem===true){
-                 $this->redirect('/manager');
-             }else{
-                 $this->redirect('/home');
-             }
-         }else{
-             $this->set('loginFail','Tài khoản hoặc mật khẩu không chính xác');
-         }
+        if ($this->request->isPost()) {
+            $reqUser = $this->request->getData();
+            $validation = $this->Users->newEntity($reqUser);
+            $validationError = $validation->errors();
+            if (empty($validationError)) {
+                $passwordMd5 = md5($reqUser['password']);
+                $userTable = TableRegistry::getTableLocator()->get('Users');
+                $getUser = $userTable->find('all', [
+                            'conditions' => [
+                                'username' => $reqUser['username'],
+                                'and' => ['password' => $passwordMd5]
+                            ]
+                        ])->first();
+                if (count($getUser) > 0) {
+                    $roleTable = TableRegistry::getTableLocator()->get('Roles');
+                    $getRole = $roleTable->find('all', [
+                                'conditions' => ['users_id' => $getUser['id']]
+                            ])->toArray();
+                    $this->session->write('username', $getUser['username']);
+                    $this->session->write('roles', $getRole);
+                    $loginSystem = $this->roles->checkLoginSystem($getRole);
+                    if ($loginSystem === TRUE) {
+                        $this->redirect('/manager');
+                    } else {
+                        $this->redirect('/home');
+                    }
+                } else {
+                    $this->set('loginFail', 'Tài khoản hoặc mật khẩu không chính xác');
+                }
+            } else {                
+                foreach ($validationError as $key=>$value){
+                    $break=FALSE;
+                    foreach ($value as $k=>$v){
+                        $this->Flash->error($v);
+                        $break=TRUE;
+                        break;
+                    }
+                    if($break===TRUE){
+                        break;
+                    }
+                }
+            }
         }
     }
 

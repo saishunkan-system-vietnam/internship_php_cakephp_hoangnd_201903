@@ -69,9 +69,7 @@ class PhoneManagerController extends LoggedController {
                     $newMatHang->hinhanh = $reqMatHang['hinhanh']['name'];
                     $newMatHang->hienthi = $reqMatHang['hienthi'];
                     $newMatHang->chitietloaihang_id = $reqMatHang['chitietloaihang'];
-                    $newMatHang->nhomhang_id = $reqMatHang['nhomhang'];
-                    //var_dump($newMatHang);
-                                        die();
+                    $newMatHang->nhomhang_id = $reqMatHang['nhomhang'];                    
                     if ($this->Mathang->save($newMatHang)) {
                         $this->redirect('/manager/phone_manager');
                     }

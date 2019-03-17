@@ -1,12 +1,6 @@
 
 <div class="login_fail">
-    <p>
-    <?php
-        if(isset($loginFail)){
-            echo $loginFail;
-        }
-    ?>
-    </p>
+    <?=$this->Flash->render()?>
 </div>
 <div class="form">
     <?=$this->Form->create();?>

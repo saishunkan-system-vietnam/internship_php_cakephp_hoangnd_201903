@@ -24,7 +24,7 @@ function loadlstchitietloaihang() {
     });
     $.ajax({
         method: 'post',
-        url: "/logincakephp/Ajax/getlstchitietloaihang",
+        url: "/shopdienthoai/Ajax/getlstchitietloaihang",
         data: {loaihang_id: $('#loaihang').val()}
     }).done(function (rp) {
         $('#chitietloaihang').removeAttr('disabled');
@@ -43,7 +43,7 @@ function deletePhone(id) {
         });
         $.ajax({
             method:'post',
-            url:"/logincakephp/Ajax/deletemathang",
+            url:"/shopdienthoai/Ajax/deletemathang",
             data:{mathang_id:id}
         }).done(function (rq){            
              location.reload();

@@ -46,27 +46,37 @@ class UsersTable extends Table {
         $validator->requirePresence('username', 'Users', 'cần nhập vào username')
                 ->maxLength('username', 100, 'Tối đa cho phép nhập 100 kí tự')
                 ->allowEmptyString('username', FALSE, 'username không được để trống');
-//                ->add('username', [
-//                    'unique'=>[
-//                        'rule'=>'validateUnique',
-//                        'provider'=>'table',
-//                        'message'=>'username đã tồn tại, vui lòng nhập tên khác'
-//                    ]
-//                ]);
+
 
         $validator->maxLength('name', 30, 'Tối đa nhập cho phép nhập 30 kí tự')
                 ->allowEmptyString('name', False, 'Họ tên không được để trống');
         $validator->requirePresence('password', 'Users', 'cần nhập vào password')
                 ->allowEmptyString('password', FALSE, 'password không được để chống');
         $validator->allowEmptyString('passwordAgain', False, 'Xác nhận password không được để trống')
-                ->add('passwordAgain', [
-                    'password_mismatch' => [
-                        'rule' => ['compareWith', 'password'],
-                        'message' => 'Hai password nhập vào phải giống nhau'
-                    ]
+                ->add('confirm_password', 'no-misspelling', [
+                    'rule' => ['compareWith', 'password'],
+                    'message' => 'Passwords are not equal',
         ]);
+//                ->add('passwordAgain', [
+//                    'password_mismatch' => [
+//                        'rule' => ['compareWith', 'password'],
+//                        'message' => 'Hai password nhập vào phải giống nhau'
+//                    ]
+//        ]);
 
 
+        return $validator;
+    }
+
+    public function validationRegestration(Validator $validator) {
+        $validator = $this->validationDefault($validator);
+        $validator->add('username', [
+            'unique' => [
+                'rule' => 'validateUnique',
+                'provider' => 'table',
+                'message' => 'username đã tồn tại, vui lòng nhập tên khác'
+            ]
+        ]);
         return $validator;
     }
 

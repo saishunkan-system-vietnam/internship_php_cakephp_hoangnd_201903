@@ -24,8 +24,7 @@
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('bootstrap.min.css') ?>
     <?= $this->Html->css('login.css') ?>
 
     <?= $this->fetch('meta') ?>

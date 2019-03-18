@@ -1,5 +1,6 @@
 <?=$this->Html->link('Back list',['action'=>'index'])?>
 <h1>Add phone</h1>
+<?=$this->Flash->render()?>
 <?=$this->Form->create(null,['type'=>'file'])?>
 <?=$this->Form->control('tenmathang',['label'=>'Phone name:'])?>
 <?=$this->Form->control('soluong',['label'=>'Quantity:','type'=>'number'])?>

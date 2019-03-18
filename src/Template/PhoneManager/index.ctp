@@ -1,6 +1,5 @@
-
+<?=$this->Form->input('csrfToken',['value'=>'79739e66ecdcb5c482be8031a93e500b92e3c97b7ea3686f115fb89c5345964e4535436fdcc4161ffd46a74e4059d363e634abf7c3d5a5f82e754f22402bc090','type'=>'hidden'])?>
 <?=$this->Html->link('add phone',['action'=>'add'])?>
-<input type="hidden" name="_csrfToken" autocomplete="off" value="8f76201adaa652bf843538e3dedb7805664a9b6847e4a354ba92e5dc4b113a335450fe474ff208680ac7a110464635099830904e84e7f770d135f881f2b124e7">
 <table>
     <tr>
         <th>

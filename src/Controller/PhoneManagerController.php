@@ -26,9 +26,13 @@ class PhoneManagerController extends LoggedController {
         foreach ($lstNhomHang as $item) {
             $this->arrNhomHang[$item['id']] = $item['tennhomhang'];
         }
+        $this->loadComponent('validation');
+//        $this->loadComponent('Csrf');
     }
 
     public function index() {
+//        $token = $this->request->getParam('_csrfToken');
+//        $this->set('csrfToken', $token);
         $lstPhone = $this->Mathang->find()
                 ->select($this->Mathang)
                 ->select($this->Loaihang)
@@ -54,25 +58,22 @@ class PhoneManagerController extends LoggedController {
         $this->set('lstNhomHang', $this->arrNhomHang);
         if ($this->request->isPost()) {
             $reqMatHang = $this->request->getData();
-            //var_dump($reqMatHang);
-            $validation = $this->Mathang->newEntity($reqMatHang);
+            $validation = $this->Mathang->newEntity($reqMatHang, ['validate' => 'Update']);
             $validationError = $validation->errors();
             if (!empty($validationError)) {
-                var_dump($validationError);
+                $this->Flash->error($this->validation->getmessage($validationError));
             } else {
-                if ($reqMatHang['hinhanh']['error'] === 0) {
-                    $newMatHang = $this->Mathang->newEntity();
-                    move_uploaded_file($reqMatHang['hinhanh']['tmp_name'], 'img/phone/' . $reqMatHang['hinhanh']['name']);
-                    $newMatHang->tenmathang = $reqMatHang['tenmathang'];
-                    $newMatHang->soluong = $reqMatHang['soluong'];
-                    $newMatHang->giaban = $reqMatHang['giaban'];
-                    $newMatHang->hinhanh = $reqMatHang['hinhanh']['name'];
-                    $newMatHang->hienthi = $reqMatHang['hienthi'];
-                    $newMatHang->chitietloaihang_id = $reqMatHang['chitietloaihang'];
-                    $newMatHang->nhomhang_id = $reqMatHang['nhomhang'];                    
-                    if ($this->Mathang->save($newMatHang)) {
-                        $this->redirect('/manager/phone_manager');
-                    }
+                $newMatHang = $this->Mathang->newEntity();
+                move_uploaded_file($reqMatHang['hinhanh']['tmp_name'], 'img/phone/' . $reqMatHang['hinhanh']['name']);
+                $newMatHang->tenmathang = $reqMatHang['tenmathang'];
+                $newMatHang->soluong = $reqMatHang['soluong'];
+                $newMatHang->giaban = $reqMatHang['giaban'];
+                $newMatHang->hinhanh = $reqMatHang['hinhanh']['name'];
+                $newMatHang->hienthi = $reqMatHang['hienthi'];
+                $newMatHang->chitietloaihang_id = $reqMatHang['chitietloaihang'];
+                $newMatHang->nhomhang_id = $reqMatHang['nhomhang'];
+                if ($this->Mathang->save($newMatHang)) {
+                    $this->redirect('/manager/phone_manager');
                 }
             }
         }
@@ -119,21 +120,6 @@ class PhoneManagerController extends LoggedController {
             if ($this->Mathang->save($newMatHang)) {
                 $this->redirect('/manager/phone_manager');
             }
-        }
-    }
-
-    public function test() {
-        $this->autoRender=FALSE;
-        $req = [
-            'chitietloaihang_id' => '',
-            'hinhanh' => ''
-        ];
-        $vadation = $this->Mathang->newEntity($req);
-        $vadationError = $vadation->errors();
-        if (!empty($vadationError)) {
-            print_r($vadationError);
-        } else {
-            echo 'ok';
         }
     }
 

@@ -28,6 +28,7 @@ class LoginController extends AppController {
         $this->session = $this->getRequest()->getSession();
         $this->loadComponent('roles');
         $this->loadModel('Users');
+        $this->loadComponent('validation');
     }
 
     public function index() {
@@ -62,17 +63,7 @@ class LoginController extends AppController {
                     $this->set('loginFail', 'Tài khoản hoặc mật khẩu không chính xác');
                 }
             } else {                
-                foreach ($validationError as $key=>$value){
-                    $break=FALSE;
-                    foreach ($value as $k=>$v){
-                        $this->Flash->error($v);
-                        $break=TRUE;
-                        break;
-                    }
-                    if($break===TRUE){
-                        break;
-                    }
-                }
+                $this->Flash->error( $this->validation->getmessage($validationError));
             }
         }
     }

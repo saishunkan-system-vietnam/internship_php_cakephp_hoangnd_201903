@@ -35,9 +35,9 @@ class AjaxController extends AppController {
     public function deletemathang() {
         $this->autoRender = FALSE;
         if ($this->request->is('ajax')) {
-            $mathangid = $this->request->getData('mathang_id');
-            $mathang = $this->Mathang->get($mathangid);
-            $this->Mathang->delete($mathang);
+//            $mathangid = $this->request->getData('mathang_id');
+//            $mathang = $this->Mathang->get($mathangid);
+//            $this->Mathang->delete($mathang);
         }
     }
 

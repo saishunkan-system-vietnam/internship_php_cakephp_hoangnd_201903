@@ -16,7 +16,7 @@
                         <?=$this->Form->text('name',['class'=>'form-control','placeholder'=>'Enter producer name...'])?>
                     </div>      
                     <div class="form-group">
-                        <?=$this->Form->submit('Add',['class'=>'btn btn-primary'])?>
+                        <?=$this->Form->submit('Add',['class'=>'btn btn-primary','name'=>'addproducer'])?>
                     </div>
                     <?=$this->Form->end()?>
                 </div>
@@ -28,15 +28,15 @@
                 <div class="panel-body">
                     <?=$this->Form->create()?>
                     <div class="form-group">
-                        <?=$this->Form->label('name','Choose producer:')?>
-                        <?=$this->Form->select('name',[['value'=>'','text'=>'---Choose producer---','hidden']],['class'=>'form-control'])?>
+                        <?=$this->Form->label('parent_id','Choose producer:')?>
+                        <?=$this->Form->select('parent_id',$option,['class'=>'form-control'])?>
                     </div>      
-                     <div class="form-group">
-                        <?=$this->Form->label('name','Name subproducer:')?>
-                        <?=$this->Form->text('name',['class'=>'form-control','placeholder'=>'Enter subproducer name...'])?>
+                    <div class="form-group">
+                        <?=$this->Form->label('namesub','Name subproducer:')?>
+                        <?=$this->Form->text('namesub',['class'=>'form-control','placeholder'=>'Enter subproducer name...'])?>
                     </div>  
                     <div class="form-group">
-                        <?=$this->Form->submit('Add',['class'=>'btn btn-primary'])?>
+                        <?=$this->Form->submit('Add',['class'=>'btn btn-primary','name'=>'addsubproducer'])?>
                     </div>
                     <?=$this->Form->end()?>
                 </div>

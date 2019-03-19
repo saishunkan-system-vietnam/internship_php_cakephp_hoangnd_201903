@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 19, 2019 at 11:36 AM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th3 19, 2019 lúc 05:14 PM
+-- Phiên bản máy phục vụ: 10.1.38-MariaDB
+-- Phiên bản PHP: 7.1.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,26 +19,38 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `shopdienthoai`
+-- Cơ sở dữ liệu: `shopdienthoai`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Cấu trúc bảng cho bảng `categories`
 --
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'miêu tả',
   `parent_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `parent_id`) VALUES
+(1, 'Samsung', 0),
+(2, 'Oppo', 0),
+(3, 'A3s', 2),
+(4, 'A3s', 2),
+(5, 'A3s', 2),
+(6, 'A3s', 2),
+(7, 'Iphone', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `groups`
+-- Cấu trúc bảng cho bảng `groups`
 --
 
 CREATE TABLE `groups` (
@@ -49,7 +61,7 @@ CREATE TABLE `groups` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `images`
+-- Cấu trúc bảng cho bảng `images`
 --
 
 CREATE TABLE `images` (
@@ -60,7 +72,7 @@ CREATE TABLE `images` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Cấu trúc bảng cho bảng `products`
 --
 
 CREATE TABLE `products` (
@@ -76,7 +88,7 @@ CREATE TABLE `products` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_groups`
+-- Cấu trúc bảng cho bảng `product_groups`
 --
 
 CREATE TABLE `product_groups` (
@@ -88,7 +100,7 @@ CREATE TABLE `product_groups` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_images`
+-- Cấu trúc bảng cho bảng `product_images`
 --
 
 CREATE TABLE `product_images` (
@@ -100,7 +112,7 @@ CREATE TABLE `product_images` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_specifications`
+-- Cấu trúc bảng cho bảng `product_specifications`
 --
 
 CREATE TABLE `product_specifications` (
@@ -124,7 +136,7 @@ CREATE TABLE `product_specifications` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Cấu trúc bảng cho bảng `roles`
 --
 
 CREATE TABLE `roles` (
@@ -134,7 +146,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `roles`
+-- Đang đổ dữ liệu cho bảng `roles`
 --
 
 INSERT INTO `roles` (`id`, `role_details_id`, `users_id`) VALUES
@@ -146,7 +158,7 @@ INSERT INTO `roles` (`id`, `role_details_id`, `users_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role_details`
+-- Cấu trúc bảng cho bảng `role_details`
 --
 
 CREATE TABLE `role_details` (
@@ -155,7 +167,7 @@ CREATE TABLE `role_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `role_details`
+-- Đang đổ dữ liệu cho bảng `role_details`
 --
 
 INSERT INTO `role_details` (`id`, `name`) VALUES
@@ -166,7 +178,7 @@ INSERT INTO `role_details` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `specifications`
+-- Cấu trúc bảng cho bảng `specifications`
 --
 
 CREATE TABLE `specifications` (
@@ -178,7 +190,7 @@ CREATE TABLE `specifications` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
@@ -193,7 +205,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `sex`, `birthday`, `phonenumber`, `address`) VALUES
@@ -202,36 +214,36 @@ INSERT INTO `users` (`id`, `username`, `password`, `name`, `sex`, `birthday`, `p
 (3, 'ng.hoang9898@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đình Hoàng', 0, '1998-09-03', '0981056713', 'Hà Nội');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `categories`
+-- Chỉ mục cho bảng `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `groups`
+-- Chỉ mục cho bảng `groups`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `images`
+-- Chỉ mục cho bảng `images`
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `products`
+-- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `categries_id` (`categories_id`);
 
 --
--- Indexes for table `product_groups`
+-- Chỉ mục cho bảng `product_groups`
 --
 ALTER TABLE `product_groups`
   ADD PRIMARY KEY (`id`),
@@ -239,7 +251,7 @@ ALTER TABLE `product_groups`
   ADD KEY `fk_productgroups_groupsid` (`groups_id`);
 
 --
--- Indexes for table `product_images`
+-- Chỉ mục cho bảng `product_images`
 --
 ALTER TABLE `product_images`
   ADD PRIMARY KEY (`id`),
@@ -247,7 +259,7 @@ ALTER TABLE `product_images`
   ADD KEY `images_id` (`images_id`);
 
 --
--- Indexes for table `product_specifications`
+-- Chỉ mục cho bảng `product_specifications`
 --
 ALTER TABLE `product_specifications`
   ADD PRIMARY KEY (`id`),
@@ -267,7 +279,7 @@ ALTER TABLE `product_specifications`
   ADD KEY `sim_card` (`sim_card`);
 
 --
--- Indexes for table `roles`
+-- Chỉ mục cho bảng `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
@@ -275,94 +287,102 @@ ALTER TABLE `roles`
   ADD KEY `users_id` (`users_id`);
 
 --
--- Indexes for table `role_details`
+-- Chỉ mục cho bảng `role_details`
 --
 ALTER TABLE `role_details`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `specifications`
+-- Chỉ mục cho bảng `specifications`
 --
 ALTER TABLE `specifications`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
--- AUTO_INCREMENT for table `images`
+-- AUTO_INCREMENT cho bảng `images`
 --
 ALTER TABLE `images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `product_groups`
+-- AUTO_INCREMENT cho bảng `product_groups`
 --
 ALTER TABLE `product_groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `product_images`
+-- AUTO_INCREMENT cho bảng `product_images`
 --
 ALTER TABLE `product_images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `product_specifications`
+-- AUTO_INCREMENT cho bảng `product_specifications`
 --
 ALTER TABLE `product_specifications`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `roles`
+-- AUTO_INCREMENT cho bảng `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
--- AUTO_INCREMENT for table `specifications`
+-- AUTO_INCREMENT cho bảng `specifications`
 --
 ALTER TABLE `specifications`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `products`
+-- Các ràng buộc cho bảng `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `fk_products_categoriesid` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `product_groups`
+-- Các ràng buộc cho bảng `product_groups`
 --
 ALTER TABLE `product_groups`
   ADD CONSTRAINT `fk_productgroups_groupsid` FOREIGN KEY (`groups_id`) REFERENCES `groups` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_productgroups_productsid` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `product_images`
+-- Các ràng buộc cho bảng `product_images`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `fk_productimages_imagesid` FOREIGN KEY (`images_id`) REFERENCES `images` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_productimages_productsid` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Constraints for table `product_specifications`
+-- Các ràng buộc cho bảng `product_specifications`
 --
 ALTER TABLE `product_specifications`
   ADD CONSTRAINT `fk_productspecifications_battery` FOREIGN KEY (`battery`) REFERENCES `specifications` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
@@ -381,7 +401,7 @@ ALTER TABLE `product_specifications`
   ADD CONSTRAINT `fk_productspecifications_weight` FOREIGN KEY (`weight`) REFERENCES `specifications` (`id`);
 
 --
--- Constraints for table `roles`
+-- Các ràng buộc cho bảng `roles`
 --
 ALTER TABLE `roles`
   ADD CONSTRAINT `fk_roles_role_details_id` FOREIGN KEY (`role_details_id`) REFERENCES `role_details` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;

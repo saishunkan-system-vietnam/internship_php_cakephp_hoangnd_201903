@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -21,8 +22,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Category[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Category findOrCreate($search, callable $callback = null, $options = [])
  */
-class CategoriesTable extends Table
-{
+class CategoriesTable extends Table {
 
     /**
      * Initialize method
@@ -30,8 +30,7 @@ class CategoriesTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->setTable('categories');
@@ -54,26 +53,31 @@ class CategoriesTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->integer('id')
-            ->allowEmptyString('id', 'create');
-
+                ->integer('id')
+                ->allowEmptyString('id', 'create'); 
         $validator
-            ->scalar('name')
-            ->maxLength('name', 100)
-            ->requirePresence('name', 'create')
-            ->allowEmptyString('name', false);
-
-        $validator
-            ->scalar('description')
-            ->requirePresence('description', 'create')
-            ->allowEmptyString('description', false);
-
+                ->scalar('name')
+                ->maxLength('name', 100)
+                ->requirePresence('name', 'create', 'Name is obligatory!')//tên là bắt buộc
+                ->allowEmptyString('name', false, 'Name must be different null.'); //tên phải khác null       
+        $validator->requirePresence('parent_id','create','Producer is obligatory!');
         return $validator;
     }
 
+    public function validationAdd(Validator $validator) {
+        $validator = $this->validationDefault($validator);
+        $validator->add('name', [
+            'unique'=>[
+                'rule'=>'validateUnique',
+                'provider'=>'table',
+                'message'=>'Name should be unique.'//tên phải là duy nhất
+            ]
+        ]);
+        return $validator;
+    }
+   
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.

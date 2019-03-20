@@ -51,8 +51,15 @@ class GroupsTable extends Table
         $validator
             ->scalar('name')
             ->maxLength('name', 100)
-            ->requirePresence('name', 'create')
-            ->allowEmptyString('name', false);
+            ->requirePresence('name', 'create','Name is obligatory')
+            ->allowEmptyString('name', false,'Nam should be different null.')
+                ->add('name', [
+                    'unique'=>[
+                        'rule'=>'validateUnique',
+                        'provider'=>'table',
+                        'message'=>'Name should be unique'
+                    ]
+                ]);
 
         return $validator;
     }

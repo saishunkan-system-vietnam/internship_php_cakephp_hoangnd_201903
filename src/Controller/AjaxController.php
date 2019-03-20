@@ -20,16 +20,16 @@ class AjaxController extends AppController {
     }
 
     public function getlstchitietloaihang() {
-        if ($this->request->is('ajax')) {
-            $loaiHang_id = $this->request->getData('loaihang_id');
-            $tenLoaiHang = $this->Loaihang->get($loaiHang_id)['tenloaihang'];
-            $lstLoaiHang = $this->Chitietloaihang->find('all', [
-                        'conditions' => ['loaihang_id' => $loaiHang_id]
-                    ])->toArray();
-
-            $this->set('tenLoaiHang', $tenLoaiHang);
-            $this->set('lstLoaiHang', $lstLoaiHang);
-        }
+//        if ($this->request->is('ajax')) {
+//            $loaiHang_id = $this->request->getData('loaihang_id');
+//            $tenLoaiHang = $this->Loaihang->get($loaiHang_id)['tenloaihang'];
+//            $lstLoaiHang = $this->Chitietloaihang->find('all', [
+//                        'conditions' => ['loaihang_id' => $loaiHang_id]
+//                    ])->toArray();
+//
+//            $this->set('tenLoaiHang', $tenLoaiHang);
+//            $this->set('lstLoaiHang', $lstLoaiHang);
+//        }
     }
 
     public function deletemathang() {

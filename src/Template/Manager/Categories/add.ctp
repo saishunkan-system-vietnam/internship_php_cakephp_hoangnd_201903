@@ -14,10 +14,11 @@
                     <div class="form-group">
                         <?=$this->Form->label('name','Name producer:')?>
                         <?=$this->Form->text('name',['class'=>'form-control','placeholder'=>'Enter producer name...'])?>
+                        <?php if(isset($erroNameProducer)){ echo '<p>'.$erroNameProducer.'</p>';}?>
                     </div>      
                     <div class="form-group">
                         <?=$this->Form->submit('Add',['class'=>'btn btn-primary','name'=>'addproducer'])?>
-                    </div>
+                    </div>                    
                     <?=$this->Form->end()?>
                 </div>
             </div>
@@ -30,10 +31,12 @@
                     <div class="form-group">
                         <?=$this->Form->label('parent_id','Choose producer:')?>
                         <?=$this->Form->select('parent_id',$option,['class'=>'form-control'])?>
+                        <?php if(isset($errProducer)) echo '<p>'.$errProducer.'</p>';?>
                     </div>      
                     <div class="form-group">
                         <?=$this->Form->label('namesub','Name subproducer:')?>
                         <?=$this->Form->text('namesub',['class'=>'form-control','placeholder'=>'Enter subproducer name...'])?>
+                        <?php if(isset($erroNameSubproducer)) echo '<p>'.$erroNameSubproducer.'</p>';?>
                     </div>  
                     <div class="form-group">
                         <?=$this->Form->submit('Add',['class'=>'btn btn-primary','name'=>'addsubproducer'])?>

@@ -104,7 +104,25 @@ Router::scope('/', function (RouteBuilder $routes) {
 
 Router::prefix('manager', function ($routes) {
     $routes->connect('/', ['controller' => 'Homes', 'action' => 'index']);
-    $routes->connect('/category',['controller'=>'Categories','action'=>'index']);
-    $routes->connect('/category/add',['controller'=>'Categories','action'=>'add']);
+
+
+    //route category
+    $routes->connect('/category', ['controller' => 'Categories', 'action' => 'index']);
+    $routes->connect('/category/add', ['controller' => 'Categories', 'action' => 'addproducer']);
+    $routes->connect('/category/editproducer', ['controller' => 'Categories', 'action' => 'editproducer']);
+    $routes->connect('/category/editsubproducer', ['controller' => 'Categories', 'action' => 'editsubproducer']);
+    $routes->connect('/category/delete', ['controller' => 'Categories', 'action' => 'delete']);
+
+
+    //route product groups
+    $routes->connect('/product_groups', ['controller' => 'ProductGroups', 'action' => 'index']);
+    $routes->connect('/product_groups/edit', ['controller' => 'ProductGroups', 'action' => 'edit']);
+    $routes->connect('/product_groups/delete', ['controller' => 'ProductGroups', 'action' => 'delete']);
+    
+    
+    //route product
+    $routes->connect('/product', ['controller' => 'Products', 'action' => 'index']);
+
+
     $routes->fallbacks(DashedRoute::class);
 });

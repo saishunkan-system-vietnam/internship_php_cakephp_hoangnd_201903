@@ -26,7 +26,7 @@
         <?= $this->fetch('title') ?>
         </title>
     <?= $this->Html->meta('icon') ?>
-
+ <?= $this->Html->script('jquery-3.3.1.min.js')?>
     <?= $this->Html->css('bootstrap.min.css') ?>    
 
     <?= $this->fetch('meta') ?>
@@ -48,9 +48,9 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><?=$this->Html->link('Home',['controller'=>'Homes','action'=>'index'])?></li>
-                        <li><a class="active" href="#">Phone manager</a></li>
+                        <li><?=$this->Html->link('Phone manager',['controller'=>'Products','action'=>'index'])?></li>
                         <li><?=$this->Html->link('Category manager',['controller'=>'Categories','action'=>'index'])?></li>
-                        <li><a href="#">Group phone manager</a></li>
+                        <li><?=$this->Html->link('Group phone manager',['controller'=>'ProductGroups','action'=>'index'])?></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -59,8 +59,7 @@
 
         <div class="container-fluid">
             <?= $this->fetch('content') ?>
-        </div><!-- /.container -->    
-        <?= $this->Html->script('jquery-3.3.1.min.js')?>
+        </div><!-- /.container -->           
         <?= $this->Html->script('bootstrap.min.js')?>
     </body>
 </html>

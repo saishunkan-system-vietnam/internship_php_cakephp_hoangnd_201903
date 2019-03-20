@@ -18,11 +18,18 @@ use Cake\Controller\Component;
 
 class validationComponent extends Component {
 
-    public function getmessage($validation) {
-        foreach ($validation as $value) {
+    public function getmessage($validation, $name = NULL) {
+        foreach ($validation as $key => $value) {
+            if ($name != NULL & $key == $name) {               
+                foreach ($value as $v) {
+                    return $v;
+                }
+                return;
+            } 
             foreach ($value as $v) {
                 return $v;
             }
         }
     }
+
 }

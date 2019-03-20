@@ -1,4 +1,19 @@
 $(document).ready(function () {
+    $('#test').click(function () {
+        var csrfToken = <?=json_encode($this->request->getParam('_csrfToken')) ?>;
+                $.ajax({
+                    headers: {
+                        'X-CSRF-Token': csrfToken
+                    },
+                    method: 'post',
+                    url: "/shopdienthoai/Ajax/getlstchitietloaihang",
+                    data: {loaihang_id: $('#loaihang').val()}
+                }).done(function (rp) {
+            alert('success');
+        }).fail(function () {
+            alert('Fail load');
+        });
+    });
     $('#hinhanhmoi').hide();
 //    $.ajaxSetup({
 //        headers: {

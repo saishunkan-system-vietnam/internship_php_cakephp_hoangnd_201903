@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2019 at 09:30 AM
+-- Generation Time: Mar 21, 2019 at 11:40 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -41,8 +41,13 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`, `parent_id`) VALUES
 (1, 'Samsung', 0),
 (2, 'Oppo', 0),
-(6, 'A3s', 2),
-(7, 'Iphone', 0);
+(6, 'Oppo A3s', 2),
+(7, 'Iphone', 0),
+(9, 'Iphone 6s', 7),
+(10, 'Iphone 6', 7),
+(11, 'Iphone 6 plus', 7),
+(12, 'Iphone 6s plus', 7),
+(13, 'Iphone 7', 7);
 
 -- --------------------------------------------------------
 
@@ -72,7 +77,8 @@ INSERT INTO `groups` (`id`, `name`) VALUES
 
 CREATE TABLE `images` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `ca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -90,6 +96,14 @@ CREATE TABLE `products` (
   `description` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'miêu tả',
   `categories_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `price`, `quantity`, `status`, `description`, `categories_id`) VALUES
+(1, 'Điện thoại OPPO A3s 32GB', 4000000, 111, 1, 'OPPO A3s 32GB là một chiếc smartphone mới của OPPO sở hữu giá rẻ hiếm hoi nhưng vẫn được trang bị màn hình tai thỏ và camera kép xu thế của năm 2018.', 10),
+(3, 'Điện thoại iPhone 6s Plus 32GB', 1000000, 12, 0, 'iPhone 6s Plus 32 GB là phiên bản nâng cấp hoàn hảo từ iPhone 6 Plus với nhiều tính năng mới hấp dẫn.', 11);
 
 -- --------------------------------------------------------
 
@@ -319,12 +333,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `images`
 --
@@ -334,7 +348,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `product_groups`
 --

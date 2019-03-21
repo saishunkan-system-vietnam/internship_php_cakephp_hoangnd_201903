@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,25 +12,24 @@
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-
-
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-    <?= $this->Html->charset() ?>
+<?= $this->Html->charset() ?>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrfToken" content="<?= $this->Token->getToken() ?>"> 
         <title>
 
-        <?= $this->fetch('title') ?>
+<?= $this->fetch('title') ?>
         </title>
-    <?= $this->Html->meta('icon') ?>
- <?= $this->Html->script('jquery-3.3.1.min.js')?>
-    <?= $this->Html->css('bootstrap.min.css') ?>    
+            <?= $this->Html->meta('icon') ?>
+            <?= $this->Html->script('jquery-3.3.1.min.js') ?>
+        <?= $this->Html->css('bootstrap.min.css') ?>    
 
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+        <?= $this->fetch('meta') ?>
+        <?= $this->fetch('css') ?>
+        <?= $this->fetch('script') ?>
     </head>
     <body style="padding: 70px 0px">
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -47,19 +45,20 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><?=$this->Html->link('Home',['controller'=>'Homes','action'=>'index'])?></li>
-                        <li><?=$this->Html->link('Phone manager',['controller'=>'Products','action'=>'index'])?></li>
-                        <li><?=$this->Html->link('Category manager',['controller'=>'Categories','action'=>'index'])?></li>
-                        <li><?=$this->Html->link('Group phone manager',['controller'=>'ProductGroups','action'=>'index'])?></li>
-                        <li><a href="#">Logout</a></li>
+                        <li class="active"><?= $this->Html->link('Home', ['controller' => 'Homes', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link('Phone manager', ['controller' => 'Products', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link('Category manager', ['controller' => 'Categories', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link('Group phone manager', ['controller' => 'ProductGroups', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link('Images manager', ['controller' => 'Images', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link('Logout', ['controller' => 'Managers', 'action' => 'logout']) ?></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
 
         <div class="container-fluid">
-            <?= $this->fetch('content') ?>
+<?= $this->fetch('content') ?>
         </div><!-- /.container -->           
-        <?= $this->Html->script('bootstrap.min.js')?>
+            <?= $this->Html->script('bootstrap.min.js') ?>
     </body>
 </html>

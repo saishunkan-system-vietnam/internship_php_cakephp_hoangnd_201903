@@ -29,9 +29,13 @@ class CategoriesController extends ManagersController {
             $validation = $this->Categories->newEntity($reqCategory, ['validate' => 'Add']);
             $validationError = $validation->errors();
             if (empty($validationError)) {
-                $result = $this->categories->add(['name' => $reqCategory['name'], 'parent_id' => 0]);
-                $message = ($result === true) ? 'Add successful!' : 'Add fail';
-                $this->set((isset($reqCategory['addproducer']) ? 'messageProducer' : 'messageSubproducer'), $message);
+                $result = $this->categories->add(['name' => $reqCategory['name'], 'parent_id' => $reqCategory['parent_id']]);
+                if ($result === FALSE) {
+                    $message = ($result === FALSE) ? 'Add fail' : '';
+                    $this->set((isset($reqCategory['addproducer']) ? 'messageProducer' : 'messageSubproducer'), $message);
+                } else {
+                    $this->redirect(['action'=>'index']);
+                }
             } else {
                 $errName = $this->validation->getmessage($validationError, 'name');
                 $errParent_id = $this->validation->getmessage($validationError, 'parent_id');
@@ -40,7 +44,7 @@ class CategoriesController extends ManagersController {
             }
         }
         $optionSelectSubproducer = $this->categories->getSelectOption($this->categories->selectAll());
-        $this->set('option', $optionSelectSubproducer);        
+        $this->set('option', $optionSelectSubproducer);
     }
 
     public function editproducer($id = null) {
@@ -48,23 +52,24 @@ class CategoriesController extends ManagersController {
         $this->set('producer', $producer);
         if ($this->request->isPost()) {
             $reqCategory = $this->request->getData();
+            $update = TRUE;
             if ($reqCategory['name'] !== $producer['name']) {
                 $reqCategory['parent_id'] = 0;
                 $validation = $this->Categories->newEntity($reqCategory, ['validate' => 'Add']);
                 $validationError = $validation->errors();
-                if (empty($validationError)) {
-                    $result = $this->categories->update(['id' => $id, 'name' => $reqCategory['name'], 'parent_id' => 0]);
-                    if ($result === false) {
-                        $this->set('editFail', 'Edit fail!');
-                    } else {
-                        $this->redirect(['action' => 'index']);
-                    }
-                } else {
+                if (!empty($validationError)) {
                     $errName = $this->validation->getmessage($validationError, 'name');
                     $this->set('errName', $errName);
+                    $update = FALSE;
                 }
-            } else {
-                $this->redirect(['action' => 'index']);
+            }
+            if ($update === true) {
+                $result = $this->categories->update(['id' => $id, 'name' => $reqCategory['name'], 'parent_id' => 0]);
+                if ($result === false) {
+                    $this->set('editFail', 'Edit fail!');
+                } else {
+                    $this->redirect(['action' => 'index']);
+                }
             }
         }
     }
@@ -76,40 +81,41 @@ class CategoriesController extends ManagersController {
         $this->set('subproducer', $subproducer);
         if ($this->request->isPost()) {
             $reqCategory = $this->request->getData();
+            $update = true;
             if ($reqCategory['name'] !== $subproducer['name']) {
                 $validation = $this->Categories->newEntity($reqCategory, ['validate' => 'Add']);
                 $validationError = $validation->errors();
-                if (empty($validationError)) {
-                    $result = $this->categories->update(['id' => $id, 'name' => $reqCategory['name'], 'parent_id' => $reqCategory['parent_id']]);
-                    if ($result === false) {
-                        $this->set('editFail', 'Edit fail!');
-                    } else {
-                        $this->redirect(['action' => 'index']);
-                    }
-                } else {
+                if (!empty($validationError)) {
                     $errName = $this->validation->getmessage($validationError, 'name');
                     $this->set('errName', $errName);
+                    $update = false;
                 }
-            } else {
-                $this->redirect(['action' => 'index']);
+            }
+            if ($update === true) {
+                $result = $this->categories->update(['id' => $id, 'name' => $reqCategory['name'], 'parent_id' => $reqCategory['parent_id']]);
+                if ($result === false) {
+                    $this->set('editFail', 'Edit fail!');
+                } else {
+                    $this->redirect(['action' => 'index']);
+                }
             }
         }
     }
 
-    public function delete($id=null) {
-        $category=$this->categories->get($id);
-        $this->set('category',$category);
-        if($category['parent_id']===0){
-            $this->set('producer',$category['name']);
-            $this->set('titleDelete','Confirm delete producer')  ;  
-        }  else {
-            $this->set('producer',  $this->categories->get($category['parent_id'])['name']);
-             $this->set('titleDelete','Confirm delete subproducer')  ;
+    public function delete($id = null) {
+        $category = $this->categories->get($id);
+        $this->set('category', $category);
+        if ($category['parent_id'] === 0) {
+            $this->set('producer', $category['name']);
+            $this->set('titleDelete', 'Confirm delete producer');
+        } else {
+            $this->set('producer', $this->categories->get($category['parent_id'])['name']);
+            $this->set('titleDelete', 'Confirm delete subproducer');
         }
-        if($this->request->isPost()){
+        if ($this->request->isPost()) {
             $result = $this->categories->delete($id);
-            if($result===true){
-                $this->redirect(['action'=>'index']);
+            if ($result === true) {
+                $this->redirect(['action' => 'index']);
             }
         }
     }

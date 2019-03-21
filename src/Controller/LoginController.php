@@ -53,7 +53,7 @@ class LoginController extends AppController {
                             ])->toArray();
                     $this->session->write('username', $getUser['username']);
                     $this->session->write('roles', $getRole);
-                    $loginSystem = $this->roles->checkLoginSystem($getRole);
+                    $loginSystem = $this->roles->checkRole($getRole,2);
                     if ($loginSystem === TRUE) {
                         $this->redirect('/manager');
                     } else {

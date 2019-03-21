@@ -1,1 +1,1 @@
-<h1>index của home manager</h1>
+<h1>home manager</h1>

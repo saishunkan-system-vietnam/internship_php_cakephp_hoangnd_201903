@@ -96,7 +96,7 @@ Router::scope('/', function (RouteBuilder $routes) {
 //    });
 //    Router::scope('/', function (RouteBuilder $routes) {
 //        $routes->connect('/', ['controller' => 'Homes', 'action' => 'index']);
-//        $routes->connect('/login', ['controller' => 'Login', 'action' => 'index']);
+    $routes->connect('/login', ['controller' => 'Login', 'action' => 'index']);
 //        $routes->connect('/registration', ['controller' => 'Registration', 'action' => 'index']);
 //    });
     $routes->fallbacks(DashedRoute::class);
@@ -105,6 +105,8 @@ Router::scope('/', function (RouteBuilder $routes) {
 Router::prefix('manager', function ($routes) {
     $routes->connect('/', ['controller' => 'Homes', 'action' => 'index']);
 
+    //logout
+    $routes->connect('/logout', ['controller' => 'Managers', 'action' => 'logout']);
 
     //route category
     $routes->connect('/category', ['controller' => 'Categories', 'action' => 'index']);
@@ -118,11 +120,14 @@ Router::prefix('manager', function ($routes) {
     $routes->connect('/product_groups', ['controller' => 'ProductGroups', 'action' => 'index']);
     $routes->connect('/product_groups/edit', ['controller' => 'ProductGroups', 'action' => 'edit']);
     $routes->connect('/product_groups/delete', ['controller' => 'ProductGroups', 'action' => 'delete']);
-    
-    
+
+
     //route product
     $routes->connect('/product', ['controller' => 'Products', 'action' => 'index']);
 
-
+    //Ajax
+        $routes->connect('/getsubproducer', ['controller' => 'Ajax', 'action' => 'getsubproducer']);
+    
+    
     $routes->fallbacks(DashedRoute::class);
 });

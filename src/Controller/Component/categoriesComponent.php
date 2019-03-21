@@ -72,8 +72,9 @@ class categoriesComponent extends Component {
         }
         return $arrCategories;
     }
-     public function getSubSelectOption() {
-        $categories = $this->Categories->find('all')->where(['parent_id <>' => 0])->order(['name' => 'ASC']);
+     public function getSubSelectOption($idProducer) {
+        $categories = $this->Categories->find('all')->where(['parent_id' => $idProducer])->order(['name' => 'ASC']);
+        
         $arrCategories = [];
         if (count($categories) > 0) {
             foreach ($categories as $item) {

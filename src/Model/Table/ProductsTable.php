@@ -52,34 +52,15 @@ class ProductsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('id')
-            ->allowEmptyString('id', 'create');
-
-        $validator
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
             ->allowEmptyString('name', false);
+            // ->add('name', 'unique',['rule'=>'validateUnique','provider'=>'table']);
 
-        $validator
-            ->requirePresence('price', 'create')
-            ->allowEmptyString('price', false);
-
-        $validator
-            ->integer('quantity')
-            ->requirePresence('quantity', 'create')
-            ->allowEmptyString('quantity', false);
-
-        $validator
-            ->boolean('status')
-            ->requirePresence('status', 'create')
-            ->allowEmptyString('status', false);
-
-        $validator
-            ->scalar('description')
-            ->requirePresence('description', 'create')
-            ->allowEmptyString('description', false);
-
+       $validator ->requirePresence('categories_id', 'create')
+               ->allowEmptyString('categories_id',FALSE,'Subproducer shoult be different null');
+       
         return $validator;
     }
 
@@ -90,10 +71,10 @@ class ProductsTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['categories_id'], 'Categories'));
-
-        return $rules;
-    }
+//    public function buildRules(RulesChecker $rules)
+//    {
+//        $rules->add($rules->existsIn(['categories_id'], 'Categories'));
+//
+//        return $rules;
+//    }
 }

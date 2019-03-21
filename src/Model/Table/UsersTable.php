@@ -45,15 +45,11 @@ class UsersTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('id')
-            ->allowEmptyString('id', 'create');
-
-        $validator
             ->scalar('username')
             ->maxLength('username', 100)
             ->requirePresence('username', 'create')
-            ->allowEmptyString('username', false)
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->allowEmptyString('username', false);
+           // ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('password')
@@ -61,33 +57,33 @@ class UsersTable extends Table
             ->requirePresence('password', 'create')
             ->allowEmptyString('password', false);
 
-        $validator
-            ->scalar('name')
-            ->maxLength('name', 30)
-            ->requirePresence('name', 'create')
-            ->allowEmptyString('name', false);
-
-        $validator
-            ->boolean('sex')
-            ->requirePresence('sex', 'create')
-            ->allowEmptyString('sex', false);
-
-        $validator
-            ->date('birthday')
-            ->requirePresence('birthday', 'create')
-            ->allowEmptyDate('birthday', false);
-
-        $validator
-            ->scalar('phonenumber')
-            ->maxLength('phonenumber', 10)
-            ->requirePresence('phonenumber', 'create')
-            ->allowEmptyString('phonenumber', false);
-
-        $validator
-            ->scalar('address')
-            ->maxLength('address', 255)
-            ->requirePresence('address', 'create')
-            ->allowEmptyString('address', false);
+//        $validator
+//            ->scalar('name')
+//            ->maxLength('name', 30)
+//            ->requirePresence('name', 'create')
+//            ->allowEmptyString('name', false);
+//
+//        $validator
+//            ->boolean('sex')
+//            ->requirePresence('sex', 'create')
+//            ->allowEmptyString('sex', false);
+//
+//        $validator
+//            ->date('birthday')
+//            ->requirePresence('birthday', 'create')
+//            ->allowEmptyDate('birthday', false);
+//
+//        $validator
+//            ->scalar('phonenumber')
+//            ->maxLength('phonenumber', 10)
+//            ->requirePresence('phonenumber', 'create')
+//            ->allowEmptyString('phonenumber', false);
+//
+//        $validator
+//            ->scalar('address')
+//            ->maxLength('address', 255)
+//            ->requirePresence('address', 'create')
+//            ->allowEmptyString('address', false);
 
         return $validator;
     }

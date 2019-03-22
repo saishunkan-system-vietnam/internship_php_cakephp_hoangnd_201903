@@ -1,3 +1,4 @@
+<?=$this->Html->script('ckeditor/ckeditor.js')?>
 <div class="container-fluid">
     <div class="col-md-2">
         <h3>Add category</h3> 
@@ -5,7 +6,7 @@
             <li><?=$this->Html->link('Back products manager',['action'=>'index'],['class'=>'w3-bar-item w3-button'])?></li>
         </ul>       
     </div>
-    <div class="col-md-10">      
+    <div  class="col-md-10">      
         <div class="panel panel-default">
             <div class="panel-heading">Add producer</div>
             <div class="panel-body">
@@ -13,16 +14,18 @@
                 <div class="form-group">
                         <?=$this->Form->label('name','Name product:')?>
                         <?=$this->Form->text('name',['class'=>'form-control','placeholder'=>'Enter producer name...'])?>      
-                        <?php if(isset($errName)){ echo '<p>'.$errName.'</p>';}?>
+                        <?php if(isset($errName)){ echo '<div class="error-contents">'.$errName.'</div>';}?>
                     <?=$this->Flash->render()?>
                 </div>      
                  <div class="form-group">
                         <?=$this->Form->label('price','Price:')?>
-                        <?=$this->Form->text('price',['class'=>'form-control','type'=>'number','value'=>0,'step'=>"1"])?>                       
+                        <?=$this->Form->text('price',['class'=>'form-control','type'=>'number','step'=>"1"])?>    
+                        <?php if(isset($errPrice)){ echo '<div class="error-contents">'.$errPrice.'</div>';}?>
                 </div>   
                  <div class="form-group">
                         <?=$this->Form->label('quantity','Quantity:')?>
-                        <?=$this->Form->text('quantity',['class'=>'form-control','type'=>'number','value'=>0])?>                       
+                        <?=$this->Form->text('quantity',['class'=>'form-control','type'=>'number'])?>    
+                        <?php if(isset($errQuantity)){ echo '<div class="error-contents">'.$errQuantity.'</div>';}?>
                 </div>   
                  <div class="form-group">
                         <?=$this->Form->label('status','Status: ')?>&nbsp;
@@ -30,7 +33,7 @@
                 </div>   
                  <div class="form-group">
                         <?=$this->Form->label('description','Description:')?>
-                        <?=$this->Form->textarea('description',['class'=>'form-control','placeholder'=>'Enter product description...'])?>                       
+                        <?=$this->Form->textarea('description',['class'=>'form-control','class'=>'ckeditor','placeholder'=>'Enter product description...'])?>                       
                 </div>   
                  <div class="form-group">
                         <?=$this->Form->label('producer','Producer:')?>
@@ -39,7 +42,7 @@
                  <div class="form-group">
                         <?=$this->Form->label('categories_id','Subproducer:')?>
                         <?=$this->Form->select('categories_id',[],['class'=>'form-control'])?>   
-                        <?php if(isset($errSubproducer)){ echo '<p>'.$errSubproducer.'</p>';}?>
+                        <?php if(isset($errSubproducer)){ echo '<div class="error-contents">'.$errSubproducer.'</div>';}?>
                 </div>   
                 <div class="form-group">
                         <?=$this->Form->submit('Add',['class'=>'btn btn-primary'])?>

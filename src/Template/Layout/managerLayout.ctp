@@ -26,7 +26,7 @@
             <?= $this->Html->meta('icon') ?>
             <?= $this->Html->script('jquery-3.3.1.min.js') ?>
         <?= $this->Html->css('bootstrap.min.css') ?>    
-
+        <?= $this->Html->css('fronend.css')?>       
         <?= $this->fetch('meta') ?>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('script') ?>
@@ -49,7 +49,7 @@
                         <li><?= $this->Html->link('Phone manager', ['controller' => 'Products', 'action' => 'index']) ?></li>
                         <li><?= $this->Html->link('Category manager', ['controller' => 'Categories', 'action' => 'index']) ?></li>
                         <li><?= $this->Html->link('Group phone manager', ['controller' => 'ProductGroups', 'action' => 'index']) ?></li>
-                        <li><?= $this->Html->link('Images manager', ['controller' => 'Images', 'action' => 'index']) ?></li>
+                        
                         <li><?= $this->Html->link('Logout', ['controller' => 'Managers', 'action' => 'logout']) ?></li>
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -62,3 +62,4 @@
             <?= $this->Html->script('bootstrap.min.js') ?>
     </body>
 </html>
+

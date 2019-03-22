@@ -9,6 +9,12 @@
         <div class="panel panel-default">
             <div class="panel-heading">Comfirm delete product</div>
             <div class="panel-body">
+                 <?=$this->Form->create()?>
+
+                <div class="form-group">
+                        <?=$this->Form->submit('Delete',['class'=>'btn btn-primary','name'=>'addproducer'])?>
+                </div>                    
+                    <?=$this->Form->end()?>   
                 <table class="table">
                     <tr>
                         <td>
@@ -51,15 +57,7 @@
                             $status=( $product['status']==1)?'show':'hidden';
                            echo '<p><strong> '.$status.'</strong></p>';?>
                         </td>
-                    </tr>  
-                    <tr>
-                        <td>
-                            <p>Description: </p>
-                        </td>
-                        <td>
-                           <?php echo '<p><strong> '.$product['description'].'</strong></p>';?>
-                        </td>
-                    </tr>  
+                    </tr> 
                     <tr>
                         <td>
                             <p>Producer: </p>
@@ -76,16 +74,18 @@
                            <?php echo '<p><strong> '.$subproducer['name'].'</strong></p>';?>
                         </td>
                     </tr>  
+                    <tr>
+                        <td>
+                            <p>Description: </p>
+                        </td>
+                        <td>
+                           <?php echo '<p><strong> '.$product['description'].'</strong></p>';?>
+                        </td>
+                    </tr>                      
                 </table>
                 <p><?php 
                 if(isset($error)) echo $error;                
-                ?></p>
-                    <?=$this->Form->create()?>
-
-                <div class="form-group">
-                        <?=$this->Form->submit('Delete',['class'=>'btn btn-primary','name'=>'addproducer'])?>
-                </div>                    
-                    <?=$this->Form->end()?>             
+                ?></p>                             
             </div>
         </div>
     </div>

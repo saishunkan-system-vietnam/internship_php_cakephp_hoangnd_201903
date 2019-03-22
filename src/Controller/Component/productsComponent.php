@@ -9,30 +9,40 @@ class productsComponent extends Component {
 
     private $Products;
     private $Categories;
+    private $ProductImages;
 
     public function initialize(array $config) {
         parent::initialize($config);
         $this->Products = TableRegistry::getTableLocator()->get('Products');
-        $this->Categories=  TableRegistry::getTableLocator()->get('Categories');
+        $this->Categories = TableRegistry::getTableLocator()->get('Categories');
+        $this->ProductImages = TableRegistry::getTableLocator()->get('ProductImages');
     }
 
-    public function get($id){
+    public function get($id) {
         return $this->Products->get($id);
     }
 
-        public function selectAll() {
-        $lstProduct= $this->Products->find()
+    public function selectAll() {
+        $lstProduct = $this->Products->find('all')
                 ->select($this->Products)
                 ->select($this->Categories)
+                ->select($this->ProductImages)
                 ->join([
-                    'categories'=>[
-                        'table'=>'categories',
-                        'type'=>'INNER',
-                        'conditions'=>'categories.id=products.categories_id'
+                    'Categories' => [
+                        'table' => 'categories',
+                        'type' => 'INNER',
+                        'conditions' => 'Categories.id=products.categories_id'
                     ]
                 ])
-                ->toArray();       
-         return $lstProduct;
+                ->join([
+                    'ProductImages' => [
+                        'table' => 'product_images',
+                        'type' => 'LEFT',
+                        'conditions' => 'ProductImages.products_id=products.id'
+                    ]
+                ])
+                ->toArray();        
+        return $lstProduct;
     }
 
     public function add($reqProduct) {
@@ -45,7 +55,9 @@ class productsComponent extends Component {
         $newProduct->categories_id = $reqProduct['categories_id'];
         return $this->Products->save($newProduct);
     }
-     public function update($reqProduct) {
+
+    // function update product with condition is product ID
+    public function update($reqProduct) {
         $product = $this->get($reqProduct['id']);
         $product->name = $reqProduct['name'];
         $product->price = $reqProduct['price'];
@@ -55,7 +67,7 @@ class productsComponent extends Component {
         $product->categories_id = $reqProduct['categories_id'];
         return $this->Products->save($product);
     }
-    
+
     public function delete($id) {
         $product = $this->Products->get($id);
         if ($this->Products->delete($product)) {

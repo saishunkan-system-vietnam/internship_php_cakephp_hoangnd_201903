@@ -19,5 +19,12 @@ class AjaxController extends AppController {
             $this->set('subOption', $subOption);
         }
     }
+    
+    function saveimagesinram(){
+        if ($this->request->is('ajax')) {
+            $req = $this->request->getData();            
+          
+        }
+    }
 
 }

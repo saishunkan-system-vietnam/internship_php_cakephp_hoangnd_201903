@@ -17,17 +17,17 @@ class ProductsController extends ManagersController {
     }
 
     public function index() {
-        $lstProduct = $this->products->selectAll();       
+        $lstProduct = $this->products->selectAll();
         $this->set('lstProduct', $lstProduct);
     }
 
     public function add() {
         $option = $this->categories->getSelectOption();
         $this->set('option', $option);
-        if ($this->request->isPost()) {            
-            $reqProduct = $this->request->getData();            
+        if ($this->request->isPost()) {
+            $reqProduct = $this->request->getData();
             $validation = $this->Products->newEntity($reqProduct);
-            $validationError = $validation->errors();            
+            $validationError = $validation->errors();
             if (empty($validationError)) {
                 $result = $this->products->add($reqProduct);
                 if ($result === FALSE) {
@@ -36,60 +36,77 @@ class ProductsController extends ManagersController {
                     $this->redirect(['action' => 'index']);
                 }
             } else {
-                $errName = $this->validation->getmessage($validationError, 'name');
-                $errSubproducer = $this->validation->getmessage($validationError, 'categories_id');                
-                $this->set('errName', $errName);
-                $this->set('errSubproducer', $errSubproducer);                
+                $this->setValidation($validationError);
             }
         }
     }
-    
+
     public function edit($id) {
         $option = $this->categories->getSelectOption();
-        $this->set('option', $option);         
-        $product=  $this->products->get($id);
-        $this->set('product',$product);
-        $subproducer=  $this->categories->get($product['categories_id']);
-        $producer=$this->categories->get($subproducer['parent_id']);
-        $optionSubproducer=$this->categories->getSubSelectOption($producer['id']);
-        $this->set('optionSubproducer',$optionSubproducer);
-        $this->set('producer',$producer);
-        $this->set('subproducer',$subproducer);
+        $this->set('option', $option);
+        $product = $this->products->get($id);
+        $this->set('product', $product);
+        $subproducer = $this->categories->get($product['categories_id']);
+        $producer = $this->categories->get($subproducer['parent_id']);
+        $optionSubproducer = $this->categories->getSubSelectOption($producer['id']);
+        $this->set('optionSubproducer', $optionSubproducer);
+        $this->set('producer', $producer);
+        $this->set('subproducer', $subproducer);
         if ($this->request->isPost()) {
-            $reqProduct = $this->request->getData();           
+            $reqProduct = $this->request->getData();
             $validation = $this->Products->newEntity($reqProduct);
             $validationError = $validation->errors();
             if (empty($validationError)) {
-                $reqProduct['id']=$id;
+                $reqProduct['id'] = $id;
                 $result = $this->products->update($reqProduct);
                 if ($result === FALSE) {
                     $this->set('error', 'Add fail.');
                 } else {
                     $this->redirect(['action' => 'index']);
                 }
-            } else {
-                $errName = $this->validation->getmessage($validationError, 'name');
-                $errSubproducer = $this->validation->getmessage($validationError, 'categories_id');
-                $this->set('errName', $errName);
-                $this->set('errSubproducer', $errSubproducer);
+            } else {               
+                $this->setValidation($validationError);
             }
         }
     }
-    
+
     public function delete($id) {
-        
-       $product=  $this->products->get($id);
-       $subproducer=  $this->categories->get($product['categories_id']);
-       $producer=$this->categories->get($subproducer['parent_id']);
-       $this->set('product',$product);
-        $this->set('subproducer',$subproducer); 
-        $this->set('producer',$producer);    
+
+        $product = $this->products->get($id);
+        $subproducer = $this->categories->get($product['categories_id']);
+        $producer = $this->categories->get($subproducer['parent_id']);
+        $this->set('product', $product);
+        $this->set('subproducer', $subproducer);
+        $this->set('producer', $producer);
         if ($this->request->isPost()) {
             $result = $this->products->delete($id);
             if ($result === true) {
                 $this->redirect(['action' => 'index']);
             }
-        } 
+        }
+    }
+
+    public function setValidation($validationError){
+        $errName = $this->validation->getmessage($validationError, 'name');
+        $errSubproducer = $this->validation->getmessage($validationError, 'categories_id');
+        $errQuantity = $this->validation->getmessage($validationError, 'quantity');
+        $errPrice = $this->validation->getmessage($validationError, 'price');
+        $this->set('errName', $errName);
+        $this->set('errSubproducer', $errSubproducer);
+        $this->set('errQuantity', $errQuantity);
+        $this->set('errPrice', $errPrice);
+    }
+    
+    //function add image of product
+    public function addimage($id=null)
+    {
+       $product= $this->products->get($id);
+       $this->set('product',$product);
+       
+       if($this->request->isPost()){
+           $req=  $this->request->getData();
+           var_dump($req);die();
+       }
     }
 
 }

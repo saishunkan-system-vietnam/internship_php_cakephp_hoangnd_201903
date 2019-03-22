@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -20,8 +21,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Product[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Product findOrCreate($search, callable $callback = null, $options = [])
  */
-class ProductsTable extends Table
-{
+class ProductsTable extends Table {
 
     /**
      * Initialize method
@@ -29,8 +29,7 @@ class ProductsTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->setTable('products');
@@ -49,18 +48,29 @@ class ProductsTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->scalar('name')
-            ->maxLength('name', 255)
-            ->requirePresence('name', 'create')
-            ->allowEmptyString('name', false);
-            // ->add('name', 'unique',['rule'=>'validateUnique','provider'=>'table']);
+                ->scalar('name')
+                ->maxLength('name', 255)
+                ->requirePresence('name', 'create')
+                ->allowEmptyString('name', false);
+        // ->add('name', 'unique',['rule'=>'validateUnique','provider'=>'table']);
 
-       $validator ->requirePresence('categories_id', 'create')
-               ->allowEmptyString('categories_id',FALSE,'Subproducer shoult be different null');
-       
+        $validator
+                ->numeric('price', 'Price must be numberic.')
+                ->requirePresence('price', 'create')
+                ->allowEmptyString('price', false, 'Price should be different null')
+                ->greaterThanOrEqual('price', 0, 'Price must be greater than equal zero.', FALSE);
+
+        $validator
+                ->numeric('quantity', 'Price must be numberic.')
+                ->requirePresence('quantity', 'create')
+                ->allowEmptyString('quantity', false, 'Price should be different null')
+                ->greaterThanOrEqual('quantity', 0, 'Price must be greater than equal zero.', FALSE);
+
+        $validator->requirePresence('categories_id', 'create')
+                ->allowEmptyString('categories_id', FALSE, 'Subproducer shoult be different null');
+
         return $validator;
     }
 

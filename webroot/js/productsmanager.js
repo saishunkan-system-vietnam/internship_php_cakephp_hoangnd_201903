@@ -5,6 +5,7 @@ $(document).ready(function () {
     $("select[name='producer']").change(function () {
         getSubproducer();
     });
+    $('#my-dialog').dialog();
 });
 function getSubproducer() {
     csrf = $('meta[name="csrfToken"]').attr('content');

@@ -1,0 +1,27 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.box-description{
+    max-width: 800px;
+    max-height: 200px;
+    overflow: scroll;
+}
+.error-contents{
+    color: red;
+}
+.add-images{
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.add-images:hover{
+   box-shadow: 1px 1px 10px green;
+}

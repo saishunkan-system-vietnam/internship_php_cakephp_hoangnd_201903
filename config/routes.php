@@ -124,6 +124,9 @@ Router::prefix('manager', function ($routes) {
 
     //route product
     $routes->connect('/product', ['controller' => 'Products', 'action' => 'index']);
+    $routes->connect('/product/edit', ['controller' => 'Products', 'action' => 'edit']);
+    $routes->connect('/product/add', ['controller' => 'Products', 'action' => 'add']);
+    $routes->connect('/product/delete', ['controller' => 'Products', 'action' => 'delete']);
 
     //Ajax
         $routes->connect('/getsubproducer', ['controller' => 'Ajax', 'action' => 'getsubproducer']);

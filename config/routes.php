@@ -129,8 +129,9 @@ Router::prefix('manager', function ($routes) {
     $routes->connect('/product/delete', ['controller' => 'Products', 'action' => 'delete']);
 
     //Ajax
-        $routes->connect('/getsubproducer', ['controller' => 'Ajax', 'action' => 'getsubproducer']);
-    
-    
+    $routes->connect('/getsubproducer', ['controller' => 'Ajax', 'action' => 'getsubproducer']);
+    $routes->connect('/saveimagesinram', ['controller' => 'Ajax', 'action' => 'saveimagesinram']);
+
+
     $routes->fallbacks(DashedRoute::class);
 });

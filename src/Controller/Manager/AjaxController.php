@@ -23,7 +23,18 @@ class AjaxController extends AppController {
     function saveimagesinram(){
         if ($this->request->is('ajax')) {
             $req = $this->request->getData();            
-          
+            $session=$this->request->getSession();     
+//            if($session->check('add')){
+//                echo 'chua ton tai add';
+//            } else {
+//            echo 'da ton tai add';    
+//            }
+//                $lstImg=($session->check('lstImg')===true)?$session->read('lstImg'):[];
+//                //var_dump($lstImg);die();
+//                $Img= array_merge($lstImg,[['name'=>$req['file']['name'],'tmp_name'=>$req['file']['tmp_name']]]);
+//                $session->write('lstImg',$Img);    
+            
+                var_dump($req);
         }
     }
 

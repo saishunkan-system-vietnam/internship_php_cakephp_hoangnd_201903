@@ -43,13 +43,14 @@
                         </td>
                     </tr>                            
                 </table>
-                <?=$this->Form->create()?>
+                <?=$this->Form->create('',['type'=>'file','name'=>'frmaddimg'])?>
 
                 <div class="form-group">
-                        <?=$this->Form->file('add',['class'=>'btn btn-primary'])?>
+                        <?=$this->Form->file('addimg',['class'=>'btn btn-primary'])?>
                      <?=$this->Form->submit('save',['class'=>'btn btn-primary'])?>
                 </div>                    
                     <?=$this->Form->end()?>                              
             </div>
         </div>
     </div>
+<?=$this->Html->script('productsmanager')?>

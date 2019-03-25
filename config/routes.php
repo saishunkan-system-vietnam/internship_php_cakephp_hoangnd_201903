@@ -131,6 +131,8 @@ Router::prefix('manager', function ($routes) {
     //Ajax
     $routes->connect('/getsubproducer', ['controller' => 'Ajax', 'action' => 'getsubproducer']);
     $routes->connect('/saveimagesinram', ['controller' => 'Ajax', 'action' => 'saveimagesinram']);
+    $routes->connect('/removeimageinram', ['controller' => 'Ajax', 'action' => 'removeimageinram']);
+    $routes->connect('/saveimages', ['controller' => 'Ajax', 'action' => 'saveimages']);
 
 
     $routes->fallbacks(DashedRoute::class);

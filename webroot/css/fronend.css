@@ -11,17 +11,34 @@
 .error-contents{
     color: red;
 }
-.add-images{
+.add-icon{
     width: 20px;
     height: 20px;
     background-color: green;
     color: white;
     font-size: 20px;
-    line-height: 17px;
+    line-height: 20px;
     text-align: center;
     border-radius: 10px;
     cursor: pointer;
 }
-.add-images:hover{
+.add-icon:hover{
    box-shadow: 1px 1px 10px green;
+}
+.remove-icon{
+    width: 20px;
+    height: 20px;
+    background-color: darkred;
+    color: white;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+.remove-icon:hover{
+   box-shadow: 1px 1px 10px darkred;
+   outline: none;
 }

@@ -43,7 +43,7 @@
                     <?php
                     if (count($lstProduct) > 0) {
                         foreach ($lstProduct as $item) {
-                            $image=(empty($item['ProductImages']['name']))?'<a href="'.$this->Url->build(['action'=>'addimage',$item['id']]).'"><div class="add-images">+</div></a>':'có ảnh';
+                            $image= $this->Html->link('Edit',['action'=>'addimage',$item['id']]);
                             $status=( $item['status']==1)?'show':'hidden';
                             echo '<tr><td>' . $item['id'] . '</td><td>' . $item['name'] . '</td><td>' . number_format($item['price']) . ' vnd</td><td>' . 
                                     $item['quantity'] . '</td><td>' .$status . '</td><td><div class="box-description">' . $item['description'] . '</div></td><td>' . $item['Categories']['name'] . '</td><td>' . $image . '</td>'

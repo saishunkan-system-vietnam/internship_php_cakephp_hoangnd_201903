@@ -44,11 +44,7 @@ class ImagesTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
-        $validator
-            ->integer('id')
-            ->allowEmptyString('id', 'create');
-
-        $validator
+         $validator
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')

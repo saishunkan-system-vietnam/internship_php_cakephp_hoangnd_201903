@@ -26,23 +26,14 @@ class productsComponent extends Component {
         $lstProduct = $this->Products->find('all')
                 ->select($this->Products)
                 ->select($this->Categories)
-                ->select($this->ProductImages)
                 ->join([
                     'Categories' => [
                         'table' => 'categories',
                         'type' => 'INNER',
                         'conditions' => 'Categories.id=products.categories_id'
                     ]
-                ])
-                ->join([
-                    'ProductImages' => [
-                        'table' => 'product_images',
-                        'type' => 'LEFT',
-                        'conditions' => 'ProductImages.products_id=products.id'
-                    ]
-                ])
-                ->toArray();        
-        return $lstProduct;
+                ]);  
+      return $lstProduct;
     }
 
     public function add($reqProduct) {

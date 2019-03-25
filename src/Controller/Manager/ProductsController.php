@@ -14,6 +14,7 @@ class ProductsController extends ManagersController {
         $this->loadComponent('categories');
         $this->loadComponent('products');
         $this->loadModel('Products');
+        $this->loadComponent('images');
     }
 
     public function index() {
@@ -64,7 +65,7 @@ class ProductsController extends ManagersController {
                 } else {
                     $this->redirect(['action' => 'index']);
                 }
-            } else {               
+            } else {
                 $this->setValidation($validationError);
             }
         }
@@ -86,7 +87,7 @@ class ProductsController extends ManagersController {
         }
     }
 
-    public function setValidation($validationError){
+    public function setValidation($validationError) {
         $errName = $this->validation->getmessage($validationError, 'name');
         $errSubproducer = $this->validation->getmessage($validationError, 'categories_id');
         $errQuantity = $this->validation->getmessage($validationError, 'quantity');
@@ -96,17 +97,11 @@ class ProductsController extends ManagersController {
         $this->set('errQuantity', $errQuantity);
         $this->set('errPrice', $errPrice);
     }
-    
+
     //function add image of product
-    public function addimage($id=null)
-    {
-       $product= $this->products->get($id);
-       $this->set('product',$product);
-       
-       if($this->request->isPost()){
-           $req=  $this->request->getData();
-           var_dump($req);die();
-       }
+    public function addimage($id = null) {
+        $product = $this->products->get($id);
+        $this->set('product', $product);        
     }
 
 }

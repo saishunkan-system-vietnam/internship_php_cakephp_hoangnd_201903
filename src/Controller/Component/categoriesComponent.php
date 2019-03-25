@@ -72,9 +72,10 @@ class categoriesComponent extends Component {
         }
         return $arrCategories;
     }
-     public function getSubSelectOption($idProducer) {
+
+    public function getSubSelectOption($idProducer) {
         $categories = $this->Categories->find('all')->where(['parent_id' => $idProducer])->order(['name' => 'ASC']);
-        
+
         $arrCategories = [];
         if (count($categories) > 0) {
             foreach ($categories as $item) {
@@ -83,4 +84,5 @@ class categoriesComponent extends Component {
         }
         return $arrCategories;
     }
+
 }

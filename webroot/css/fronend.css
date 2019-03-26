@@ -42,3 +42,7 @@
    box-shadow: 1px 1px 10px darkred;
    outline: none;
 }
+
+.delete-img{
+    position: absolute;        
+}

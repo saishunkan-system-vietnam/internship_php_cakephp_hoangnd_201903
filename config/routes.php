@@ -120,6 +120,7 @@ Router::prefix('manager', function ($routes) {
     $routes->connect('/product_groups', ['controller' => 'ProductGroups', 'action' => 'index']);
     $routes->connect('/product_groups/edit', ['controller' => 'ProductGroups', 'action' => 'edit']);
     $routes->connect('/product_groups/delete', ['controller' => 'ProductGroups', 'action' => 'delete']);
+    $routes->connect('/product_groups/group', ['controller' => 'ProductGroups', 'action' => 'group']);
 
 
     //route product
@@ -127,6 +128,8 @@ Router::prefix('manager', function ($routes) {
     $routes->connect('/product/edit', ['controller' => 'Products', 'action' => 'edit']);
     $routes->connect('/product/add', ['controller' => 'Products', 'action' => 'add']);
     $routes->connect('/product/delete', ['controller' => 'Products', 'action' => 'delete']);
+    $routes->connect('/product/addimage', ['controller' => 'Products', 'action' => 'addimage']);
+    $routes->connect('/product/deleteimg', ['controller' => 'Products', 'action' => 'deleteimg']);
 
     //Ajax
     $routes->connect('/getsubproducer', ['controller' => 'Ajax', 'action' => 'getsubproducer']);

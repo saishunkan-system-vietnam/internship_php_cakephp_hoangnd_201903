@@ -70,5 +70,10 @@ class ProductGroupsController extends ManagersController {
         }
         
     }
+    
+    public function group(){
+        $lstGroups = $this->productgroups->getAllGroups();
+        $this->set('lstGroups',$lstGroups);
+    }
 
 }

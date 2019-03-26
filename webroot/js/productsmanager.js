@@ -9,9 +9,12 @@ $(document).ready(function () {
 
     $("input[name='addimg']").change(function () {
         var fd = new FormData();
-        var file = $("input[name='addimg']")[0].files[0];
+        var countfile = $("input[name='addimg']")[0].files.length;
+        for (var i = 0; i < countfile; i++) {
+            var file = $("input[name='addimg']")[0].files[i];
+            fd.append('file[]', file);
+        }
         var add = ($("input[name='addimg']").attr('add')) ? 'add' : '';
-        fd.append('file', file);
         fd.append('add', add);
         $.ajax({
             url: '/shopdienthoai/manager/saveimagesinram',
@@ -23,12 +26,12 @@ $(document).ready(function () {
         }).done(function (rp) {
             $("input[name='addimg']").attr('add', 'add');
             $('#img').html(rp);
-            showbtn();            
+            showbtn();
         });
 
     });
 
-    $(document).on('click', '.remove-icon', function () {
+    $(document).on('click', '.removeImgInRam', function () {
         var t = $(this).parent('.col-md-3');
         t.remove();
         $.ajax({
@@ -40,18 +43,7 @@ $(document).ready(function () {
             t.remove();
             showbtn();
         });
-    });
-
-    $(document).on('click','button[name="save"]',function (){
-         $.ajax({
-            headers: {'X-CSRF-Token': $('meta[name="csrfToken"]').attr('content')},
-            url: '/shopdienthoai/manager/saveimages',
-            type: 'post'
-        }).done(function (rp) {
-            alert(rp);
-        });
-    });
-
+    });          
 });
 function getSubproducer() {
     csrf = $('meta[name="csrfToken"]').attr('content');

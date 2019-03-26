@@ -2,7 +2,7 @@
     <div class="col-md-2">
         <h3>Product groups manager</h3> 
         <ul class="nav nav-pills nav-stacked">
-            <li></li>
+            <li><?=$this->Html->link('Group products',['action'=>'group'])?></li>
         </ul>       
     </div>
     <div class="col-md-10">    

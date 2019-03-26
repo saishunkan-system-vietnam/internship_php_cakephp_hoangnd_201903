@@ -15,6 +15,7 @@ class ProductsController extends ManagersController {
         $this->loadComponent('products');
         $this->loadModel('Products');
         $this->loadComponent('images');
+        $this->loadComponent('ajaxmanagers');
     }
 
     public function index() {
@@ -101,7 +102,47 @@ class ProductsController extends ManagersController {
     //function add image of product
     public function addimage($id = null) {
         $product = $this->products->get($id);
-        $this->set('product', $product);        
+        $this->set('product', $product);
+        if ($this->request->isPost()) {
+            $req = $this->request->getData();
+            $session = $this->request->getSession();
+            if (isset($req['save'])) {
+                $lstImg = $session->read('lstImg');
+                if (count($lstImg) > 0) {
+                    foreach ($lstImg as $name) {
+                        $this->images->add(['name' => $name]);
+                        $imgId = $this->images->selectImages($name)['id'];
+                        $this->images->addProductImage(['products_id' => $id, 'images_id' => $imgId]);
+                        copy('img/ram/' . $name, 'img/phone/' . $name);
+                    }
+                    $session->delete('lstImg');
+                    $this->ajaxmanagers->removeAllImg();
+                }
+            }
+            if (isset($req['removeall'])) {
+                $session->delete('lstImg');
+                $this->ajaxmanagers->removeAllImg();
+            }
+            var_dump($session->read('lstImg'));
+        }
+        $this->set('lstImg', $this->images->findProductImage($id));
+    }
+
+    public function deleteimgs($productImgId = null, $imageId = null, $productId = null) {
+        
+    }
+
+    public function deleteimg($productImgId = null, $imageId = null, $productId = null) {
+        $this->autoRender = FALSE;
+        $result_delete_product_images = $this->images->deleteProductImage($productImgId);
+        if ($result_delete_product_images === true) {
+            var_dump($result_delete_product_images);
+            $result_delete_images = $this->images->deleteImage($imageId);
+            if ($result_delete_images === true) {
+                var_dump($result_delete_images);
+                return $this->redirect(['action' => 'addimage', $productId]);
+            }
+        }
     }
 
 }

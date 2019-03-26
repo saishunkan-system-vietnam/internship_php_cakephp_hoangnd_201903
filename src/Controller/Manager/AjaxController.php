@@ -10,6 +10,7 @@ class AjaxController extends AppController {
         parent::initialize();
         $this->viewBuilder()->disableAutoLayout();
         $this->loadComponent('categories');
+        $this->loadComponent('ajaxmanagers');
     }
 
     function getsubproducer() {
@@ -24,44 +25,26 @@ class AjaxController extends AppController {
         if ($this->request->is('ajax')) {
             $req = $this->request->getData();
             $session = $this->request->getSession();
-            if (isset($req['file']['name'])) {
-                if ($req['add'] === '') {
-                    if ($session->check('lstImg') === true) {
-                        $session->delete('lstImg');
-                        $files = scandir(WWW_ROOT . 'img\ram\\');
-                        foreach ($files as $item) {
-                            if ($item !== '.' and $item !== '..') {
-                                unlink(WWW_ROOT . 'img\ram\\' . $item);
-                            }
-                        }
-                    }
-                }
-                $lstImg = ($session->check('lstImg') === true) ? $session->read('lstImg') : [];
-                $checkItem = FALSE;
-                if (count($lstImg) > 0) {
-                    foreach ($lstImg as $item) {
-                        if ($item['name'] === $req['file']['name']) {
-                            $checkItem = true;
-                            break;
-                        }
-                    }
-                }
-                if ($checkItem === FALSE) {
-                    if (!file_exists('img/ram/' . $req['file']['name'])) {
-                        if ($req['file']['error'] == 0) {
-                            var_dump($req['file']['tmp_name']);
-                             var_dump($req['file']['name']);
-                            move_uploaded_file($req['file']['tmp_name'], 'img/ram/' . $req['file']['name']);
-                        }
-                    }
-                    $img = array_merge($lstImg, [['name' => $req['file']['name'], 'tmp_name' => $req['file']['tmp_name']]]);
-                } else {
-                    $img = $lstImg;
-                }
-
-                $session->write('lstImg', $img);
+            if ($req['add'] === '') {
+                $session->delete('lstImg');
+                $this->ajaxmanagers->removeAllImg();
             }
-            $this->set('lstImg', $session->read('lstImg'));
+            if (isset($req['file'])) {
+                $reqLstImg = $req['file'];
+                $lstImg = ($session->check('lstImg') === true) ? $session->read('lstImg') : [];
+                foreach ($reqLstImg as $item) {
+                    $nameArray = explode('.', $item['name']);
+                    $extension = array_pop($nameArray);
+                    $randName = $this->randName();
+                    $name = $randName . '.' . $extension;
+                    if ($item['error'] == 0) {
+                        move_uploaded_file($item['tmp_name'], 'img/ram/' . $name);
+                    }
+                    array_push($lstImg, $name);
+                }
+                $session->write('lstImg', $lstImg);
+                $this->set('lstImg', $session->read('lstImg'));
+            }
         }
     }
 
@@ -72,24 +55,22 @@ class AjaxController extends AppController {
             $session = $this->request->getSession();
             $imgName = $req['imgName'];
             $lstImg = $session->read('lstImg');
-            foreach ($lstImg as $key => $item) {
-                if ($item['name'] === $imgName) {
+            foreach ($lstImg as $key => $name) {
+                if ($name === $imgName) {
                     unset($lstImg[$key]);
-                    unlink(WWW_ROOT . 'img\ram\\' . $item['name']);
+                    $this->ajaxmanagers->removeImg($imgName);
                 }
             }
             $session->write('lstImg', $lstImg);
         }
     }
-    function saveimages(){
-         $this->autoRender = FALSE;
-        if ($this->request->is('ajax')) {            
-            $session = $this->request->getSession();          
-            $lstImg = $session->read('lstImg');
-            var_dump(move_uploaded_file($lstImg[0]['tmp_name'], 'img/phone/' . $lstImg[0]['name']));
-            var_dump($lstImg[0]['tmp_name']);
-            var_dump($lstImg[0]['name']);
+
+    function randName() {
+        $randNameImg = '';
+        for ($i = 0; $i < 30; $i++) {
+            $randNameImg.=rand(0, 9);
         }
+        return $randNameImg;
     }
 
 }

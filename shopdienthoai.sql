@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2019 at 11:35 AM
+-- Generation Time: Mar 27, 2019 at 05:48 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -85,17 +85,9 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `name`) VALUES
-(39, '161009224704872778789076979917.jpeg'),
-(40, '186329505456455418828111747549.jpeg'),
-(41, '410606456284142730088342122002.jpeg'),
-(42, '936105095834827800321339484544.jpeg'),
-(43, '939391665058799156955661541243.jpg'),
-(44, '444214892654227122219235318905.jpg'),
-(45, '065988536225648134139792224808.jpeg'),
-(46, '695943091924645803429717161665.jpeg'),
-(47, '086875695470136782985466540759.jpeg'),
-(48, '437143579793187349239737508698.jpeg'),
-(49, '784958358806102262021317690442.jpeg');
+(69, '654621118929618272647262095539.jpg'),
+(70, '773925296036416140289248461405.jpeg'),
+(71, '909348864593263590891610789141.jpg');
 
 -- --------------------------------------------------------
 
@@ -152,7 +144,9 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `products_id`, `images_id`, `avatar`, `status`) VALUES
-(37, 1, 49, 1, 1);
+(57, 1, 69, 1, 1),
+(58, 3, 70, 0, 1),
+(59, 3, 71, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -368,7 +362,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT for table `products`
 --
@@ -383,7 +377,7 @@ ALTER TABLE `product_groups`
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `product_specifications`
 --

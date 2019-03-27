@@ -19,6 +19,7 @@ class imagesComponent extends Component {
     public function getImage($id) {
         return $this->Images->get($id);
     }
+
     public function getProductImage($id) {
         return $this->ProductImages->get($id);
     }
@@ -33,12 +34,12 @@ class imagesComponent extends Component {
         $newProductImg = $this->ProductImages->newEntity();
         $newProductImg->products_id = $req['products_id'];
         $newProductImg->images_id = $req['images_id'];
-        $newProductImg->avatar = true;
-        $newProductImg->status = true;
+        $newProductImg->avatar = FALSE;
+        $newProductImg->status = TRUE;
         return $this->ProductImages->save($newProductImg);
     }
 
-    public function findProductImage($products_id) {
+    public function findProductImage($req) {
         $lstProductImage = $this->ProductImages->find()
                         ->select($this->ProductImages)
                         ->select($this->Images)
@@ -48,7 +49,27 @@ class imagesComponent extends Component {
                                 'type' => 'INNER',
                                 'conditions' => 'ProductImages.images_id=Images.id'
                             ]
-                        ])->where(['products_id' => $products_id])->toArray();
+                        ])->toArray();
+        if (count($lstProductImage) > 0) {
+            foreach ($lstProductImage as $key => $value) {
+                if (isset($req['products_id'])) {
+                    if ($req['products_id'] != $value['products_id']) {
+                        unset($lstProductImage[$key]);
+                    }
+                }
+                if (isset($req['avatar'])) {
+                    if ($req['avatar'] !== $value['avatar']) {
+                        unset($lstProductImage[$key]);
+                    }
+                }
+                 if (isset($req['id!='])) {
+                    if ($req['id!='] == $value['id']) {
+                        unset($lstProductImage[$key]);
+                    }
+                }
+                
+            }
+        }
         return $lstProductImage;
     }
 
@@ -57,13 +78,41 @@ class imagesComponent extends Component {
     }
 
     public function delete($id) {
-        $image=$this->getImage($id);
+        $image = $this->getImage($id);
+        unlink(WWW_ROOT . 'img\phone\\' . $image['name']);
         return $this->Images->delete($image);
     }
 
     public function deleteProductImage($id) {
-        $productImage=  $this->getProductImage($id);
+        $productImage = $this->getProductImage($id);
         return $this->ProductImages->delete($productImage);
+    }
+
+    public function editProductImage($req) {
+        $productImage = $this->getProductImage($req['id']);
+        $avatar = $productImage->avatar;
+        $status = $productImage->status;
+        if (isset($req['avatar'])) {
+            if ($req['avatar'] == TRUE) {
+                $avatar = TRUE;
+            } else if ($req['avatar'] == FALSE) {
+                $avatar = FALSE;
+            } else {
+                $avatar = $productImage->status;
+            }
+        }
+        if (isset($req['status'])) {
+            if ($req['status'] == TRUE) {
+                $status = TRUE;
+            } elseif ($req['status'] == FALSE) {
+                $status = FALSE;
+            } else {
+                $status = $productImage->status;
+            }
+        }
+        $productImage->avatar = $avatar;
+        $productImage->status = $status;
+        return $this->ProductImages->save($productImage);
     }
 
 }

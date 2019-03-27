@@ -9,7 +9,7 @@ class SelectHelper extends Helper {
 
     public function initialize(array $config) {
         parent::initialize($config);
-         //$this->loadComponent('productgroups');
+//         $this->loadComponent('productgroups');
     }
 
     public function groups() {

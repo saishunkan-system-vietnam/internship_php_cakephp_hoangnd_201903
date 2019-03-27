@@ -63,7 +63,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+//    $routes->connect('/', ['controller' => 'home/Homes', 'action' => 'index']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
@@ -102,6 +102,14 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->fallbacks(DashedRoute::class);
 });
 
+Router::prefix('home', function ($routes) {
+    $routes->connect('/', ['controller' => 'Products', 'action' => 'index']);
+
+    $routes->fallbacks(DashedRoute::class);
+});
+
+
+
 Router::prefix('manager', function ($routes) {
     $routes->connect('/', ['controller' => 'Homes', 'action' => 'index']);
 
@@ -130,6 +138,7 @@ Router::prefix('manager', function ($routes) {
     $routes->connect('/product/delete', ['controller' => 'Products', 'action' => 'delete']);
     $routes->connect('/product/addimage', ['controller' => 'Products', 'action' => 'addimage']);
     $routes->connect('/product/deleteimg', ['controller' => 'Products', 'action' => 'deleteimg']);
+    $routes->connect('/product/editimage', ['controller' => 'Products', 'action' => 'editimage']);
 
     //Ajax
     $routes->connect('/getsubproducer', ['controller' => 'Ajax', 'action' => 'getsubproducer']);

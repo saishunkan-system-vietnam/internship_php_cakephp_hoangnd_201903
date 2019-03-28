@@ -1,0 +1,74 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of LoginController
+ *
+ * @author HoangND
+ */
+
+namespace App\Controller\Home;
+
+use App\Controller\Home\HomesController;
+use Cake\ORM\TableRegistry;
+
+class LoginController extends HomesController {
+
+    public $session;
+
+    public function initialize() {
+        parent::initialize();
+        $this->session = $this->getRequest()->getSession();
+        $this->loadComponent('roles');
+        $this->loadModel('Users');
+        $this->loadComponent('validation');
+    }
+
+    public function index() {       
+        if ($this->request->isPost()) {
+            $reqUser = $this->request->getData();
+            $validation = $this->Users->newEntity($reqUser);
+            $validationError = $validation->errors();
+            if (empty($validationError)) {
+                $passwordMd5 = md5($reqUser['password']);
+                $userTable = TableRegistry::getTableLocator()->get('Users');
+                $getUser = $userTable->find('all', [
+                            'conditions' => [
+                                'username' => $reqUser['username'],
+                                'and' => ['password' => $passwordMd5]
+                            ]
+                        ])->first();
+                if (count($getUser) > 0) {
+                    $roleTable = TableRegistry::getTableLocator()->get('Roles');
+                    $getRole = $roleTable->find('all', [
+                                'conditions' => ['users_id' => $getUser['id']]
+                            ])->toArray();
+                    $this->session->write('usernameId', $getUser['id']);
+                    $this->session->write('roles', $getRole);
+                    $loginSystem = $this->roles->checkRole($getRole, 2);
+                    if ($loginSystem === TRUE) {
+                        return $this->redirect('/manager');
+                    } else {
+                        if($this->session->check('tmp_url')==true){                          
+                        $tmp_url=$this->session->read('tmp_url');
+                        $url= strstr(ltrim($tmp_url,'/'), '/');
+                            return $this->redirect($url);
+                        }  else {
+                            
+                        }
+                    }
+                } else {
+                    $this->set('loginFail', 'Tài khoản hoặc mật khẩu không chính xác');
+                }
+            } else {
+                $this->Flash->error($this->validation->getmessage($validationError));
+            }
+        }
+    }
+
+}

@@ -11,14 +11,16 @@
         <?= $this->Html->meta('icon') ?>
         <?= $this->Html->script('jquery-3.3.1.min.js') ?>
         <?= $this->Html->css('bootstrap.min.css') ?>    
-        <?= $this->Html->css('fronend.css') ?>       
+        <?= $this->Html->css('fronend.css') ?>    
+        <?= $this->Html->css('login.css') ?>    
+        <?= $this->Html->css('homepage.css') ?>
         <?= $this->fetch('meta') ?>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('script') ?>
     </head>
     <body style="padding: 70px 0px">
         <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
@@ -30,21 +32,22 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><?= $this->Html->link('Home', ['controller' => 'Homes', 'action' => 'index']) ?></li>
-                        <li><?= $this->Html->link('Phone manager', ['controller' => 'Products', 'action' => 'index']) ?></li>
-                        <li><?= $this->Html->link('Category manager', ['controller' => 'Categories', 'action' => 'index']) ?></li>
-                        <li><?= $this->Html->link('Group phone manager', ['controller' => 'ProductGroups', 'action' => 'index']) ?></li>
-
-                        <li><?= $this->Html->link('Logout', ['controller' => 'Managers', 'action' => 'logout']) ?></li>
+                        <li class="active"><?= $this->Html->link('Home', ['controller' => 'Products', 'action' => 'index']) ?></li>         
+                        <li><a href="<?= $this->Url->build(['controller' => 'Order', 'action' => 'index']) ?>">Cart(<?php if (isset($quantity)) {
+            echo $quantity;
+        } else {
+            echo '0';
+        } ?>)</a></li>
+                        <li><?= $this->Html->link('Login', ['controller' => 'Login', 'action' => 'index']) ?></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
 
-        <div class="container-fluid">
-            <?= $this->fetch('content') ?>
+        <div class="container">
+<?= $this->fetch('content') ?>
         </div><!-- /.container -->           
-        <?= $this->Html->script('bootstrap.min.js') ?>
+<?= $this->Html->script('bootstrap.min.js') ?>
     </body>
 </html>
 

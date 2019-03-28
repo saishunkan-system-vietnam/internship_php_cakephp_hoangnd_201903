@@ -22,8 +22,8 @@ class ManagersController extends Controller {
         $roles = $this->session->read('roles');
 
 
-        if ($this->session->check('username') === false or $this->roles->checkRole($roles, 2) === FALSE) {
-            $this->redirect('/login');
+        if ($this->session->check('usernameId') === false or $this->roles->checkRole($roles, 2) === FALSE) {
+            $this->redirect('/home/login');
         }
        
         $this->loadComponent('Csrf'); 
@@ -32,9 +32,9 @@ class ManagersController extends Controller {
 
     public function logout() {
         $this->autoRender=FALSE;
-        $this->session->destroy('username');
+        $this->session->destroy('usernameId');
         $this->session->destroy('roles');
-        $this->redirect('/login');
+        $this->redirect('/home/login');
     }
 
 }

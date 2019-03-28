@@ -6,7 +6,7 @@ use Cake\Controller\Controller;
 
 class HomesController extends Controller {
 
-    private $session;
+    protected $session;
 
     public function initialize() {
         parent::initialize();
@@ -19,9 +19,21 @@ class HomesController extends Controller {
          $this->viewBuilder()->setLayout('homesLayout');   
        
         $this->loadComponent('Csrf'); 
+        $this->session=  $this->request->getSession();
+        $this->set('quantity', $this->totalCart());
+        
         
     }  
 
-   
+    private function totalCart(){
+         $cart = ($this->session->check('cart') == true) ? $this->session->read('cart') : [];
+         $total=0;
+         if(count($cart)>0){
+             foreach ($cart as $v){
+                 $total+=$v;
+             }
+         }
+         return $total;
+    }
 
 }

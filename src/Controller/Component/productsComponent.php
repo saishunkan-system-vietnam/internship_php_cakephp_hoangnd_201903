@@ -10,29 +10,57 @@ class productsComponent extends Component {
     private $Products;
     private $Categories;
     private $ProductImages;
+    private $Images;
 
     public function initialize(array $config) {
         parent::initialize($config);
         $this->Products = TableRegistry::getTableLocator()->get('Products');
         $this->Categories = TableRegistry::getTableLocator()->get('Categories');
         $this->ProductImages = TableRegistry::getTableLocator()->get('ProductImages');
+        $this->Images=  TableRegistry::getTableLocator()->get('Images');
     }
 
     public function get($id) {
         return $this->Products->get($id);
     }
 
-    public function selectAll() {
+    public function selectAll($req=null) {
         $lstProduct = $this->Products->find('all')
                 ->select($this->Products)
                 ->select($this->Categories)
+                ->select($this->ProductImages)
+                ->select($this->Images)
                 ->join([
                     'Categories' => [
                         'table' => 'categories',
-                        'type' => 'INNER',
+                        'type' => 'LEFT',
                         'conditions' => 'Categories.id=products.categories_id'
                     ]
-                ]);  
+                ]) 
+                ->join([
+                    'ProductImages' => [
+                        'table' => 'product_images',
+                        'type' => 'LEFT',
+                        'conditions' => 'products.id=ProductImages.products_id and ProductImages.avatar=TRUE'
+                    ]
+                ])
+                ->join([
+                    'Images' => [
+                        'table' => 'images',
+                        'type' => 'LEFT',
+                        'conditions' => 'ProductImages.images_id=Images.id'
+                    ]
+                ])->toArray();
+        
+        if(!empty($req)){
+            foreach ($lstProduct as $key=>$value){
+                if(isset($req['id'])){
+                    if($value['id']!=$req['id']){
+                        unset($lstProduct[$key]);
+                    }
+                }
+            }
+        }
       return $lstProduct;
     }
 

@@ -33,11 +33,13 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><?= $this->Html->link('Home', ['controller' => 'Products', 'action' => 'index']) ?></li>         
-                        <li><a href="<?= $this->Url->build(['controller' => 'Order', 'action' => 'index']) ?>">Cart(<?php if (isset($quantity)) {
-            echo $quantity;
-        } else {
-            echo '0';
-        } ?>)</a></li>
+                        <li><a href="<?= $this->Url->build(['controller' => 'Order', 'action' => 'index'], ['id' => 'cart']) ?>">Cart(<?php
+                                if (isset($quantity)) {
+                                    echo $quantity;
+                                } else {
+                                    echo '0';
+                                }
+                                ?>)</a></li>
                         <li><?= $this->Html->link('Login', ['controller' => 'Login', 'action' => 'index']) ?></li>
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -45,7 +47,7 @@
         </nav>
 
         <div class="container">
-<?= $this->fetch('content') ?>
+        <?= $this->fetch('content') ?>
         </div><!-- /.container -->           
 <?= $this->Html->script('bootstrap.min.js') ?>
     </body>

@@ -10,7 +10,7 @@
     <?php
     foreach ($lstCart as $key => $item) {
         echo '<div class="container-fluid" style="border-bottom: 1px solid silver">'
-        . '<div style="background-color: yellow" class=" col-md-2">' . $this->Html->image('/img/phone/' . $item['image'], ['alt' => $item['image'], 'width' => '100%']) . '</div>'
+        . '<div class=" col-md-2">' . $this->Html->image('/img/phone/' . $item['image'], ['alt' => $item['image'], 'width' => '100%']) . '</div>'
         . '<div class="col-md-2"><strong>' . $item['name'] . '</strong></div>'
         . '<div class="col-md-2">' . number_format($item['price']) . ' vnđ</div>'
         . '<div class="col-md-2">' . $item['quantity'] . '</div>'

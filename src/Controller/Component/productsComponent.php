@@ -17,14 +17,14 @@ class productsComponent extends Component {
         $this->Products = TableRegistry::getTableLocator()->get('Products');
         $this->Categories = TableRegistry::getTableLocator()->get('Categories');
         $this->ProductImages = TableRegistry::getTableLocator()->get('ProductImages');
-        $this->Images=  TableRegistry::getTableLocator()->get('Images');
+        $this->Images = TableRegistry::getTableLocator()->get('Images');
     }
 
     public function get($id) {
         return $this->Products->get($id);
     }
 
-    public function selectAll($req=null) {
+    public function selectAll($req = null) {
         $lstProduct = $this->Products->find('all')
                 ->select($this->Products)
                 ->select($this->Categories)
@@ -36,7 +36,7 @@ class productsComponent extends Component {
                         'type' => 'LEFT',
                         'conditions' => 'Categories.id=products.categories_id'
                     ]
-                ]) 
+                ])
                 ->join([
                     'ProductImages' => [
                         'table' => 'product_images',
@@ -45,23 +45,29 @@ class productsComponent extends Component {
                     ]
                 ])
                 ->join([
-                    'Images' => [
-                        'table' => 'images',
-                        'type' => 'LEFT',
-                        'conditions' => 'ProductImages.images_id=Images.id'
-                    ]
-                ])->toArray();
-        
-        if(!empty($req)){
-            foreach ($lstProduct as $key=>$value){
-                if(isset($req['id'])){
-                    if($value['id']!=$req['id']){
+            'Images' => [
+                'table' => 'images',
+                'type' => 'LEFT',
+                'conditions' => 'ProductImages.images_id=Images.id'
+            ]
+        ]);
+
+        if (!empty($req)) {
+            if (isset($req['searchName'])) {
+                $lstProduct = $lstProduct->where(['Products.name LIKE' => '%' . $req['searchName'] . '%']);
+            }
+            $lstProduct = $lstProduct->toArray();
+            foreach ($lstProduct as $key => $value) {
+                if (isset($req['id'])) {
+                    if ($value['id'] != $req['id']) {
                         unset($lstProduct[$key]);
                     }
                 }
             }
+        } else {
+            $lstProduct = $lstProduct->toArray();
         }
-      return $lstProduct;
+        return $lstProduct;
     }
 
     public function add($reqProduct) {

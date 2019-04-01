@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\OrdersTable;
+use App\Model\Table\SubaddressTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\OrdersTable Test Case
+ * App\Model\Table\SubaddressTable Test Case
  */
-class OrdersTableTest extends TestCase
+class SubaddressTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\OrdersTable
+     * @var \App\Model\Table\SubaddressTable
      */
-    public $Orders;
+    public $Subaddress;
 
     /**
      * Fixtures
@@ -24,8 +24,8 @@ class OrdersTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Orders',
-        'app.Subaddress'
+        'app.Subaddress',
+        'app.Users'
     ];
 
     /**
@@ -36,8 +36,8 @@ class OrdersTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('Orders') ? [] : ['className' => OrdersTable::class];
-        $this->Orders = TableRegistry::getTableLocator()->get('Orders', $config);
+        $config = TableRegistry::getTableLocator()->exists('Subaddress') ? [] : ['className' => SubaddressTable::class];
+        $this->Subaddress = TableRegistry::getTableLocator()->get('Subaddress', $config);
     }
 
     /**
@@ -47,7 +47,7 @@ class OrdersTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Orders);
+        unset($this->Subaddress);
 
         parent::tearDown();
     }

@@ -17,7 +17,7 @@ class OrderDetailsFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'products_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'orders_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'quantity' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
@@ -26,6 +26,7 @@ class OrderDetailsFixture extends TestFixture
             'fk_orderdetails_productsid' => ['type' => 'index', 'columns' => ['products_id'], 'length' => []],
         ],
         '_constraints' => [
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'fk_orderdetails_ordersid' => ['type' => 'foreign', 'columns' => ['orders_id'], 'references' => ['orders', 'id'], 'update' => 'cascade', 'delete' => 'noAction', 'length' => []],
             'fk_orderdetails_productsid' => ['type' => 'foreign', 'columns' => ['products_id'], 'references' => ['products', 'id'], 'update' => 'cascade', 'delete' => 'noAction', 'length' => []],
         ],

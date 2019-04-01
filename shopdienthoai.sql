@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2019 at 11:35 AM
+-- Generation Time: Apr 01, 2019 at 12:32 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -31,26 +31,25 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `parent_id` int(11) NOT NULL,
-  `del` tinyint(1) DEFAULT '0'
+  `parent_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `parent_id`, `del`) VALUES
-(1, 'Samsung', 0, 0),
-(2, 'Oppo', 0, 0),
-(6, 'Oppo A3s', 2, 0),
-(7, 'Iphone', 0, 0),
-(9, 'Iphone 6s', 7, 0),
-(10, 'Iphone 6', 7, 0),
-(11, 'Iphone 6 plus', 7, 0),
-(12, 'Iphone 6s plus', 7, 0),
-(13, 'Iphone 7', 7, 0),
-(14, 'Samsung Galaxy S10', 1, 0),
-(15, 'Samsung Galaxy Note', 1, 0);
+INSERT INTO `categories` (`id`, `name`, `parent_id`) VALUES
+(1, 'Samsung', 0),
+(2, 'Oppo', 0),
+(6, 'Oppo A3s', 2),
+(7, 'Iphone', 0),
+(9, 'Iphone 6s', 7),
+(10, 'Iphone 6', 7),
+(11, 'Iphone 6 plus', 7),
+(12, 'Iphone 6s plus', 7),
+(13, 'Iphone 7', 7),
+(14, 'Samsung Galaxy S10', 1),
+(15, 'Samsung Galaxy Note', 1);
 
 -- --------------------------------------------------------
 
@@ -60,18 +59,17 @@ INSERT INTO `categories` (`id`, `name`, `parent_id`, `del`) VALUES
 
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `del` tinyint(1) NOT NULL DEFAULT '0'
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `groups`
 --
 
-INSERT INTO `groups` (`id`, `name`, `del`) VALUES
-(1, 'Mới', 0),
-(2, 'Hot', 0),
-(4, 'Mới 98%', 0);
+INSERT INTO `groups` (`id`, `name`) VALUES
+(1, 'Mới'),
+(2, 'Hot'),
+(4, 'Mới 98%');
 
 -- --------------------------------------------------------
 
@@ -105,8 +103,16 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `date_time` datetime NOT NULL,
   `status` int(11) NOT NULL,
-  `note` text COLLATE utf8_unicode_ci NOT NULL
+  `note` text COLLATE utf8_unicode_ci NOT NULL,
+  `subaddress_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `date_time`, `status`, `note`, `subaddress_id`) VALUES
+(4, '2019-04-01 09:57:48', 0, '', 13);
 
 -- --------------------------------------------------------
 
@@ -120,6 +126,13 @@ CREATE TABLE `order_details` (
   `orders_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `products_id`, `orders_id`, `quantity`) VALUES
+(4, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -265,6 +278,26 @@ CREATE TABLE `specifications` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subaddress`
+--
+
+CREATE TABLE `subaddress` (
+  `id` int(11) NOT NULL,
+  `address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `users_id` int(11) NOT NULL,
+  `default_address` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `subaddress`
+--
+
+INSERT INTO `subaddress` (`id`, `address`, `users_id`, `default_address`) VALUES
+(13, 'Hà Nội', 28, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -286,7 +319,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `sex`, `birthday`, `phonenumber`, `address`) VALUES
 (1, 'hoangnguyenit98@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đình Hoàng', 0, '1998-09-03', '984554856', 'Hà Nội'),
 (2, 'hoangnguyen03091998@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đinh Hoàng', 0, '1998-09-03', '984554856', 'Hà Nội'),
-(3, 'ng.hoang9898@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đình Hoàng', 0, '1998-09-03', '0981056713', 'Hà Nội');
+(3, 'ng.hoang9898@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đình Hoàng', 0, '1998-09-03', '0981056713', 'Hà Nội'),
+(28, '', '', 'Nguyễn Đình Hoàng', 0, '0000-00-00', '0981056713', '');
 
 --
 -- Indexes for dumped tables
@@ -314,7 +348,8 @@ ALTER TABLE `images`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_id` (`subaddress_id`);
 
 --
 -- Indexes for table `order_details`
@@ -388,11 +423,17 @@ ALTER TABLE `specifications`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `subaddress`
+--
+ALTER TABLE `subaddress`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_id` (`users_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -417,12 +458,12 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `products`
 --
@@ -454,8 +495,24 @@ ALTER TABLE `roles`
 ALTER TABLE `specifications`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `subaddress`
+--
+ALTER TABLE `subaddress`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `fk_orders_subaddress_id` FOREIGN KEY (`subaddress_id`) REFERENCES `subaddress` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_details`
@@ -507,8 +564,14 @@ ALTER TABLE `product_specifications`
 -- Constraints for table `roles`
 --
 ALTER TABLE `roles`
-  ADD CONSTRAINT `fk_role` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_roles_role_details_id` FOREIGN KEY (`role_details_id`) REFERENCES `role_details` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_roles_role_details_id` FOREIGN KEY (`role_details_id`) REFERENCES `role_details` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_roles_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `subaddress`
+--
+ALTER TABLE `subaddress`
+  ADD CONSTRAINT `fk_subadress_usersid` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

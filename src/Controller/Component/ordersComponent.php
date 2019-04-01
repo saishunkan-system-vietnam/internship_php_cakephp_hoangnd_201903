@@ -14,28 +14,46 @@ class ordersComponent extends Component {
         $this->Orders = TableRegistry::getTableLocator()->get('Orders');
     }
 
-    public function add($req){
-        $newOrder=  $this->Orders->newEntity();
-        $newOrder->date_time=$req['date_time'];
-        $newOrder->note=$req['note'];
-        $newOrder->status=$req['status'];
-        $newOrder->users_id=$req['users_id'];
-        return  $this->Orders->save($newOrder);       
+    public function add($req) {
+        var_dump($req);
+        $newOrder = $this->Orders->newEntity();
+        $newOrder->date_time = $req['date_time'];
+        $newOrder->note = $req['note'];
+        $newOrder->status = $req['status'];
+        $newOrder->subaddress_id = $req['subaddress_id'];
+        return $this->Orders->save($newOrder);
     }
-     public function update($req){
-        $Order=  $this->Orders->get($req['id']);
-        $Order->date_time=$req['date_time'];
-        $Order->note=$req['note'];
-        $Order->status=$req['status'];
-        $Order->users_id=$req['users_id'];
-        return  $this->Orders->save($Order);       
+
+    public function update($req) {
+        $Order = $this->Orders->get($req['id']);
+        $Order->date_time = $req['date_time'];
+        $Order->note = $req['note'];
+        $Order->status = $req['status'];
+        $Order->subaddress_id = $req['subaddress_id'];
+        return $this->Orders->save($Order);
     }
-    public function delete($id){
-        $Order=  $this->Orders->get($id); 
-        return  $this->Orders->delete($Order);     
+
+    public function delete($id) {
+        $Order = $this->Orders->get($id);
+        return $this->Orders->delete($Order);
     }
-    public function where($req=null){
-        $lstOrders=  $this->Orders->find();
+
+//    public function where($req=null){
+//        $lstOrders=  $this->Orders->find()->toArray();
+//        if($req!=null && count($lstOrders)>0){
+//            if(isset($req['subaddress_id'])){
+//                foreach ($lstOrders as $key=>$value){
+//                    if($value['subaddress_id']!=$req['subaddress_id']){
+//                        unset($lstOrders[$key]);
+//                    }
+//                }
+//            }
+//        }
+//        return $lstOrders;
+//    }
+    
+    public function max($req = null) {
+        $lstOrders = $this->Orders->find()->where(['subaddress_id' => $req['subaddress_id']])->max('id')->toArray();
         return $lstOrders;
     }
 

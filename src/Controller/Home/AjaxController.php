@@ -9,6 +9,7 @@ class AjaxController extends HomesController {
     public function initialize() {
         parent::initialize();
         $this->viewBuilder()->disableAutoLayout();
+        $this->loadComponent('products');
     }
 
     public function updateCart() {
@@ -22,7 +23,7 @@ class AjaxController extends HomesController {
                 } else {
                     $cart[$req['productId']] = $req['quantity'];
                 }
-            }  else {
+            } else {
                 $cart[$req['productId']] = $req['quantity'];
             }
             $this->session->write('cart', $cart);
@@ -42,8 +43,8 @@ class AjaxController extends HomesController {
             $this->session->write('cart', $cart);
         }
     }
-    
-      public function deleteCart() {
+
+    public function deleteCart() {
         $this->autoRender = FALSE;
         if ($this->request->is('ajax')) {
             $req = $this->request->getData();
@@ -52,6 +53,15 @@ class AjaxController extends HomesController {
                 unset($cart[$req['productId']]);
             }
             $this->session->write('cart', $cart);
+        }
+    }
+
+    public function searchproduct() {
+        if ($this->request->is('ajax')) {
+            $req = $this->request->getData();
+            $lstProduct=  $this->products->selectAll(['searchName'=>$req['searchName']]);    
+            $this->set('searchName',$req['searchName']);
+            $this->set('lstProduct',$lstProduct);
         }
     }
 

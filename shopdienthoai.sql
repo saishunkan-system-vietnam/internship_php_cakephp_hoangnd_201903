@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2019 at 12:32 PM
+-- Generation Time: Apr 02, 2019 at 12:39 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -112,7 +112,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `date_time`, `status`, `note`, `subaddress_id`) VALUES
-(4, '2019-04-01 09:57:48', 0, '', 13);
+(4, '2019-04-01 09:57:48', 0, '', 13),
+(6, '2019-04-02 04:08:26', 0, '', 15),
+(7, '2019-04-02 07:47:58', 0, '', 18);
 
 -- --------------------------------------------------------
 
@@ -132,7 +134,9 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `products_id`, `orders_id`, `quantity`) VALUES
-(4, 1, 4, 1);
+(4, 1, 4, 1),
+(5, 1, 6, 1),
+(6, 1, 7, 5);
 
 -- --------------------------------------------------------
 
@@ -239,9 +243,8 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `role_details_id`, `users_id`) VALUES
 (8, 0, 1),
-(9, 1, 2),
-(10, 1, 3),
-(11, 2, 1);
+(11, 2, 1),
+(13, 1, 32);
 
 -- --------------------------------------------------------
 
@@ -293,7 +296,11 @@ CREATE TABLE `subaddress` (
 --
 
 INSERT INTO `subaddress` (`id`, `address`, `users_id`, `default_address`) VALUES
-(13, 'Hà Nội', 28, 0);
+(13, 'Hà Nội', 28, 0),
+(15, 'Hà Nội', 32, 1),
+(16, 'Quốc Oai', 32, 0),
+(17, 'quốc Oai', 32, 0),
+(18, 'Quốc Oai- Hà Nội', 33, 0);
 
 -- --------------------------------------------------------
 
@@ -318,9 +325,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `sex`, `birthday`, `phonenumber`, `address`) VALUES
 (1, 'hoangnguyenit98@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đình Hoàng', 0, '1998-09-03', '984554856', 'Hà Nội'),
-(2, 'hoangnguyen03091998@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đinh Hoàng', 0, '1998-09-03', '984554856', 'Hà Nội'),
-(3, 'ng.hoang9898@gmail.com', '202cb962ac59075b964b07152d234b70', 'Nguyễn Đình Hoàng', 0, '1998-09-03', '0981056713', 'Hà Nội'),
-(28, '', '', 'Nguyễn Đình Hoàng', 0, '0000-00-00', '0981056713', '');
+(28, '', '', 'Nguyễn Đình Hoàng', 0, '0000-00-00', '0981056713', ''),
+(32, 'ng.hoang9898@gmail.com', '4297f44b13955235245b2497399d7a93', 'Nguyễn Đình Hoàng', 1, '1998-09-03', '0981056713', ''),
+(33, '', '', 'Hoang ND', 0, '0000-00-00', '0984554856', '');
 
 --
 -- Indexes for dumped tables
@@ -458,12 +465,12 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `products`
 --
@@ -488,7 +495,7 @@ ALTER TABLE `product_specifications`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `specifications`
 --
@@ -498,12 +505,12 @@ ALTER TABLE `specifications`
 -- AUTO_INCREMENT for table `subaddress`
 --
 ALTER TABLE `subaddress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- Constraints for dumped tables
 --

@@ -12,7 +12,7 @@
     <?=$this->Form->control('phonenumber',['label'=>'Phone number:','class'=>'form-control'])?>
     <?=$this->Form->control('address',['label'=>'Address:','class'=>'form-control'])?>
     <?=$this->Form->control('password',['label'=>'Password:','class'=>'form-control'])?>
-    <?=$this->Form->control('password',['label'=>'Enter password again:','name'=>'passwordAgain' ,'id'=>'passwordAgain','class'=>'form-control'])?><br>
+    <?=$this->Form->control('passwordAgain',['label'=>'Enter password again:','id'=>'passwordAgain','class'=>'form-control','type'=>'password'])?><br>
     <?=$this->Form->control('Registration',['type'=>'submit','class'=>'btn btn-primary'])?><br>
     <?=$this->Html->link('Login here',['controller'=>'Login','action'=>'index'])?>
     <?=$this->Form->end()?>

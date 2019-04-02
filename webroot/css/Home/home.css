@@ -1,0 +1,14 @@
+*{padding: 0px;margin: 0px;}
+.form-search{
+    margin-top: 5px;
+    height: 40px;
+    padding: 0px 10px;
+    outline: none;
+    border: none;
+}
+#txt-search{
+    border-radius: 10px 0 0 10px;
+}
+#btn-search{
+    border-radius: 0 10px 10px 0;
+}

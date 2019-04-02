@@ -12,7 +12,8 @@
         <?= $this->Html->script('jquery-3.3.1.min.js') ?>
         <?= $this->Html->css('bootstrap.min.css') ?>    
         <?= $this->Html->css('fronend.css') ?>    
-        <?= $this->Html->css('login.css') ?>    
+        <?= $this->Html->css('login.css') ?> 
+        <?= $this->Html->css('Home/home.css') ?>
         <?= $this->Html->css('homepage.css') ?>
         <?= $this->fetch('meta') ?>
         <?= $this->fetch('css') ?>
@@ -32,7 +33,8 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><?= $this->Html->link('Home', ['controller' => 'Products', 'action' => 'index']) ?></li>         
+                        <li><div ><?= $this->Form->text('search',['class'=>'form-search','id'=>'txt-search']) ?><input id="btn-search" class="form-search" value="search" type="submit" name="sbSearch"></div></li> 
+                        <li><?= $this->Html->link('Home', ['controller' => 'Products', 'action' => 'index']) ?></li>         
                         <li><a href="<?= $this->Url->build(['controller' => 'Order', 'action' => 'index'], ['id' => 'cart']) ?>">Cart(<?php
                                 if (isset($quantity)) {
                                     echo $quantity;
@@ -47,9 +49,25 @@
         </nav>
 
         <div class="container">
-        <?= $this->fetch('content') ?>
+            <?= $this->fetch('content') ?>
         </div><!-- /.container -->           
-<?= $this->Html->script('bootstrap.min.js') ?>
+        <?= $this->Html->script('bootstrap.min.js') ?>        
     </body>
 </html>
 
+<script type="text/javascript">
+    $(document).on('click', 'input[name="sbSearch"]', function () {
+        window.location.replace("<?= $this->Url->build(['controller' => 'Products', 'action' => 'index']) ?>");
+        var conten = $('input[name="search"]').val();
+        if (conten !== "") {
+            $.ajax({
+                headers: {'X-CSRF-Token': $('meta[name="csrfToken"]').attr('content')},
+                method: 'post',
+                url: "<?= $this->Url->build(['controller' => 'Ajax', 'action' => 'searchproduct']) ?>",
+                data: {searchName: conten}
+            }).done(function (rp) {
+                $('#lstProducts').html(rp);
+            });
+        }
+    });
+</script>

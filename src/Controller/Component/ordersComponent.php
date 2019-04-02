@@ -13,9 +13,12 @@ class ordersComponent extends Component {
         parent::initialize($config);
         $this->Orders = TableRegistry::getTableLocator()->get('Orders');
     }
+    
+    public function get($id){
+        return $this->Orders->get($id);
+    }
 
     public function add($req) {
-        var_dump($req);
         $newOrder = $this->Orders->newEntity();
         $newOrder->date_time = $req['date_time'];
         $newOrder->note = $req['note'];

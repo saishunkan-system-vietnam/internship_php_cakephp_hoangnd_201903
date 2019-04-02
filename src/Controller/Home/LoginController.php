@@ -1,17 +1,4 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of LoginController
- *
- * @author HoangND
- */
-
 namespace App\Controller\Home;
 
 use App\Controller\Home\HomesController;
@@ -23,7 +10,6 @@ class LoginController extends HomesController {
 
     public function initialize() {
         parent::initialize();
-        $this->session = $this->getRequest()->getSession();
         $this->loadComponent('roles');
         $this->loadModel('Users');
         $this->loadComponent('validation');
@@ -62,6 +48,7 @@ class LoginController extends HomesController {
                             
                         }
                     }
+                    $this->Flash->success('Login Successful');
                 } else {
                     $this->set('loginFail', 'Tài khoản hoặc mật khẩu không chính xác');
                 }

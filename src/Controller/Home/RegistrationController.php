@@ -29,12 +29,13 @@ class RegistrationController extends HomesController {
             $req_user = $this->request->getData();
             $validation = $this->Users->newEntity($req_user, ['validate' => 'Regestration']);
             $validationError = $validation->errors();
-            if (empty($validationError)) {
+            if (empty($validationError)) {                           
                 //set birthday user
                 $strBirthDay = $req_user["birthday"]["year"] . '/' . $req_user["birthday"]["month"] . '/' . $req_user["birthday"]["day"];
                 $birthDay = date_format(date_create($strBirthDay), 'Y/m/d');
                 //set password md5
-                $passwordMd5 = md5($req_user['password']);
+                $password = $req_user['password'];     
+                $passwordMd5 = md5($password);
                 //add user
                 $newUser = $this->Users->newEntity();
                 $newUser->username = $req_user['username'];
@@ -46,9 +47,8 @@ class RegistrationController extends HomesController {
                 $this->Users->save($newUser);
 
                 $userId = $this->Users->find('all', [
-                            'conditions' => ['username' => $newUser['username']]
-                        ])->first()['ID'];
-
+                            'conditions' => ['username' => $req_user['username']]
+                        ])->first()['id'];
                 //add subaddress
                 $newSubaddress = $this->Subaddress->newEntity();
                 $newSubaddress->address = $req_user['address'];
@@ -60,6 +60,7 @@ class RegistrationController extends HomesController {
                 $newRole->role_details_id = 1;
                 $newRole->users_id = $userId;
                 $this->Roles->save($newRole);
+                $this->Flash->success("Regestration user successful");
             } else {
                 $this->Flash->error($this->validation->getmessage($validationError));
             }

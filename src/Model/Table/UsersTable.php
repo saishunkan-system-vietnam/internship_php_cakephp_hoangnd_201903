@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -18,8 +19,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\User[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\User findOrCreate($search, callable $callback = null, $options = [])
  */
-class UsersTable extends Table
-{
+class UsersTable extends Table {
 
     /**
      * Initialize method
@@ -27,8 +27,7 @@ class UsersTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config) {
         parent::initialize($config);
 
         $this->setTable('users');
@@ -42,20 +41,19 @@ class UsersTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
+    public function validationDefault(Validator $validator) {
         $validator
-            ->scalar('username')
-            ->maxLength('username', 100)
-            ->requirePresence('username', 'create')
-            ->allowEmptyString('username', false);
-           // ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+                ->scalar('username')
+                ->maxLength('username', 100)
+                ->requirePresence('username', 'create')
+                ->allowEmptyString('username', false);
+        // ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->scalar('password')
-            ->maxLength('password', 100)
-            ->requirePresence('password', 'create')
-            ->allowEmptyString('password', false);
+                ->scalar('password')
+                ->maxLength('password', 100)
+                ->requirePresence('password', 'create')
+                ->allowEmptyString('password', false);
 
 //        $validator
 //            ->scalar('name')
@@ -87,26 +85,78 @@ class UsersTable extends Table
 
         return $validator;
     }
-    
-    public function validationOrder(Validator $validator){
-         $validator
-            ->scalar('name')
-            ->maxLength('name', 30)
-            ->requirePresence('name', 'create')
-            ->allowEmptyString('name', false);
-         
-          $validator
-            ->scalar('phonenumber')
-            ->maxLength('phonenumber', 10)
-            ->requirePresence('phonenumber', 'create')
-            ->allowEmptyString('phonenumber', false);
-         
-         $validator
-            ->scalar('address')
-            ->maxLength('address', 255)
-            ->requirePresence('address', 'create')
-            ->allowEmptyString('address', false);
-    return $validator;
+
+    public function validationRegestration(Validator $validator) {
+        $validator
+                ->scalar('username')
+                ->maxLength('username', 100)
+                ->requirePresence('username', 'create')
+                ->allowEmptyString('username', false)
+                ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table','message'=>'Username is exits']);
+
+        $validator
+                ->scalar('password')
+                ->maxLength('password', 100)
+                ->requirePresence('password', 'create')
+                ->allowEmptyString('password', false);
+
+        $validator
+                ->scalar('passwordAgain')
+                ->maxLength('passwordAgain', 100)
+                ->requirePresence('passwordAgain', 'create')
+                ->allowEmptyString('passwordAgain', false)
+                ->equalToField('passwordAgain', 'password', 'Password again must be equa password');
+
+        $validator
+                ->scalar('name')
+                ->maxLength('name', 30)
+                ->requirePresence('name', 'create')
+                ->allowEmptyString('name', false);
+
+        $validator
+                ->boolean('sex')
+                ->requirePresence('sex', 'create')
+                ->allowEmptyString('sex', false);
+
+        $validator
+                ->date('birthday')
+                ->requirePresence('birthday', 'create')
+                ->allowEmptyDate('birthday', false);
+
+        $validator
+                ->scalar('phonenumber')
+                ->maxLength('phonenumber', 10)
+                ->requirePresence('phonenumber', 'create')
+                ->allowEmptyString('phonenumber', false);
+
+        $validator
+                ->scalar('address')
+                ->maxLength('address', 255)
+                ->requirePresence('address', 'create')
+                ->allowEmptyString('address', false);
+
+        return $validator;
+    }
+
+    public function validationOrder(Validator $validator) {
+        $validator
+                ->scalar('name')
+                ->maxLength('name', 30)
+                ->requirePresence('name', 'create')
+                ->allowEmptyString('name', false);
+
+        $validator
+                ->scalar('phonenumber')
+                ->maxLength('phonenumber', 10)
+                ->requirePresence('phonenumber', 'create')
+                ->allowEmptyString('phonenumber', false);
+
+        $validator
+                ->scalar('address')
+                ->maxLength('address', 255)
+                ->requirePresence('address', 'create')
+                ->allowEmptyString('address', false);
+        return $validator;
     }
 
     /**

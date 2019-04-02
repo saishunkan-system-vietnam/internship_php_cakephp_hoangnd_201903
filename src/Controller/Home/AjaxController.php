@@ -57,9 +57,13 @@ class AjaxController extends HomesController {
     }
 
     public function searchproduct() {
+        $this->autoRender=FALSE;
         if ($this->request->is('ajax')) {
             $req = $this->request->getData();
-            $lstProduct=  $this->products->selectAll(['searchName'=>$req['searchName']]);    
+            $lstProduct=  $this->products->selectAll(['searchName'=>$req['searchName']]);  
+            $resultSearch['key']=$req['searchName'];
+            $resultSearch['lstProduct']=$lstProduct;
+            $this->session->write('resultSearch',$resultSearch);
             $this->set('searchName',$req['searchName']);
             $this->set('lstProduct',$lstProduct);
         }

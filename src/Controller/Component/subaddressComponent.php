@@ -19,10 +19,11 @@ class subaddressComponent extends Component {
     }
 
     public function add($req) {
-
+        $default_address = (isset($req['default_address'])) ? $req['default_address'] : 0;
         $newSubAddress = $this->Subaddress->newEntity();
         $newSubAddress->address = $req['address'];
         $newSubAddress->users_id = $req['users_id'];
+        $newSubAddress->default_address = $default_address;
         return $this->Subaddress->save($newSubAddress);
     }
 
@@ -35,32 +36,39 @@ class subaddressComponent extends Component {
         return $this->Subaddress->delete($SubAddress);
     }
 
-    public function where($req = null) { 
+    public function where($req = null) {
         $lstUser = $this->Subaddress->find()->toArray();
-          if(count($lstUser) && !empty($req)){
-            if(isset($req['id'])){
-                foreach ($lstUser as $key=> $value){
-                   if($value['id']!=$req['id']){
-                       unset($lstUser[$key]);
-                   }
+        if (count($lstUser) && !empty($req)) {
+            if (isset($req['id'])) {
+                foreach ($lstUser as $key => $value) {
+                    if ($value['id'] != $req['id']) {
+                        unset($lstUser[$key]);
+                    }
                 }
             }
-            if(isset($req['default_address'])){
-                  foreach ($lstUser as $key=> $value){
-                   if($value['default_address']!=$req['default_address']){
-                       unset($lstUser[$key]);
-                   }
+            if (isset($req['default'])) {
+                foreach ($lstUser as $key => $value) {
+                    if ($value['default_address'] != $req['default']) {
+                        unset($lstUser[$key]);
+                    }
                 }
             }
-            if(isset($req['users_id'])){
-                  foreach ($lstUser as $key=> $value){
-                   if($value['users_id']!=$req['users_id']){
-                       unset($lstUser[$key]);
-                   }
+            if (isset($req['users_id'])) {
+                foreach ($lstUser as $key => $value) {
+                    if ($value['users_id'] != $req['users_id']) {
+                        unset($lstUser[$key]);
+                    }
                 }
             }
+            if (isset($req['address'])) {
+                foreach ($lstUser as $key => $value) {
+                    if ($value['address'] != $req['address']) {
+                        unset($lstUser[$key]);
+                    }
+                }
+            }
+            return $lstUser;
         }
-        return $lstUser;
     }
 
 }

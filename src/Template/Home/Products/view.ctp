@@ -45,3 +45,4 @@
         });
     });
 </script>
+<?=$this->Html->link('buy success',['controller'=>'Order','action'=>'buysuccess',''])?>

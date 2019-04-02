@@ -57,8 +57,8 @@ class productsComponent extends Component {
                 $lstProduct = $lstProduct->where(['Products.name LIKE' => '%' . $req['searchName'] . '%']);
             }
             $lstProduct = $lstProduct->toArray();
-            foreach ($lstProduct as $key => $value) {
-                if (isset($req['id'])) {
+            if (isset($req['id'])) {
+                foreach ($lstProduct as $key => $value) {
                     if ($value['id'] != $req['id']) {
                         unset($lstProduct[$key]);
                     }

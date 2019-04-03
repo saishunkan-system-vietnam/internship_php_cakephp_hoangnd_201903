@@ -21,8 +21,8 @@ class HomesController extends Controller {
         $this->loadComponent('Csrf'); 
         $this->session=  $this->request->getSession();
         $this->set('quantity', $this->totalCart());
-        
-        
+        $username=($this->session->check('username')==true)?$this->session->read('username'):'';
+        $this->set('username',$username);
     }  
 
     private function totalCart(){

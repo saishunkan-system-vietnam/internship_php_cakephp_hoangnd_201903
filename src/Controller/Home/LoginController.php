@@ -28,13 +28,14 @@ class LoginController extends HomesController {
                                 'username' => $reqUser['username'],
                                 'and' => ['password' => $passwordMd5]
                             ]
-                        ])->first();
+                        ])->first();                
                 if (count($getUser) > 0) {
                     $roleTable = TableRegistry::getTableLocator()->get('Roles');
                     $getRole = $roleTable->find('all', [
                                 'conditions' => ['users_id' => $getUser['id']]
                             ])->toArray();
                     $this->session->write('usernameId', $getUser['id']);
+                    $this->session->write('username', $getUser['username']);
                     $this->session->write('roles', $getRole);
                     $loginSystem = $this->roles->checkRole($getRole, 2);
                     if ($loginSystem === TRUE) {
@@ -50,7 +51,7 @@ class LoginController extends HomesController {
                     }
                     $this->Flash->success('Login Successful');
                 } else {
-                    $this->set('loginFail', 'Tài khoản hoặc mật khẩu không chính xác');
+                    $this->Flash->error('Tài khoản hoặc mật khẩu không chính xác');
                 }
             } else {
                 $this->Flash->error($this->validation->getmessage($validationError));

@@ -1,0 +1,32 @@
+.cart-quantity{
+    width: 100%;
+}
+.cart-btnLst{
+    width: 50%;  
+}
+.cart-btnLst:hover{
+    font-weight: bold;
+}
+.cart-btnUpdate{   
+    color: blue;
+}
+.cart-btnDelete{
+    color: red;
+}
+.cart-ifo{
+    padding: 0px 0;
+    margin: 0 0;
+}
+.btn-cart{      
+    text-align: center;
+    padding: 5px 0px;
+    background-color: red;
+}
+.btn-cart a{
+    color: white;   
+    text-decoration: none;   
+}
+.btn-cart a:hover{
+     font-weight: bold;
+    text-decoration: none;
+}

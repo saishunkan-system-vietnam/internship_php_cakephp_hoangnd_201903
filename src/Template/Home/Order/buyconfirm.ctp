@@ -1,7 +1,5 @@
-<div  class="container">
-    <h3>
-        Thông tin đơn hàng:
-    </h3>
+<?=$this->Html->css('Home/cart.css')?>
+<div  class="container">   
     <?=$this->element('ListCartElement')?>    
     
     <?=$this->element('OrderElement')?>

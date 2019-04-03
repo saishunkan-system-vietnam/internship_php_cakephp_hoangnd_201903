@@ -19,7 +19,7 @@
         <?= $this->fetch('css') ?>
         <?= $this->fetch('script') ?>
     </head>
-    <body style="padding: 70px 0px">
+    <body style="padding: 60px 0px; background-color: #F0F0F0;">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -33,8 +33,15 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><div ><?= $this->Form->text('search',['class'=>'form-search','id'=>'txt-search']) ?><input id="btn-search" class="form-search" value="search" type="submit" name="sbSearch"></div></li> 
-                        <li><?= $this->Html->link('Home', ['controller' => 'Products', 'action' => 'index']) ?></li>         
+                        <li><div >
+                                <?= $this->Form->create('Products', ['url' => ['controller' => 'Products', 'action' => 'index'], 'type' => 'get']) ?>
+                                <?php $key = (isset($key)) ? $key : '';
+                                echo $this->Form->text('key', ['class' => 'form-search', 'id' => 'txt-search', 'value' => $key])
+                                ?>
+                                <input id="btn-search" class="form-search" value="search" type="submit">
+                                <?= $this->Form->end() ?>
+                            </div></li> 
+                        <li><?= $this->Html->link('Phone', ['controller' => 'Products', 'action' => 'index']) ?></li>         
                         <li><a href="<?= $this->Url->build(['controller' => 'Order', 'action' => 'index'], ['id' => 'cart']) ?>">Cart(<?php
                                 if (isset($quantity)) {
                                     echo $quantity;
@@ -42,20 +49,28 @@
                                     echo '0';
                                 }
                                 ?>)</a></li>
-                        <li><?= $this->Html->link('Login', ['controller' => 'Login', 'action' => 'index']) ?></li>
+                         <li><?= $this->Html->link('invoice', ['controller' => 'Products', 'action' => 'index']) ?></li> 
+                        <li><?php
+                            if ($username == '') {
+                                echo $this->Html->link('Login', ['controller' => 'Login', 'action' => 'index']);
+                            } else {
+                                echo $this->Html->link($username, ['controller' => 'Login', 'action' => 'index']);
+                            }
+                            ?></li>
+                               
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
 
         <div class="container">
-            <?= $this->fetch('content') ?>
+<?= $this->fetch('content') ?>
         </div><!-- /.container -->           
-        <?= $this->Html->script('bootstrap.min.js') ?>        
+<?= $this->Html->script('bootstrap.min.js') ?>        
     </body>
 </html>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
     $(document).on('click', 'input[name="sbSearch"]', function () {
         window.location.replace("<?= $this->Url->build(['controller' => 'Products', 'action' => 'index']) ?>");
         var conten = $('input[name="search"]').val();
@@ -70,4 +85,4 @@
             });
         }
     });
-</script>
+</script>-->

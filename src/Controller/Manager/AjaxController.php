@@ -10,7 +10,9 @@ class AjaxController extends AppController {
         parent::initialize();
         $this->viewBuilder()->disableAutoLayout();
         $this->loadComponent('categories');
+        $this->loadComponent('products');
         $this->loadComponent('ajaxmanagers');
+         $this->loadComponent('productgroups');
     }
 
     function getsubproducer() {
@@ -71,6 +73,20 @@ class AjaxController extends AppController {
             $randNameImg.=rand(0, 9);
         }
         return $randNameImg;
+    }
+
+    function getproductgroup() {
+        if ($this->request->is('ajax')) {
+            $req = $this->request->getData();
+            $lstProduct = $this->products->selectAll(['subproducer_id' => $req['subproducer_id']]);
+            $arrGroup = [];
+            foreach ($lstProduct as $key => $value) {
+                $productGroup = $this->productgroups->selectProductGroups(['groups_id' => $req['groups_id'], 'products_id' => $value['id']]);
+                $arrGroup[$key] = (count($productGroup) > 0) ? 1 : 0;
+            }
+            $this->set('arrGroup', $arrGroup);
+            $this->set('lstProduct', $lstProduct);
+        }
     }
 
 }

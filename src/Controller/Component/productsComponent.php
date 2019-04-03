@@ -53,13 +53,20 @@ class productsComponent extends Component {
         ]);
 
         if (!empty($req)) {
-            if (isset($req['searchName'])) {
-                $lstProduct = $lstProduct->where(['Products.name LIKE' => '%' . $req['searchName'] . '%']);
+            if (isset($req['keySearch'])) {
+                $lstProduct = $lstProduct->where(['Products.name LIKE' => '%' . $req['keySearch'] . '%']);
             }
             $lstProduct = $lstProduct->toArray();
             if (isset($req['id'])) {
                 foreach ($lstProduct as $key => $value) {
                     if ($value['id'] != $req['id']) {
+                        unset($lstProduct[$key]);
+                    }
+                }
+            }            
+             if(isset($req['subproducer_id'])){
+                foreach ($lstProduct as $key => $value) {
+                    if ($value['categories_id'] != $req['subproducer_id']) {
                         unset($lstProduct[$key]);
                     }
                 }

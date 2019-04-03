@@ -9,6 +9,8 @@ class ProductGroupsController extends ManagersController {
     public function initialize() {
         parent::initialize();
         $this->loadComponent('productgroups');
+        $this->loadComponent('categories');
+        $this->loadComponent('products');
         $this->loadComponent('validation');
         $this->loadModel('Groups');
     }
@@ -53,27 +55,66 @@ class ProductGroupsController extends ManagersController {
                 }
             } else {
                 return $this->redirect(['action' => 'index']);
-            }
+            }           
         }
     }
 
     public function delete($id) {
         $group = $this->productgroups->getGroups($id);
         $this->set('group', $group);
-        if($this->request->isPost()){
-           $result= $this->productgroups->deleteGroups($id);
-           if($result==true){
-               return $this->redirect(['action'=>'index']);
-           }  else {
+        if ($this->request->isPost()) {
+            $result = $this->productgroups->deleteGroups($id);
+            if ($result == true) {
+                return $this->redirect(['action' => 'index']);
+            } else {
                 $this->set('error', 'Delete fail');
-           }
+            }
         }
-        
     }
-    
-    public function group(){
+
+    public function group($id = NULL) {
+
+        if ($this->request->is('post')) {
+            $req = $this->request->getData();
+            if (isset($req['selectProducts'])) {               
+                $lstSelectProducts = $req['selectProducts'];
+                
+                if (isset($req['add'])) {
+                    foreach ($lstSelectProducts as $value) {
+                        if (empty($this->productgroups->firstProductGroups(['products_id' => $value, 'groups_id' => $id]))) {
+                            $this->productgroups->addProductGroups(['products_id' => $value, 'groups_id' => $id]);
+                        }
+                    }
+                }
+                if (isset($req['remove']) && count($req['selectProducts']) > 0) {
+                    foreach ($lstSelectProducts as $value) {
+                        $productGroups = $this->productgroups->firstProductGroups(['products_id' => $value, 'groups_id' => $id]);
+                        $this->productgroups->deleteProductGroups($productGroups['id']);
+                    }
+                }
+            }
+             unset($this->request->getData()['selectProducts']);             
+        }
+
+        $group = $this->productgroups->getGroups($id);
+        $this->set('group', $group);
+
+        $option = $this->categories->getSelectOption();
+        $this->set('option', $option);
         $lstGroups = $this->productgroups->getAllGroups();
-        $this->set('lstGroups',$lstGroups);
+        $optionGroup = [];
+        foreach ($lstGroups as $value) {
+            $optionGroup = array_merge($optionGroup, [$value['id'] => $value['name']]);
+        }
+        $lstProduct = $this->products->selectAll();
+        $arrGroup = [];
+        foreach ($lstProduct as $key => $value) {
+            $productGroup = $this->productgroups->selectProductGroups(['groups_id' => $id, 'products_id' => $value['id']]);           
+            $arrGroup[$key] = (count($productGroup) > 0) ? 1 : 0;
+        }
+        $this->set('arrGroup', $arrGroup);
+        $this->set('lstProduct', $lstProduct);
+        $this->set('optionGroup', $optionGroup);
     }
 
 }

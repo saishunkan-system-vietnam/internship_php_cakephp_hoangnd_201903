@@ -1,1 +1,39 @@
 *{padding: 0px;margin: 0px;}
+.line-products{
+    width: 100%;
+    list-style: none;
+    border-top: 1px solid silver;
+    border-left: 1px solid silver;
+}
+
+.line-products li{
+    width: 25%;
+    float: left;
+    padding: 10px 10px;
+    border-bottom: 1px solid silver;
+    border-right:  1px solid silver;
+    height: 400px;
+    text-align: center;
+    color: black;
+}
+.line-products li:hover{
+    box-shadow: -0.5px -0.5px 5px silver;
+}
+.products-price{
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
+.text-title{
+    font-size: 20px;
+    font-weight: bold;
+}
+#Subtext-title{
+    font-weight: bold;
+    color: #777;
+}
+.products-price-view{
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+}

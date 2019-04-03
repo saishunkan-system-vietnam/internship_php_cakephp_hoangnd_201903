@@ -11,4 +11,22 @@
 }
 #btn-search{
     border-radius: 0 10px 10px 0;
+    margin-left: -4px;
+}
+.container-fluid{
+    padding: 10px 10px;
+    background-color: #fff;
+}
+.clear-float{
+    clear: both;
+}
+.btn-orange{
+    background: linear-gradient( to top,blue,#007bff);
+}
+.btn-blue{
+     background: linear-gradient(to top,orangered,orange);
+}
+hr{
+    margin: 5px 0;
+    border-top :1px solid silver;
 }

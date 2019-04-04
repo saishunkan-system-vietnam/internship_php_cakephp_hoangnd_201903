@@ -44,23 +44,49 @@
                             <th>
                                 Group
                             </th>
-                        </tr>                    
-                        <?php                        
+
+                        </tr>           
+                        <?php
                         if (count($lstProduct) > 0) {
-                            foreach ($lstProduct as $key=> $item) {                                
-                                $styleTr=($arrGroup[$key]==1)?' style="background-color: greenyellow"':'';                            
-                                $status = ( $item['status'] == 1) ? 'show' : 'hidden';   
-                                echo '<tr'.$styleTr.'><td>' . $item['id'] . '</td><td>' . $item['name'] . '</td><td>' . number_format($item['price']) . ' vnd</td><td>' .
-                                $item['quantity'] . '</td><td>' . $status . '</td><td>' . $item['Categories']['name'] . '</td><td>' . $this->Html->image('phone/' . $item['Images']['name'], ['width' => '50px']) . '</td><td>'
-                                . $this->Form->checkbox('selectProducts[]', ['value' => $item['id'], 'hiddenField' => FALSE]) . '</td></tr>';
+                            foreach ($lstProduct as $key => $item) {
+                                $styleTr = ($arrGroup[$key] == 1) ? ' style="background-color: greenyellow"' : '';
+                                $status = ( $item['status'] == 1) ? 'show' : 'hidden';
+                                ?>   
+                                <tr <?= $styleTr ?>>
+                                    <td>
+                                        <?= $item['id'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $item['name'] ?>
+                                    </td>
+                                    <td>
+                                        <?= number_format($item['price']) ?>
+                                    </td>
+                                    <td>
+                                        <?= $item['quantity'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $status ?>
+                                    </td>
+                                    <td>
+                                        <?= $item['Categories']['name'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $this->Html->image('phone/' . $item['Images']['name'], ['width' => '50px']) ?>
+                                    </td>
+                                    <td>
+                                        <?= $this->Form->checkbox("selectProducts[$key]", ['value' => $item['id'], 'hiddenField' => FALSE]) ?>
+                                    </td>
+                                </tr>
+                                <?php
                             }
-                        }                       
+                        }
                         ?>
                     </table>
                 </div>  
-                <p>Group name:<div id="groups_id" hidden><?=$group['id']?></div> <strong><?=$group['name']?></strong></p>
+                <p>Group name:<div id="groups_id" hidden><?= $group['id'] ?></div> <strong><?= $group['name'] ?></strong></p>
                 <?= $this->Form->submit('Apply', ['class' => 'btn btn-primary', 'name' => 'add']) ?>      
-                 <?= $this->Form->submit('Remove', ['class' => 'btn btn-danger ', 'name' => 'remove']) ?>  
+                <?= $this->Form->submit('Remove', ['class' => 'btn btn-danger ', 'name' => 'remove']) ?>  
                 <?= $this->Form->end() ?>  
             </div>
         </div>
@@ -68,12 +94,12 @@
     <script>
         $(document).on('click', '#find', function () {
             var subproducer_id = $('select[name="categories_id"]').val();
-            var groups_id=$('#groups_id').text();           
+            var groups_id = $('#groups_id').text();
             $.ajax({
                 headers: {'X-CSRF-Token': $('meta[name="csrfToken"]').attr('content')},
                 url: "<?= $this->Url->build(['controller' => 'Ajax', 'action' => 'getproductgroup']) ?>",
                 type: 'POST',
-                data: {groups_id:groups_id, subproducer_id: subproducer_id}
+                data: {groups_id: groups_id, subproducer_id: subproducer_id}
             }).done(function (rp) {
                 $('#lstProducts').html(rp);
             });

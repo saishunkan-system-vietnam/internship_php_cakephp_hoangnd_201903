@@ -36,9 +36,19 @@ class productgroupsComponent extends Component {
         return $this->Groups->save($group);
     }
 
-    public function deleteGroups($id) {
-        $group = $this->Groups->get($id);
-        return $this->Groups->delete($group);
+    public function deleteGroups($id) {  
+        try {  
+            $group = $this->Groups->get($id);            
+            if($this->Groups->delete($group)){
+                print_r("a");die;
+            }else{
+                die('b');
+            }
+            
+            return $result;
+        } catch (Exception $ex) {
+            return $ex;
+        }
     }
 
     public function selectProductGroups($req) {
@@ -84,11 +94,11 @@ class productgroupsComponent extends Component {
     }
 
     public function firstProductGroups($req = null) {
-        $productGroup = $this->ProductGroups->find()->where([
-                    'groups_id' => $req['groups_id'],
-                    'and' => ['products_id' => $req['products_id']]
-                ])->first();
-        return $productGroup;
+            $productGroup = $this->ProductGroups->find()->where([
+                        'groups_id' => $req['groups_id'],
+                        'and' => ['products_id' => $req['products_id']]
+                    ])->first();
+            return $productGroup;
     }
 
     public function where($req = NULL) {

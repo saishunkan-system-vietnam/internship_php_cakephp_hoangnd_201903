@@ -33,7 +33,7 @@
                         <th>
                             Categories
                         </th>
-                         <th>
+                        <th>
                             Image
                         </th>
                         <th>
@@ -43,12 +43,40 @@
                     <?php
                     if (count($lstProduct) > 0) {
                         foreach ($lstProduct as $item) {
-                            $image= $this->Html->link('Edit',['action'=>'addimage',$item['id']]);
-                            $status=( $item['status']==1)?'show':'hidden';
-                            echo '<tr><td>' . $item['id'] . '</td><td>' . $item['name'] . '</td><td>' . number_format($item['price']) . ' vnd</td><td>' . 
-                                    $item['quantity'] . '</td><td>' .$status . '</td><td><div class="box-description">' . $item['description'] . '</div></td><td>' . $item['Categories']['name'] . '</td><td>' . $image . '</td>'
-                                    . '<td>' . $this->Html->link('Delete', ['action' => 'delete', $item['id']])
-                            . ' | ' . $this->Html->link('Edit', ['action' => 'edit', $item['id']]) . '</td></tr>';
+                            $status = ( $item['status'] == 1) ? 'show' : 'hidden';
+                            ?>
+                            <tr>
+                                <td>
+                                    <?= $item['id'] ?>
+                                </td>
+                                <td>
+                                    <?= $item['name'] ?>
+                                </td>
+                                <td>
+                                    <?= number_format($item['price']) ?>
+                                </td>
+                                <td>
+                                    <?= $item['quantity'] ?>
+                                </td>
+                                <td>
+                                    <?= $status ?>
+                                </td>
+                                <td>
+                                    <div class="box-description">
+                                        <?= htmlentities($item['description']) ?>
+                                    </div>        
+                                </td>
+                                <td>
+                                    <?= $item['Categories']['name'] ?>
+                                </td>
+                                <td>
+                                    <?= $this->Html->link('Edit', ['action' => 'addimage', $item['id']]); ?>
+                                </td>
+                                <td>
+                                    <?= $this->Html->link('Delete', ['action' => 'delete', $item['id']]) ?> | <?= $this->Html->link('Edit', ['action' => 'edit', $item['id']]) ?>
+                                </td>
+                            </tr>
+                            <?php
                         }
                     }
                     ?>
@@ -57,4 +85,5 @@
         </div>       
     </div>
 </div>
-<?=$this->Html->script('productsmanager')?>
+<?=
+$this->Html->script('productsmanager')?>

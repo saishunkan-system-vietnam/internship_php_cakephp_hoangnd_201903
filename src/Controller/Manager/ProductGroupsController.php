@@ -74,7 +74,7 @@ class ProductGroupsController extends ManagersController {
 
     public function group($id = NULL) {
 
-        if ($this->request->is('post')) {
+        if ($this->request->is('post')) {           
             $req = $this->request->getData();
             if (isset($req['selectProducts'])) {               
                 $lstSelectProducts = $req['selectProducts'];
@@ -89,11 +89,12 @@ class ProductGroupsController extends ManagersController {
                 if (isset($req['remove']) && count($req['selectProducts']) > 0) {
                     foreach ($lstSelectProducts as $value) {
                         $productGroups = $this->productgroups->firstProductGroups(['products_id' => $value, 'groups_id' => $id]);
-                        $this->productgroups->deleteProductGroups($productGroups['id']);
+                        if(!empty($productGroups)){
+                            $this->productgroups->deleteProductGroups($productGroups['id']);
+                        }
                     }
                 }
-            }
-             unset($this->request->getData()['selectProducts']);             
+            }             
         }
 
         $group = $this->productgroups->getGroups($id);

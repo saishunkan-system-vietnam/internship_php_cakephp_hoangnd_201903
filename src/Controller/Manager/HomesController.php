@@ -6,13 +6,15 @@ use App\Controller\Manager\ManagersController;
 
 class HomesController extends ManagersController {
 
-    public function index() {
-        
+    public function initialize() {
+        parent::initialize();
+        $this->loadComponent('orders');
     }
 
-    public function add() {
-        $this->autoRender=FALSE;
-        echo 'add phone';
+    public function index() {
+        $lstOrders = $this->orders->selectAll(['status' => 0]);   
+        $this->set('lstOrders',$lstOrders);
     }
+
 
 }

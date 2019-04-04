@@ -127,7 +127,6 @@ class ProductsController extends ManagersController {
         }
         $this->set('lstImg', $this->images->findProductImage(['products_id' => $id]));
         $this->set('imgAvatar', $this->images->findProductImage(['products_id' => $id, 'avatar' => True]));
-        
     }
 
     public function editimage() {
@@ -147,9 +146,6 @@ class ProductsController extends ManagersController {
                     return $this->redirect(['action' => 'addimage', $productImg['products_id']]);
                 }
             }
-//            echo '<pre>';
-//            var_dump($req);
-//            echo '</pre>';
         }
     }
 

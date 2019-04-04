@@ -8,13 +8,17 @@ use Cake\ORM\TableRegistry;
 class ordersComponent extends Component {
 
     private $Orders;
+    private $Users;
+    private $Subaddress;
 
     public function initialize(array $config) {
         parent::initialize($config);
         $this->Orders = TableRegistry::getTableLocator()->get('Orders');
+        $this->Users = TableRegistry::getTableLocator()->get('Users');
+        $this->Subaddress = TableRegistry::getTableLocator()->get('Subaddress');
     }
-    
-    public function get($id){
+
+    public function get($id) {
         return $this->Orders->get($id);
     }
 
@@ -41,22 +45,62 @@ class ordersComponent extends Component {
         return $this->Orders->delete($Order);
     }
 
-//    public function where($req=null){
-//        $lstOrders=  $this->Orders->find()->toArray();
-//        if($req!=null && count($lstOrders)>0){
-//            if(isset($req['subaddress_id'])){
-//                foreach ($lstOrders as $key=>$value){
-//                    if($value['subaddress_id']!=$req['subaddress_id']){
-//                        unset($lstOrders[$key]);
-//                    }
-//                }
-//            }
-//        }
-//        return $lstOrders;
-//    }
-    
+    public function where($req = null) {
+        $lstOrders = $this->Orders->find()->toArray();
+        if ($req != null && count($lstOrders) > 0) {
+            if (isset($req['status'])) {
+                foreach ($lstOrders as $key => $value) {
+                    if ($value['status'] != $req['status']) {
+                        unset($lstOrders[$key]);
+                    }
+                }
+            }
+        }
+        return $lstOrders;
+    }
+
     public function max($req = null) {
         $lstOrders = $this->Orders->find()->where(['subaddress_id' => $req['subaddress_id']])->max('id')->toArray();
+        return $lstOrders;
+    }
+
+    public function selectAll($req = null) {
+        $lstOrders = $this->Orders->find()
+                ->select($this->Orders)
+                ->select($this->Subaddress)
+                ->select($this->Users)
+                ->join([
+                    'Subaddress'=>[
+                        'table'=>'subaddress',
+                        'type'=>'INNER',
+                        'conditions'=>'Subaddress.id=Orders.subaddress_id'
+                    ]
+                    
+                ])->join([
+                    'Users'=>[
+                        'table'=>'users',
+                        'type'=>'INNER',
+                        'conditions'=>'Users.id=Subaddress.users_id'
+                    ]
+                ])->toArray();
+        
+        if ($req != null && count($lstOrders) > 0) {
+            if (isset($req['status'])) {
+                foreach ($lstOrders as $key => $value) {
+                    if ($value['status'] != $req['status']) {
+                        unset($lstOrders[$key]);
+                    }
+                }
+            }
+            if (isset($req['id'])) {
+                foreach ($lstOrders as $key => $value) {
+                    if ($value['id'] != $req['id']) {
+                        unset($lstOrders[$key]);
+                    }
+                }
+            }
+        }
+         
         return $lstOrders;
     }
 

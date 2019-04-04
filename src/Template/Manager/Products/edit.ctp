@@ -27,7 +27,7 @@
                         <?php if(isset($errQuantity)){ echo '<div class="error-contents">'.$errQuantity.'</div>';}?>
                 </div>   
                  <div class="form-group">
-                        <?=$this->Form->label('status','Status: ')?>&nbsp;
+                        <?=$this->Form->label('status','Status: ')?>
                         <?=$this->Form->radio('status',[1=>'Show',0=>'Hidden'],['default'=>$product['status']])?>                       
                 </div>   
                  <div class="form-group">

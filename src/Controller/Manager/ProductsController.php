@@ -6,8 +6,6 @@ use App\Controller\Manager\ManagersController;
 
 class ProductsController extends ManagersController {
 
-    protected $token;
-
     public function initialize() {
         parent::initialize();
         $this->loadComponent('validation');
@@ -73,7 +71,6 @@ class ProductsController extends ManagersController {
     }
 
     public function delete($id) {
-
         $product = $this->products->get($id);
         $subproducer = $this->categories->get($product['categories_id']);
         $producer = $this->categories->get($subproducer['parent_id']);

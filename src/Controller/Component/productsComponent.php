@@ -51,10 +51,15 @@ class productsComponent extends Component {
                 'conditions' => 'ProductImages.images_id=Images.id'
             ]
         ]);
-
         if (!empty($req)) {
             if (isset($req['keySearch'])) {
                 $lstProduct = $lstProduct->where(['Products.name LIKE' => '%' . $req['keySearch'] . '%']);
+            }
+            if (isset($req['limit'])) {
+                $lstProduct = $lstProduct->limit($req['limit']);
+            }
+            if (isset($req['offset']) and $req['offset'] >= 0) {
+                $lstProduct = $lstProduct->offset($req['offset']);
             }
             $lstProduct = $lstProduct->toArray();
             if (isset($req['id'])) {
@@ -63,8 +68,8 @@ class productsComponent extends Component {
                         unset($lstProduct[$key]);
                     }
                 }
-            }            
-             if(isset($req['subproducer_id'])){
+            }
+            if (isset($req['subproducer_id'])) {
                 foreach ($lstProduct as $key => $value) {
                     if ($value['categories_id'] != $req['subproducer_id']) {
                         unset($lstProduct[$key]);
@@ -107,6 +112,17 @@ class productsComponent extends Component {
         } else {
             return False;
         }
+    }
+
+    public function count($req=null) {
+        $lstProduct = $this->Products->find();
+        if (!empty($req)) {
+            if (isset($req['keySearch'])) {
+                $lstProduct = $lstProduct->where(['Products.name LIKE' => '%' . $req['keySearch'] . '%']);
+            }            
+        }
+        $count = $lstProduct->count();
+        return $count;
     }
 
 }

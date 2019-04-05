@@ -2,11 +2,9 @@
 
 namespace App\Controller\Home;
 
-use Cake\Controller\Controller;
+use App\Controller\Home\HomesController;
 
-class LogedController extends Controller {
-
-    private $session;
+class LogedController extends HomesController {
 
     public function initialize() {
         parent::initialize();
@@ -15,26 +13,12 @@ class LogedController extends Controller {
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
-        $this->loadComponent('roles');
-        $this->viewBuilder()->setLayout('managerLayout');
+        $this->loadComponent('roles');       
         $this->session = $this->request->getSession();
-        $roles = $this->session->read('roles');
-
-        
         if ($this->session->check('username') === false) {
-            $url= \Cake\Routing\Router::url(null,FALSE);
-            $this->session->write('tmp_url',$url);
-            $this->redirect(['controller'=>'Login','action'=>'index']);
+           $this->redirect(['controller'=>'Login','action'=>'index']);
         }
 
         $this->loadComponent('Csrf');
-    }
-
-    public function logout() {
-        $this->autoRender = FALSE;
-        $this->session->destroy('username');
-        $this->session->destroy('roles');
-        $this->redirect('login');
-    }
-
+    }  
 }

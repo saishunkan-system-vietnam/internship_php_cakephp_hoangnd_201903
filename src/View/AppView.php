@@ -36,6 +36,6 @@ class AppView extends View
      */
     public function initialize()
     {
-//        $this->loadHelper('Token');
+        $this->loadHelper('Token');
     }
 }

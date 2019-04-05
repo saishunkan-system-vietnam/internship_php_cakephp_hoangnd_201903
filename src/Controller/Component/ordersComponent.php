@@ -24,8 +24,11 @@ class ordersComponent extends Component {
 
     public function add($req) {
         $newOrder = $this->Orders->newEntity();
+        $customerNote=(isset($req['customer_note']))?$req['customer_note']:'';
+        $note=(isset($req['note']))?$req['note']:'';
         $newOrder->date_time = $req['date_time'];
-        $newOrder->note = $req['note'];
+        $newOrder->note =$note ;
+        $newOrder->customer_note = $customerNote;
         $newOrder->status = $req['status'];
         $newOrder->subaddress_id = $req['subaddress_id'];
         return $this->Orders->save($newOrder);
@@ -33,10 +36,16 @@ class ordersComponent extends Component {
 
     public function update($req) {
         $Order = $this->Orders->get($req['id']);
-        $Order->date_time = $req['date_time'];
-        $Order->note = $req['note'];
-        $Order->status = $req['status'];
-        $Order->subaddress_id = $req['subaddress_id'];
+        $note = (isset($req['note'])) ? $req['note'] : $Order['note'];
+        $status=(isset($req['status'])) ? $req['status'] : $Order['status'];
+        $date=(isset($req['date_time'])) ? $req['date_time'] : $Order['date_time'];
+        $subaddress=(isset($req['subaddress_id'])) ? $req['subaddress_id'] : $Order['subaddress_id'];
+        
+        
+        $Order->date_time = $date;
+        $Order->note = $note;
+        $Order->status = $status;
+        $Order->subaddress_id =$subaddress;
         return $this->Orders->save($Order);
     }
 
@@ -66,24 +75,23 @@ class ordersComponent extends Component {
 
     public function selectAll($req = null) {
         $lstOrders = $this->Orders->find()
-                ->select($this->Orders)
-                ->select($this->Subaddress)
-                ->select($this->Users)
-                ->join([
-                    'Subaddress'=>[
-                        'table'=>'subaddress',
-                        'type'=>'INNER',
-                        'conditions'=>'Subaddress.id=Orders.subaddress_id'
-                    ]
-                    
-                ])->join([
-                    'Users'=>[
-                        'table'=>'users',
-                        'type'=>'INNER',
-                        'conditions'=>'Users.id=Subaddress.users_id'
+                        ->select($this->Orders)
+                        ->select($this->Subaddress)
+                        ->select($this->Users)
+                        ->join([
+                            'Subaddress' => [
+                                'table' => 'subaddress',
+                                'type' => 'INNER',
+                                'conditions' => 'Subaddress.id=Orders.subaddress_id'
+                            ]
+                        ])->join([
+                    'Users' => [
+                        'table' => 'users',
+                        'type' => 'INNER',
+                        'conditions' => 'Users.id=Subaddress.users_id'
                     ]
                 ])->toArray();
-        
+
         if ($req != null && count($lstOrders) > 0) {
             if (isset($req['status'])) {
                 foreach ($lstOrders as $key => $value) {
@@ -100,7 +108,7 @@ class ordersComponent extends Component {
                 }
             }
         }
-         
+
         return $lstOrders;
     }
 

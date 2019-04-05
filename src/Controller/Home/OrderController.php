@@ -25,6 +25,7 @@ class OrderController extends HomesController {
     public function buyconfirm($id = null) {
         $cart = ($this->session->check('cart') == true) ? $this->session->read('cart') : [];
         if ($id != null) {
+            $cartold=$cart;
             if (array_key_exists($id, $cart) == true) {
                 $cart = [$id => $cart[$id]];
             } else {
@@ -71,12 +72,18 @@ class OrderController extends HomesController {
                 }
 
                 //kiểm tra add order nếu thành công thì add order details
-                if ($this->orders->add(['users_id' => $user['id'], 'status' => 0, 'note' => '', 'subaddress_id' => $addressID, 'date_time' => date('Y-m-d H:i:s')]) !== FALSE) {
+                if ($this->orders->add(['users_id' => $user['id'], 'status' => 0, 'subaddress_id' => $addressID, 'date_time' => date('Y-m-d H:i:s')]) !== FALSE) {
                     $order = $this->orders->max(['subaddress_id' => $addressID]);
                     foreach ($cart as $key => $value) {
                         $this->orderdetails->add(['orders_id' => $order['id'], 'products_id' => $key, 'quantity' => $value]);
+                        unset($cartold[$key]);
                     }
                     $this->set('successful', 'Order successful');
+                    if (count($cartold) > 0) {
+                        $this->session->write('cart', $cartold);
+                    } else {
+                        $this->session->delete('cart', $cart);
+                    }
                     return $this->redirect(['action' => 'buysuccess', $order['id']]);
                 }
             }
@@ -107,8 +114,14 @@ class OrderController extends HomesController {
                                 $order = $this->orders->max(['subaddress_id' => $subaddress['id']]);
                                 foreach ($cart as $key => $value) {
                                     $this->orderdetails->add(['orders_id' => $order['id'], 'products_id' => $key, 'quantity' => $value]);
+                                    unset($cartold[$key]);
                                 }
                                 $this->set('successful', 'Order successful');
+                                if (count($cartold) > 0) {
+                                    $this->session->write('cart', $cartold);
+                                } else {
+                                    $this->session->delete('cart', $cart);
+                                }
                                 return $this->redirect(['action' => 'buysuccess', $order['id']]);
                             }
                         }
@@ -158,7 +171,5 @@ class OrderController extends HomesController {
             $this->set('user', $user);
         }
     }
-    
-    
 
 }

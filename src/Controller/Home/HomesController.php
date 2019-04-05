@@ -26,14 +26,8 @@ class HomesController extends Controller {
     }  
 
     private function totalCart(){
-         $cart = ($this->session->check('cart') == true) ? $this->session->read('cart') : [];
-         $total=0;
-         if(count($cart)>0){
-             foreach ($cart as $v){
-                 $total+=$v;
-             }
-         }
-         return $total;
+         $cart = ($this->session->check('cart') == true) ? $this->session->read('cart') : [];         
+         return count($cart);
     }
 
 }

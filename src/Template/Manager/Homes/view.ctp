@@ -1,11 +1,11 @@
 <div class="container-fluid">
     <div class="col-md-2">
-        <h3>Oder details</h3> 
+        <h3>New orders</h3> 
         <ul class="nav nav-pills nav-stacked">
-            <li><?= $this->Html->link('Back orders manager', ['action' => 'index'], ['class' => 'w3-bar-item w3-button']) ?></li>
+            <li></li>
         </ul>       
     </div>
-    <div class="col-md-10">       
+    <div class="col-md-12">       
         <div class="panel panel-default">            
             <div class="panel-heading">List orders</div>
             <div  class="panel-body">
@@ -14,14 +14,8 @@
                     $order = array_pop($lstOrders);
                     $status = '';
                     if ($order['status'] == 0) {
-                                $status = 'Chưa duyệt';                               
-                            } else if ($order['status'] == 1) {
-                                $status = 'Đã xác nhận, đang giao hàng';                               
-                            } else if ($order['status'] == 2) {
-                                $status = 'Đã thanh toán';                               
-                            } else if ($order['status'] == 3) {
-                                $status = 'Đã hủy';                               
-                            } 
+                        $status = "Chưa duyệt";
+                    }
                     ?>
                     <div class="container-fluid">
                         <div class="col-md-4">
@@ -38,18 +32,14 @@
                                 <tr>
                                     <th>Address</th><td><p><?= $order['Users']['name'] ?></p><p><?= $order['Users']['phonenumber'] ?></p><p><?= $order['Subaddress']['address'] ?></p></td>
                                 </tr>
-                                <tr>
-                                    <th>Custonmer note:</th><td><p><?= $order['customer_note'] ?></td>
-                                </tr>
                             </table>    
                         </div>         
                         <div class="col-md-8">
                             <?= $this->Form->create(null) ?>
-                             <?= $this->Form->label('status', ['text' => 'Status:']) ?><br>
-                            <?=$this->Form->radio('status',['0'=>'Chưa xác nhận','1'=>'Đã xác nhận, đang giao hàng','2'=>'Đã thanh toán','3'=>'Đã hủy'],['default'=>$order['status']])?><br>
-                            <?= $this->Form->label('note', ['text' => 'Note:']) ?><br>
-                            <?= $this->Form->textarea('note',['value'=>$order['note']]) ?>
-                            <?= $this->Form->submit('update') ?>
+                            <?= $this->Form->submit('Xác nhận', ['name' => 'btnXacNhan']) ?>
+                            <?= $this->Form->submit('Hủy', ['name'=>'btnHuy']) ?>
+                            <?= $this->Form->label('note',['text'=>'Note:'])?><br>
+                             <?= $this->Form->textarea('note') ?>
                             <?= $this->Form->end() ?>
                         </div>
                     </div>

@@ -70,7 +70,7 @@
                                     <?= $item['Categories']['name'] ?>
                                 </td>
                                 <td>
-                                    <?= $this->Html->link('Edit', ['action' => 'addimage', $item['id']]); ?>
+                                    <?= $this->Html->link('Edit image', ['action' => 'addimage', $item['id']]); ?>
                                 </td>
                                 <td>
                                     <?= $this->Html->link('Delete', ['action' => 'delete', $item['id']]) ?> | <?= $this->Html->link('Edit', ['action' => 'edit', $item['id']]) ?>
@@ -80,7 +80,7 @@
                         }
                     }
                     ?>
-                </table>
+                </table>                
             </div>
         </div>       
     </div>

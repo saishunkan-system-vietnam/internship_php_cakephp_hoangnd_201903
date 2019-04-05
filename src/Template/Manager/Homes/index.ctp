@@ -57,7 +57,7 @@
                                    <?=$item['Subaddress']['address']?>
                                 </td>
                                  <td>
-                                   <?=$this->Html->link('view detail',['controller'=>'Orders','action'=>'view',$item['id']])?>
+                                   <?=$this->Html->link('view detail',['action'=>'view',$item['id']])?>
                                 </td>                                
                             </tr>
                             <?php

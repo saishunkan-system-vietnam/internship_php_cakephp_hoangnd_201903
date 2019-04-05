@@ -8,12 +8,16 @@ use Cake\ORM\TableRegistry;
 class orderdetailsComponent extends Component {
 
     private $OrderDetail;
-    private  $Products;
+    private $Products;
+    private $ProductImages;
+    private $Images;
 
     public function initialize(array $config) {
         parent::initialize($config);
         $this->OrderDetail = TableRegistry::getTableLocator()->get('OrderDetails');
-        $this->Products=  TableRegistry::getTableLocator()->get('Products');
+        $this->Products = TableRegistry::getTableLocator()->get('Products');
+        $this->ProductImages = TableRegistry::getTableLocator()->get('ProductImages');
+        $this->Images = TableRegistry::getTableLocator()->get('Images');
     }
 
     public function get($id) {
@@ -40,44 +44,58 @@ class orderdetailsComponent extends Component {
         $orderDetail = $this->OrderDetail->get($id);
         return $this->OrderDetail->delete($orderDetail);
     }
-    
-    public function selectAll($req=null){
-        $lstOrderDetails=  $this->OrderDetail->find()
-                ->select($this->OrderDetail)
-                ->select($this->Products)
-                ->join([
-                    'Products'=>[
-                        'table'=>'products',
-                        'type'=>'INNER',
-                        'conditions'=>'Products.id=OrderDetails.products_id'
-                    ]
-                ])
-                ->toArray();
-         if($req!=null){
-            if(count($lstOrderDetails)>0){
-               if(isset($req['orders_id'])){
-                   foreach ($lstOrderDetails as $key=>$value){
-                       if($value['orders_id']!=$req['orders_id']){
-                           unset($lstOrderDetails[$key]);
-                       }
-                   }
-               }
+
+    public function selectAll($req = null) {
+        $lstOrderDetails = $this->OrderDetail->find()
+                        ->select($this->OrderDetail)
+                        ->select($this->Products)
+                        ->select($this->ProductImages)
+                        ->select($this->Images)
+                        ->join([
+                            'Products' => [
+                                'table' => 'products',
+                                'type' => 'INNER',
+                                'conditions' => 'Products.id=OrderDetails.products_id'
+                            ]
+                        ])->join([
+                            'ProductImages' => [
+                                'table' => 'product_images',
+                                'type' => 'LEFT',
+                                'conditions' => 'products.id=ProductImages.products_id and ProductImages.avatar=TRUE'
+                            ]
+                        ])
+                        ->join([
+                            'Images' => [
+                                'table' => 'images',
+                                'type' => 'LEFT',
+                                'conditions' => 'ProductImages.images_id=Images.id'
+                            ]
+                        ])->toArray();
+        if ($req != null) {
+            if (count($lstOrderDetails) > 0) {
+                if (isset($req['orders_id'])) {
+                    foreach ($lstOrderDetails as $key => $value) {
+                        if ($value['orders_id'] != $req['orders_id']) {
+                            unset($lstOrderDetails[$key]);
+                        }
+                    }
+                }
             }
         }
         return $lstOrderDetails;
     }
 
-        public function where($req=null){
-        $lstOrderDetail=  $this->OrderDetail->find()->toArray();
-        if($req!=null){
-            if(count($lstOrderDetail)>0){
-               if(isset($req['orders_id'])){
-                   foreach ($lstOrderDetail as $key=>$value){
-                       if($value['orders_id']!=$req['orders_id']){
-                           unset($lstOrderDetail[$key]);
-                       }
-                   }
-               }
+    public function where($req = null) {
+        $lstOrderDetail = $this->OrderDetail->find()->toArray();
+        if ($req != null) {
+            if (count($lstOrderDetail) > 0) {
+                if (isset($req['orders_id'])) {
+                    foreach ($lstOrderDetail as $key => $value) {
+                        if ($value['orders_id'] != $req['orders_id']) {
+                            unset($lstOrderDetail[$key]);
+                        }
+                    }
+                }
             }
         }
         return $lstOrderDetail;

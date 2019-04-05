@@ -10,27 +10,44 @@
         ?>
     </div>
     <hr>
+    <p id="Subtext-title"><?= $countProduct ?>  sản phẩm: </p>
 </div>
-<div  class="container-fluid" id="lstProducts">
-    <?php
-    if (isset($lstProduct)) {
-        if (count($lstProduct) > 0) {
-            echo '<p id="Subtext-title">'.  count($lstProduct).' sản phẩm: </p>';
-            $dem = 1;
-            foreach ($lstProduct as $item) {
-                $openUl = ($dem == 1) ? '<ul class="line-products">' : '';
-                $closeUl = ($dem == 4 or $dem ==  count($lstProduct)) ? '<div class="clear-float"></div></ul>' : '';               
-                echo $openUl. '<a href="' . $this->Url->build(['controller' => 'Products', 'action' => 'view', $item['id']]) . '"> '
-                        . '<li class="col-product">' . $this->Html->image('/img/phone/' . $item['Images']['name'], ['alt' => $item['Images']['name'], 'width' => '100%']) . '<br><p>' .
-                $item['name'] . '</p><div class="products-price"><p>' . number_format($item['price']) . ' vnđ</p><div> </li></a>'.$closeUl;
-                if ($dem == 4) {
-                    $dem = 1;
-                }
-                $dem++;
-            }
-        }
-    }
-    ?>  
+
+<div  class="container-fluid" id="lstProducts">  
 
 </div>
+<div  class="container-fluid">       
+    <div>
+        <?php
+        if ($pageNumber >= 2) {
+            ?>
+            <input onclick="loadProduct(0)" value="Trang đầu" type="button">
+            <?php
+            for ($i = 0; $i < $pageNumber; $i++) {
+                ?>
+                <input onclick="loadProduct(<?= $i + 1 ?>)" value="<?= $i + 1 ?>" type="button">
+                <?php
+            }
+            ?>
+            <input onclick="loadProduct(<?=$pageNumber?>)" value="Trang cuối" type="button">
+            <?php
+        }
+        ?>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        loadProduct(1);
+    });
+    function loadProduct(page) {
+        $.ajax({
+            headers: {'X-CSRF-Token': $('meta[name="csrfToken"]').attr('content')},
+            url: "<?= $this->Url->build(['controller' => 'Ajax', 'action' => 'loadpage']) ?>",
+            type: 'POST',
+            data: {page: page}
+        }).done(function (rp) {
+            $('#lstProducts').html(rp);
+        });
+    }
+</script>
 

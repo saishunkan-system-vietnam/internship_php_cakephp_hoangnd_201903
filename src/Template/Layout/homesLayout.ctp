@@ -34,7 +34,7 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><div >
-                                <?= $this->Form->create('Products', ['url' => ['controller' => 'Products', 'action' => 'index'], 'type' => 'get']) ?>
+                                <?= $this->Form->create('Products', ['url' => ['controller' => 'Products', 'action' => 'index'], 'type' => 'post']) ?>
                                 <?php $key = (isset($key)) ? $key : '';
                                 echo $this->Form->text('key', ['class' => 'form-search', 'id' => 'txt-search', 'value' => $key])
                                 ?>
@@ -49,12 +49,12 @@
                                     echo '0';
                                 }
                                 ?>)</a></li>
-                         <li><?= $this->Html->link('invoice', ['controller' => 'Products', 'action' => 'index']) ?></li> 
+                         <li><?= $this->Html->link('Invoice', ['controller' => 'Invoice', 'action' => 'index']) ?></li> 
                         <li><?php
                             if ($username == '') {
                                 echo $this->Html->link('Login', ['controller' => 'Login', 'action' => 'index']);
                             } else {
-                                echo $this->Html->link($username, ['controller' => 'Login', 'action' => 'index']);
+                                echo $this->Html->link($username, ['controller' => 'Users', 'action' => 'index']);
                             }
                             ?></li>
                                

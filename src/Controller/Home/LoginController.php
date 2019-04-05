@@ -41,13 +41,7 @@ class LoginController extends HomesController {
                     if ($loginSystem === TRUE) {
                         return $this->redirect('/manager');
                     } else {
-                        if($this->session->check('tmp_url')==true){                          
-                        $tmp_url=$this->session->read('tmp_url');
-                        $url= strstr(ltrim($tmp_url,'/'), '/');
-                            return $this->redirect($url);
-                        }  else {
-                            
-                        }
+                        return $this->redirect(['controller'=>'Users']);
                     }
                     $this->Flash->success('Login Successful');
                 } else {

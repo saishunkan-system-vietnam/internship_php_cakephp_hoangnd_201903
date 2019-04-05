@@ -3,7 +3,7 @@
     <div class="col-md-2">
         <h3>Group products</h3> 
         <ul class="nav nav-pills nav-stacked">
-            <li></li>
+            <li><?= $this->Html->link('Back product groups manager', ['action' => 'index'], ['class' => 'w3-bar-item w3-button']) ?></li>
         </ul>       
     </div>
     <div class="col-md-10">    

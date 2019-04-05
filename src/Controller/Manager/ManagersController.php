@@ -6,7 +6,7 @@ use Cake\Controller\Controller;
 
 class ManagersController extends Controller {
 
-    private $session;
+    protected $session;
 
     public function initialize() {
         parent::initialize();
@@ -16,7 +16,7 @@ class ManagersController extends Controller {
         ]);
         $this->loadComponent('Flash');
         $this->loadComponent('roles');
-         $this->viewBuilder()->setLayout('managerLayout');
+        $this->viewBuilder()->setLayout('managerLayout');
 
         $this->session = $this->request->getSession();
         $roles = $this->session->read('roles');
@@ -25,16 +25,9 @@ class ManagersController extends Controller {
         if ($this->session->check('usernameId') === false or $this->roles->checkRole($roles, 2) === FALSE) {
             $this->redirect('/home/login');
         }
-       
-        $this->loadComponent('Csrf'); 
-        
-    }  
-
-    public function logout() {
-        $this->autoRender=FALSE;
-        $this->session->destroy('usernameId');
-        $this->session->destroy('roles');
-        $this->redirect('/home/login');
+        $username = ($this->session->check('username') == true) ? $this->session->read('username') : '';
+        $this->set('username', $username);
+        $this->loadComponent('Csrf');
     }
 
 }

@@ -34,8 +34,8 @@
                         <li><?= $this->Html->link('Phone manager', ['controller' => 'Products', 'action' => 'index']) ?></li>
                         <li><?= $this->Html->link('Category manager', ['controller' => 'Categories', 'action' => 'index']) ?></li>
                         <li><?= $this->Html->link('Group phone manager', ['controller' => 'ProductGroups', 'action' => 'index']) ?></li>
-                         <li><?= $this->Html->link('Orders manager', ['controller' => 'Orders', 'action' => 'index']) ?></li>
-                         <li><?= $this->Html->link('Specifications manager', ['controller' => 'Orders', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link('Orders manager', ['controller' => 'Orders', 'action' => 'index']) ?></li>
+                        <li><?= $this->Html->link('Specifications manager', ['controller' => 'Specifications', 'action' => 'index']) ?></li>
                         <li><?= $this->Html->link($username, ['controller' => 'Users', 'action' => 'index']) ?></li>
                     </ul>
                 </div><!--/.nav-collapse -->

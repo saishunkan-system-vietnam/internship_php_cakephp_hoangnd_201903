@@ -12,20 +12,28 @@ class ProductsController extends HomesController {
     }
 
     public function index() {
-        if($this->request->is('post')){
-            die();
-            $req=  $this->request->getData();
-            var_dump($req);
+        $this->set("title","Trang chủ");
+        $req = $this->request->getQuery();
+        $key="";
+        if (isset($req["key"]) and $req["key"]!="") {           
+            $countProduct = $this->products->count(['keySearch' => $req["key"]]);
+            $key=$req["key"];
+            $this->set("title","Tìm kiếm");
+        } else {
+            $countProduct = $this->products->count(['keySearch' => 'a']);            
         }
-        $countProduct = $this->products->count(['keySearch'=>'a']);
         $pageNumber = ($countProduct % 4 == 0) ? $countProduct / 4 : (int) ($countProduct / 4) + 1;
         $this->set('countProduct', $countProduct);
         $this->set('pageNumber', $pageNumber);
+        $this->set("key",$key);
     }
 
-    public function view($id = null) {
+    public function view($id = null) {        
         $product = $this->products->selectAll(['id' => $id]);
-        $this->set('product', array_pop($product));
+        $product= array_pop($product);
+        $this->set('product',$product);
+        $this->set("title",$product['name']);
+       
     }
 
 }

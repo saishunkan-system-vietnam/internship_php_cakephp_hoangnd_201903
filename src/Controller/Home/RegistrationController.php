@@ -23,7 +23,7 @@ class RegistrationController extends HomesController {
     }
 
     public function index() {
-
+$this->set('title','Registration');
         if ($this->request->isPost()) {
             //get data form login
             $req_user = $this->request->getData();

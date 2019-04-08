@@ -116,6 +116,8 @@ class CategoriesController extends ManagersController {
             $result = $this->categories->delete($id);
             if ($result === true) {
                 $this->redirect(['action' => 'index']);
+            }  else {
+            $this->set('errDelete',"Không xóa được");
             }
         }
     }

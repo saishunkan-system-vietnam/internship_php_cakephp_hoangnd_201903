@@ -15,7 +15,8 @@ class LoginController extends HomesController {
         $this->loadComponent('validation');
     }
 
-    public function index() {       
+    public function index() {      
+        $this->set('title','Login');
         if ($this->request->isPost()) {
             $reqUser = $this->request->getData();
             $validation = $this->Users->newEntity($reqUser);

@@ -21,14 +21,15 @@
         <?php
         if (isset($product)) {
              echo '<div class="products-price-view">'.number_format($product['price']) . ' vnd</div>';
-            echo '<br>' . $this->Html->link('Buy now', ['controller' => 'Order', 'action' => 'buyconfirm', $product['id']]);
-            echo '<br>' . $this->Form->button('Add cart', ['productId' => $product['id'], 'name' => 'addCart']);
+            echo '<br>' . $this->Html->link('Buy now', ['controller' => 'Order', 'action' => 'buyconfirm', $product['id']],['class'=>'btn btn-danger']);
+            echo '<br>';
+            echo '<br>' . $this->Form->button('Add cart', ['productId' => $product['id'], 'name' => 'addCart','class'=>'btn btn-primary']);
         }
         ?>
     </div>
 </div>
 <div class="container-fluid">
-<div class="col-md-8">
+<div  class="col-md-8">
     
          <?php
     if (isset($product)) {

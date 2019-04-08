@@ -6,7 +6,7 @@
         <meta name="csrfToken" content="<?php echo $this->Token->getToken(); ?>"> 
         <title>
 
-            <?= $this->fetch('title') ?>
+            <?= $title ?>
         </title>
         <?= $this->Html->meta('icon') ?>
         <?= $this->Html->script('jquery-3.3.1.min.js') ?>
@@ -29,12 +29,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Phone HoangND</a>
+                    <a class="navbar-brand" href="<?=$this->Url->build(['controller'=>'Products','action'=>'index'])?>">Phone HoangND</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><div >
-                                <?= $this->Form->create('Products', ['url' => ['controller' => 'Products', 'action' => 'index'], 'type' => 'post']) ?>
+                                <?= $this->Form->create('Products', ['url' => ['controller' => 'Products', 'action' => 'index'], 'type' => 'get']) ?>
                                 <?php $key = (isset($key)) ? $key : '';
                                 echo $this->Form->text('key', ['class' => 'form-search', 'id' => 'txt-search', 'value' => $key])
                                 ?>

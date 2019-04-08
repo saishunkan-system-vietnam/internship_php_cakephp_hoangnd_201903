@@ -20,12 +20,15 @@ class OrderController extends HomesController {
     public function index() {
         $cart = ($this->session->check('cart') == true) ? $this->session->read('cart') : [];
         $this->getCart($cart);
+        $this->set("title","Order");
     }
 
     public function buyconfirm($id = null) {
+        $this->set("title","Buy products");
         $cart = ($this->session->check('cart') == true) ? $this->session->read('cart') : [];
+
         if ($id != null) {
-            $cartold=$cart;
+            $cartold = $cart;
             if (array_key_exists($id, $cart) == true) {
                 $cart = [$id => $cart[$id]];
             } else {
@@ -63,23 +66,24 @@ class OrderController extends HomesController {
                             $getSubaddress = $this->subaddress->where(['users_id' => $user['id'], 'address' => $req['address']]);
                         }
                     }
-                    $addressID = array_pop($getSubaddress);
+                    $addressID = array_pop($getSubaddress)['id'];                    
                 }
                 //ngược lại kiểm tra khách hàng có thay đổi địa chỉ mua hàng băng
                 elseif (isset($req['addressOption']) and $req['addressOption'] != '') {
                     $getSubaddress = $this->subaddress->get($req['addressOption']);
                     $addressID = $getSubaddress['id'];
                 }
-
-                //kiểm tra add order nếu thành công thì add order details
+                 //kiểm tra add order nếu thành công thì add order details
                 if ($this->orders->add(['users_id' => $user['id'], 'status' => 0, 'subaddress_id' => $addressID, 'date_time' => date('Y-m-d H:i:s')]) !== FALSE) {
                     $order = $this->orders->max(['subaddress_id' => $addressID]);
                     foreach ($cart as $key => $value) {
                         $this->orderdetails->add(['orders_id' => $order['id'], 'products_id' => $key, 'quantity' => $value]);
-                        unset($cartold[$key]);
+                        if (isset($cartold)) {
+                            unset($cartold[$key]);
+                        }
                     }
                     $this->set('successful', 'Order successful');
-                    if (count($cartold) > 0) {
+                    if (isset($cartold) and count($cartold) > 0) {
                         $this->session->write('cart', $cartold);
                     } else {
                         $this->session->delete('cart', $cart);
@@ -114,10 +118,12 @@ class OrderController extends HomesController {
                                 $order = $this->orders->max(['subaddress_id' => $subaddress['id']]);
                                 foreach ($cart as $key => $value) {
                                     $this->orderdetails->add(['orders_id' => $order['id'], 'products_id' => $key, 'quantity' => $value]);
-                                    unset($cartold[$key]);
+                                    if (isset($cartold)) {
+                                        unset($cartold[$key]);
+                                    }
                                 }
                                 $this->set('successful', 'Order successful');
-                                if (count($cartold) > 0) {
+                                if (isset($cartold) and count($cartold) > 0) {
                                     $this->session->write('cart', $cartold);
                                 } else {
                                     $this->session->delete('cart', $cart);
@@ -151,6 +157,7 @@ class OrderController extends HomesController {
     }
 
     public function buysuccess($id = null) {
+        $this->set("title","Order information");
         if ($id != null) {
             $order = $this->orders->get($id);
             $address = $this->subaddress->get($order['subaddress_id']);

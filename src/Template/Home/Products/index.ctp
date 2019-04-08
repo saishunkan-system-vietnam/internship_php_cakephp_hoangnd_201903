@@ -2,8 +2,8 @@
 <div class="container-fluid">
     <div class="text-title">
         <?php
-        if (isset($key)) {
-            echo '<p>Tìm thấy <strong>' . count($lstProduct) . '</strong> kết quả phù hợp với từ khóa tìm kiếm <strong>"' . $key . '"</strong> trong đó có:</p>';
+        if (isset($key) and $key !=null) {
+            echo '<p>Tìm thấy <strong>' . $countProduct . '</strong> kết quả phù hợp với từ khóa tìm kiếm <strong>"' . $key . '"</strong> trong đó có:</p>';
         } else {
             echo '<p>Danh sách sản phẩm:</p>';
         }
@@ -21,15 +21,15 @@
         <?php
         if ($pageNumber >= 2) {
             ?>
-            <input onclick="loadProduct(0)" value="Trang đầu" type="button">
+            <input onclick="loadProduct(0)" value="Trang đầu" type="button" class="btn">
             <?php
             for ($i = 0; $i < $pageNumber; $i++) {
                 ?>
-                <input onclick="loadProduct(<?= $i + 1 ?>)" value="<?= $i + 1 ?>" type="button">
+                <input onclick="loadProduct(<?= $i + 1 ?>)" value="<?= $i + 1 ?>" type="button" class="btn">
                 <?php
             }
             ?>
-            <input onclick="loadProduct(<?=$pageNumber?>)" value="Trang cuối" type="button">
+            <input onclick="loadProduct(<?=$pageNumber?>)" value="Trang cuối" type="button" class="btn">
             <?php
         }
         ?>
@@ -44,7 +44,7 @@
             headers: {'X-CSRF-Token': $('meta[name="csrfToken"]').attr('content')},
             url: "<?= $this->Url->build(['controller' => 'Ajax', 'action' => 'loadpage']) ?>",
             type: 'POST',
-            data: {page: page}
+            data: {page: page,key:"<?=$key?>"}
         }).done(function (rp) {
             $('#lstProducts').html(rp);
         });

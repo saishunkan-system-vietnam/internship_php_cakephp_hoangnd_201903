@@ -64,6 +64,13 @@ class ordersComponent extends Component {
                     }
                 }
             }
+             if (isset($req['products_id'])) {
+                foreach ($lstOrders as $key => $value) {
+                    if ($value['products_id'] != $req['products_id']) {
+                        unset($lstOrders[$key]);
+                    }
+                }
+            }
         }
         return $lstOrders;
     }

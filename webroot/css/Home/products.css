@@ -1,16 +1,13 @@
 *{padding: 0px;margin: 0px;}
-.box-products{
-    border-top: 1px solid silver;
-    border-right: 1px solid silver;    
+.box-products{   
     text-align: center;    
 }
 .line-products{
     padding: 20px 10px;
     height: 450px;
-    border-bottom: 1px solid silver;
-    border-left: 1px solid silver;   
 }
 .line-products:hover{
+    border: 1px solid silver;
     box-shadow: -0.5px -0.5px 5px silver;
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 05, 2019 lúc 12:30 PM
+-- Thời gian đã tạo: Th4 08, 2019 lúc 12:33 PM
 -- Phiên bản máy phục vụ: 10.1.25-MariaDB
 -- Phiên bản PHP: 7.1.7
 
@@ -67,8 +67,7 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`id`, `name`) VALUES
-(1, 'Mới'),
-(4, 'Mới 98%');
+(5, 'Mới');
 
 -- --------------------------------------------------------
 
@@ -95,7 +94,8 @@ INSERT INTO `images` (`id`, `name`) VALUES
 (79, '756328757533243167510962128325.jpg'),
 (80, '719357767694980000712379369247.jpg'),
 (81, '240350809085411591005035262736.jpg'),
-(82, '698481920510381218165564513045.jpg');
+(82, '698481920510381218165564513045.jpg'),
+(83, '625772214943402703604234731964.jpg');
 
 -- --------------------------------------------------------
 
@@ -128,7 +128,11 @@ INSERT INTO `orders` (`id`, `date_time`, `status`, `note`, `subaddress_id`, `cus
 (13, '2019-04-05 10:05:05', 0, '', 25, ''),
 (14, '2019-04-05 10:06:34', 0, '', 26, ''),
 (15, '2019-04-05 10:07:01', 0, '', 27, ''),
-(16, '2019-04-05 10:11:52', 0, '', 28, '');
+(16, '2019-04-05 10:11:52', 0, '', 28, ''),
+(17, '2019-04-08 02:48:41', 0, '', 29, ''),
+(30, '2019-04-08 04:10:16', 0, '', 45, ''),
+(31, '2019-04-08 04:10:52', 0, '', 45, ''),
+(32, '2019-04-08 04:11:20', 0, '', 46, '');
 
 -- --------------------------------------------------------
 
@@ -161,7 +165,11 @@ INSERT INTO `order_details` (`id`, `products_id`, `orders_id`, `quantity`) VALUE
 (14, 1, 13, 2),
 (15, 1, 14, 2),
 (16, 1, 15, 3),
-(17, 3, 16, 3);
+(17, 3, 16, 3),
+(18, 1, 17, 3),
+(29, 1, 30, 1),
+(30, 3, 31, 1),
+(31, 1, 32, 1);
 
 -- --------------------------------------------------------
 
@@ -207,15 +215,6 @@ CREATE TABLE `product_groups` (
   `groups_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `product_groups`
---
-
-INSERT INTO `product_groups` (`id`, `products_id`, `groups_id`) VALUES
-(15, 4, 1),
-(16, 5, 1),
-(23, 1, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -255,19 +254,7 @@ INSERT INTO `product_images` (`id`, `products_id`, `images_id`, `avatar`, `statu
 CREATE TABLE `product_specifications` (
   `id` int(11) NOT NULL,
   `products_id` int(11) NOT NULL,
-  `os` int(11) NOT NULL COMMENT 'hệ điều hành',
-  `cpu` int(11) NOT NULL,
-  `rear_camera` int(11) NOT NULL COMMENT 'camera sau',
-  `front_camera` int(11) NOT NULL COMMENT 'camera trước',
-  `memory` int(11) NOT NULL COMMENT 'Ram',
-  `storage` int(11) NOT NULL COMMENT 'Bộ nhớ trong',
-  `weight` int(11) NOT NULL COMMENT 'Trọng lượng',
-  `dimensions` int(11) NOT NULL COMMENT 'Kích thước',
-  `screem` int(11) NOT NULL COMMENT 'màn hình',
-  `color` int(11) NOT NULL,
-  `battery` int(11) NOT NULL COMMENT 'dung lượng bin',
-  `memory_card` int(11) NOT NULL COMMENT 'thẻ nhớ',
-  `sim_card` int(11) NOT NULL COMMENT 'thẻ sim'
+  `specifications_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -289,7 +276,8 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `role_details_id`, `users_id`) VALUES
 (8, 0, 1),
 (11, 2, 1),
-(13, 1, 32);
+(13, 1, 32),
+(14, 1, 56);
 
 -- --------------------------------------------------------
 
@@ -323,6 +311,14 @@ CREATE TABLE `specifications` (
   `parent_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `specifications`
+--
+
+INSERT INTO `specifications` (`id`, `name`, `parent_id`) VALUES
+(3, 'Màn Hình', 0),
+(13, 'Adroids', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -355,7 +351,22 @@ INSERT INTO `subaddress` (`id`, `address`, `users_id`, `default_address`) VALUES
 (25, 'ha noi', 40, 0),
 (26, 'ha noi', 41, 0),
 (27, 'ha noi', 42, 0),
-(28, 'ha noi', 43, 0);
+(28, 'ha noi', 43, 0),
+(29, 'ha noi', 44, 0),
+(30, 'ha noi', 45, 0),
+(31, 'ha noi', 46, 0),
+(32, 'ha noi', 47, 0),
+(33, 'ha noi', 48, 0),
+(34, 'ha noi', 49, 0),
+(35, 'ha noi', 50, 0),
+(36, 'ha noi', 51, 0),
+(37, 'ha noi', 52, 0),
+(38, 'ha noi', 53, 0),
+(39, 'ha noi', 54, 0),
+(40, 'ha noi', 55, 0),
+(42, 'Hà Nội', 56, 1),
+(45, 'Thạch thất', 56, 0),
+(46, 'Thạch thất', 57, 0);
 
 -- --------------------------------------------------------
 
@@ -392,7 +403,21 @@ INSERT INTO `users` (`id`, `username`, `password`, `name`, `sex`, `birthday`, `p
 (40, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
 (41, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
 (42, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
-(43, '', '', 'HoangND', 0, '0000-00-00', '0984554856', '');
+(43, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(44, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(45, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(46, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(47, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(48, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(49, '', '', 'hoang nd', 0, '0000-00-00', '0984554856', ''),
+(50, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(51, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(52, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(53, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(54, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(55, '', '', 'HoangND', 0, '0000-00-00', '0984554856', ''),
+(56, 'hoangnguyen@gmail.com', '202cb962ac59075b964b07152d234b70', 'Hoàng', 1, '1998-09-03', '0981056713', ''),
+(57, '', '', 'Hoàng', 0, '0000-00-00', '0981056713', '');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -459,20 +484,8 @@ ALTER TABLE `product_images`
 --
 ALTER TABLE `product_specifications`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `products_id` (`products_id`),
-  ADD KEY `os` (`os`),
-  ADD KEY `cpu` (`cpu`),
-  ADD KEY `rear_camera` (`rear_camera`),
-  ADD KEY `front_camera` (`front_camera`),
-  ADD KEY `memory` (`memory`),
-  ADD KEY `storage` (`storage`),
-  ADD KEY `weight` (`weight`),
-  ADD KEY `dimensions` (`dimensions`),
-  ADD KEY `screem` (`screem`),
-  ADD KEY `color` (`color`),
-  ADD KEY `battery` (`battery`),
-  ADD KEY `memory_card` (`memory_card`),
-  ADD KEY `sim_card` (`sim_card`);
+  ADD KEY `fk_product_specifications_specificationsid` (`specifications_id`),
+  ADD KEY `fk_product_specifications_productsid` (`products_id`);
 
 --
 -- Chỉ mục cho bảng `roles`
@@ -520,22 +533,22 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT cho bảng `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT cho bảng `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
@@ -545,7 +558,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT cho bảng `product_groups`
 --
 ALTER TABLE `product_groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT cho bảng `product_images`
 --
@@ -560,22 +573,22 @@ ALTER TABLE `product_specifications`
 -- AUTO_INCREMENT cho bảng `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT cho bảng `specifications`
 --
 ALTER TABLE `specifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT cho bảng `subaddress`
 --
 ALTER TABLE `subaddress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
@@ -603,34 +616,22 @@ ALTER TABLE `products`
 -- Các ràng buộc cho bảng `product_groups`
 --
 ALTER TABLE `product_groups`
-  ADD CONSTRAINT `fk_productgroups_groupsid` FOREIGN KEY (`groups_id`) REFERENCES `groups` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_productgroups_productsid` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_productgroups_groupsid` FOREIGN KEY (`groups_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_productgroups_productsid` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `product_images`
 --
 ALTER TABLE `product_images`
-  ADD CONSTRAINT `fk_productimages_imagesid` FOREIGN KEY (`images_id`) REFERENCES `images` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_productimages_productsid` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_productimages_imagesid` FOREIGN KEY (`images_id`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_productimages_productsid` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `product_specifications`
 --
 ALTER TABLE `product_specifications`
-  ADD CONSTRAINT `fk_productspecifications_battery` FOREIGN KEY (`battery`) REFERENCES `specifications` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_productspecifications_color` FOREIGN KEY (`color`) REFERENCES `specifications` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_productspecifications_cpu` FOREIGN KEY (`cpu`) REFERENCES `specifications` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_productspecifications_dimensions` FOREIGN KEY (`dimensions`) REFERENCES `specifications` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_productspecifications_frontcamera` FOREIGN KEY (`front_camera`) REFERENCES `specifications` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_productspecifications_memory` FOREIGN KEY (`memory`) REFERENCES `specifications` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_productspecifications_memorycard` FOREIGN KEY (`memory_card`) REFERENCES `specifications` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_productspecifications_os` FOREIGN KEY (`os`) REFERENCES `specifications` (`id`),
-  ADD CONSTRAINT `fk_productspecifications_productsid` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_productspecifications_rearcamera` FOREIGN KEY (`rear_camera`) REFERENCES `specifications` (`id`),
-  ADD CONSTRAINT `fk_productspecifications_screem` FOREIGN KEY (`screem`) REFERENCES `specifications` (`id`),
-  ADD CONSTRAINT `fk_productspecifications_simcard` FOREIGN KEY (`sim_card`) REFERENCES `specifications` (`id`),
-  ADD CONSTRAINT `fk_productspecifications_storage` FOREIGN KEY (`storage`) REFERENCES `specifications` (`id`),
-  ADD CONSTRAINT `fk_productspecifications_weight` FOREIGN KEY (`weight`) REFERENCES `specifications` (`id`);
+  ADD CONSTRAINT `fk_product_specifications_productsid` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_product_specifications_specificationsid` FOREIGN KEY (`specifications_id`) REFERENCES `specifications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `roles`

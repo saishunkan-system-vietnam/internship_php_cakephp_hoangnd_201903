@@ -13,7 +13,7 @@ class productsComponent extends Component {
     private $Images;
 
     public function initialize(array $config) {
-        parent::initialize($config);
+        parent::initialize($config);        
         $this->Products = TableRegistry::getTableLocator()->get('Products');
         $this->Categories = TableRegistry::getTableLocator()->get('Categories');
         $this->ProductImages = TableRegistry::getTableLocator()->get('ProductImages');
@@ -106,6 +106,7 @@ class productsComponent extends Component {
     }
 
     public function delete($id) {
+        
         $product = $this->Products->get($id);
         if ($this->Products->delete($product)) {
             return TRUE;

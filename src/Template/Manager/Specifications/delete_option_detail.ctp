@@ -1,13 +1,13 @@
 <div class="container-fluid">
-    <div class="col-md-2 col-md-offset-3">
-        <h3>Confirm delete category</h3> 
+    <div class="col-md-2">
+        <h3>Confirm delete option detail</h3> 
         <ul class="nav nav-pills nav-stacked">
-            <li><?= $this->Html->link('Back category manager', ['action' => 'index'], ['class' => 'w3-bar-item w3-button']) ?></li>
+            <li><?= $this->Html->link('Back specification manager', ['action' => 'index'], ['class' => 'w3-bar-item w3-button']) ?></li>
         </ul>       
     </div>
-    <div class="col-md-4">
+    <div class="col-md-10">
         <div class="panel panel-default">
-            <div class="panel-heading"><?= $titleDelete ?></div>
+            <div class="panel-heading">Option detail:</div>
             <div class="panel-body">
                 <table class="table">
                     <tr>
@@ -15,23 +15,27 @@
                             <p>ID: </p>
                         </td>
                         <td>
-                            <?php echo '<p><strong> ' . $category['id'] . '</strong></p>'; ?>
+                            <?php echo '<p><strong> ' . $specification['id'] . '</strong></p>'; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p>Name producer: </p>
+                            <p>Name: </p>
                         </td>
                         <td>
-                            <?php echo '<p><strong> ' . $producer . '</strong></p>'; ?>
+                            <?php echo '<p><strong> ' . $specification['name'] . '</strong></p>'; ?>
                         </td>
-                    </tr>
-                    <?php
-                    if ($category['parent_id'] !== 0) {
-                        echo '<tr><td><p>Name subproducer: </p></td> <td><p> <strong>' . $category['name'] . '</strong></p></td></tr>';
-                    }
-                    ?>
+                    </tr>           
+                     <tr>
+                        <td>
+                            <p>Option parent name: </p>
+                        </td>
+                        <td>
+                            <?php echo '<p><strong> ' . $specificationParent['name'] . '</strong></p>'; ?>
+                        </td>
+                    </tr>      
                 </table>
+                
                 <?= $this->Form->create() ?>
                 <?php
                 if (isset($errDelete)) {

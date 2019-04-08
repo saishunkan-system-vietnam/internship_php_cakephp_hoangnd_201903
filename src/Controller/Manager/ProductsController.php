@@ -14,6 +14,8 @@ class ProductsController extends ManagersController {
         $this->loadModel('Products');
         $this->loadComponent('images');
         $this->loadComponent('ajaxmanagers');
+        $this->loadComponent('productgroups');
+        $this->loadComponent('orders');
     }
 
     public function index() {
@@ -78,10 +80,16 @@ class ProductsController extends ManagersController {
         $this->set('subproducer', $subproducer);
         $this->set('producer', $producer);
         if ($this->request->isPost()) {
-            $result = $this->products->delete($id);
+            $exitOrder=$this->orders->where(['products_id'=>$id]);
+            if(count($exitOrder)>0){
+                $this->set('errDelete','không thể xóa sản phẩm này');
+            }  else {
+                $result = $this->products->delete($id);
             if ($result === true) {
                 $this->redirect(['action' => 'index']);
             }
+            }
+            
         }
     }
 

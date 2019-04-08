@@ -18,8 +18,18 @@ class categoriesComponent extends Component {
         return $this->Categories->get($id);
     }
 
-    public function selectAll() {
-        return $this->Categories->find()->toArray();
+    public function selectAll($req=null) {
+        $lstCategories= $this->Categories->find()->toArray();
+       if(!empty($req)){
+            if(isset($req['parent_id'])){
+                foreach ($lstCategories as $key=>$value){
+                    if($value['parent_id']!=$req['parent_id']){
+                        unset($lstCategories[$key]);
+                    }
+                }
+            }
+        }
+        return $lstCategories;
     }
 
     public function add(array $reqCategory) {
@@ -53,7 +63,11 @@ class categoriesComponent extends Component {
         }
     }
 
-    public function delete($id) {
+    public function delete($id) {        
+        $exitCategori=$this->selectAll(['parent_id'=>$id]);
+        if(count($exitCategori)>0){
+            return FALSE;
+        }
         $Category = $this->Categories->get($id);
         if ($this->Categories->delete($Category)) {
             return TRUE;

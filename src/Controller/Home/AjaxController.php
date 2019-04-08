@@ -39,6 +39,7 @@ class AjaxController extends HomesController {
     public function addCart() {
         $this->autoRender = FALSE;
         if ($this->request->is('ajax')) {
+            
             $req = $this->request->getData();
 
             //check exits cart nếu tồn tại lấy ra giở hàng cũ ngược lại tạo mới giở hàng
@@ -82,9 +83,9 @@ class AjaxController extends HomesController {
     }
 
     public function loadpage() {
-        if ($this->request->is('ajax')) {
-            $req=  $this->request->getData();              
-            if ($this->request->is('get') and isset($req['key']) and $req['key'] != '') {
+        if ($this->request->is('ajax')) {             
+            $req=  $this->request->getData();  
+            if (isset($req["key"]) and $req["key"]!="") {
                 $lstProduct = $this->products->selectAll(['keySearch' => $req['key'], 'limit' => 4,'offset'=>($req['page']-1)*4]);
                 $this->set('key', $req['key']);
                 $this->set('lstProduct', $lstProduct);

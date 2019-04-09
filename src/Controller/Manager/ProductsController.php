@@ -16,6 +16,8 @@ class ProductsController extends ManagersController {
         $this->loadComponent('ajaxmanagers');
         $this->loadComponent('productgroups');
         $this->loadComponent('orders');
+        $this->loadComponent('specifications');
+        $this->loadComponent('productspecifications');
     }
 
     public function index() {
@@ -26,8 +28,24 @@ class ProductsController extends ManagersController {
     public function add() {
         $option = $this->categories->getSelectOption();
         $this->set('option', $option);
+        $lstSpecification = $this->specifications->where(['parent_id' => 0]);
+        $optionSpecification = [];
+        foreach ($lstSpecification as $key => $value) {
+            $optionSpecification[$key] = $this->specifications->getOptionParent($this->specifications->where(['parent_id' => $value['id']]));
+        }
+        $this->set('lstSpecification', $lstSpecification);
+        $this->set('optionSpecification', $optionSpecification);
+//        if ($this->request->is('post')) {
+//            $req = $this->request->getData();
+//            $option = $this->productspecifications->max(['products_id' => $id], 'options')['options'] + 1;
+//            foreach ($lstSpecification as $value) {
+//                $this->productspecifications->add(['products_id' => $id, 'specifications_id' => $req[$value['id']], 'options' => $option]);
+//            }
+//        }
         if ($this->request->isPost()) {
             $reqProduct = $this->request->getData();
+            echo '<pre>';
+            var_dump($reqProduct);die;
             $validation = $this->Products->newEntity($reqProduct);
             $validationError = $validation->errors();
             if (empty($validationError)) {
@@ -80,16 +98,15 @@ class ProductsController extends ManagersController {
         $this->set('subproducer', $subproducer);
         $this->set('producer', $producer);
         if ($this->request->isPost()) {
-            $exitOrder=$this->orders->where(['products_id'=>$id]);
-            if(count($exitOrder)>0){
-                $this->set('errDelete','không thể xóa sản phẩm này');
-            }  else {
+            $exitOrder = $this->orders->where(['products_id' => $id]);
+            if (count($exitOrder) > 0) {
+                $this->set('errDelete', 'không thể xóa sản phẩm này');
+            } else {
                 $result = $this->products->delete($id);
-            if ($result === true) {
-                $this->redirect(['action' => 'index']);
+                if ($result === true) {
+                    $this->redirect(['action' => 'index']);
+                }
             }
-            }
-            
         }
     }
 

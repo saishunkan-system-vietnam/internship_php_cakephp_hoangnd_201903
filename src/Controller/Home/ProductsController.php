@@ -15,12 +15,15 @@ class ProductsController extends HomesController {
         $this->set("title","Trang chủ");
         $req = $this->request->getQuery();
         $key="";
-        if (isset($req["key"]) and $req["key"]!="") {           
+        if (isset($req["key"])) {          
+            if($req["key"]==""){
+                return $this->redirect(['action'=>'index']);
+            }
             $countProduct = $this->products->count(['keySearch' => $req["key"]]);
             $key=$req["key"];
             $this->set("title","Tìm kiếm");
-        } else {
-            $countProduct = $this->products->count(['keySearch' => 'a']);            
+        } else{            
+            $countProduct = $this->products->count();            
         }
         $pageNumber = ($countProduct % 4 == 0) ? $countProduct / 4 : (int) ($countProduct / 4) + 1;
         $this->set('countProduct', $countProduct);

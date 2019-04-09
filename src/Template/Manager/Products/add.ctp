@@ -21,15 +21,15 @@
                     ?>
                     <?= $this->Flash->render() ?>
                 </div>      
-                <div class="form-group">
-                    <?= $this->Form->label('price', 'Price:') ?>
-                    <?= $this->Form->text('price', ['class' => 'form-control', 'type' => 'number', 'step' => "1"]) ?>    
-                    <?php
-                    if (isset($errPrice)) {
-                        echo '<div class="error-contents">' . $errPrice . '</div>';
-                    }
-                    ?>
-                </div>   
+                <!--                <div class="form-group">
+                <?= $this->Form->label('price', 'Price:') ?>
+                <?= $this->Form->text('price', ['class' => 'form-control', 'type' => 'number', 'step' => "1"]) ?>    
+                <?php
+                if (isset($errPrice)) {
+                    echo '<div class="error-contents">' . $errPrice . '</div>';
+                }
+                ?>
+                                </div>   -->
                 <div class="form-group">
                     <?= $this->Form->label('quantity', 'Quantity:') ?>
                     <?= $this->Form->text('quantity', ['class' => 'form-control', 'type' => 'number']) ?>    
@@ -52,8 +52,38 @@
                 if (isset($errSubproducer)) {
                     echo '<div class="error-contents">' . $errSubproducer . '</div>';
                 }
-                ?> 
-                <div class="form-group">
+                ?>   
+
+                <div class="options">   
+                    <p><strong>Options:</strong></p>
+                    <div class="options1">
+                        <div class="container-fluid">                            
+                            <?php
+                            if (isset($lstSpecification) and count($lstSpecification) > 0) {
+                                $dem = 0;
+                                foreach ($lstSpecification as $key => $item) {
+                                    ?>
+                                    <div class="col-md-3">
+                                        <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '[]', $optionSpecification[$key], ['class' => 'form-control']) ?>                           
+                                    </div>  
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <div class="col-md-3">
+                                <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control', 'type' => 'number', 'step' => "1"]) ?>                           
+                            </div> 
+                            <div class="col-md-1 col-md-offset-11"><div class="remove-icon" onclick="removeOption()">-</div></div>
+                        </div>  <hr> 
+                    </div>             
+                </div> 
+                <div class="col-md-12">
+                    <div class="add-icon" onclick="addOption()">
+                        +
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <br>
                     <?= $this->Form->submit('Add', ['class' => 'btn btn-primary']) ?>
                 </div>  
                 <?= $this->Form->end() ?>
@@ -61,3 +91,10 @@
         </div>        
     </div>
 </div>
+<script>
+    function addOption() {
+        $('.options').append($('.options1').html());
+    }
+</script>
+
+

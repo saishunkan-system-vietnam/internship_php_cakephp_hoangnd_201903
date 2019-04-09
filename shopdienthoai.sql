@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 08, 2019 lúc 12:33 PM
+-- Thời gian đã tạo: Th4 09, 2019 lúc 12:48 PM
 -- Phiên bản máy phục vụ: 10.1.25-MariaDB
 -- Phiên bản PHP: 7.1.7
 
@@ -254,8 +254,23 @@ INSERT INTO `product_images` (`id`, `products_id`, `images_id`, `avatar`, `statu
 CREATE TABLE `product_specifications` (
   `id` int(11) NOT NULL,
   `products_id` int(11) NOT NULL,
-  `specifications_id` int(11) NOT NULL
+  `specifications_id` int(11) NOT NULL,
+  `options` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_specifications`
+--
+
+INSERT INTO `product_specifications` (`id`, `products_id`, `specifications_id`, `options`) VALUES
+(17, 1, 13, 1),
+(18, 1, 19, 1),
+(19, 1, 23, 1),
+(20, 1, 27, 1),
+(21, 1, 15, 2),
+(22, 1, 19, 2),
+(23, 1, 24, 2),
+(24, 1, 28, 2);
 
 -- --------------------------------------------------------
 
@@ -316,8 +331,38 @@ CREATE TABLE `specifications` (
 --
 
 INSERT INTO `specifications` (`id`, `name`, `parent_id`) VALUES
-(3, 'Màn Hình', 0),
-(13, 'Adroids', 3);
+(3, 'Screen', 0),
+(13, '15\"', 3),
+(14, '11\"', 3),
+(15, '12\"', 3),
+(16, '13\"', 3),
+(18, 'OS', 0),
+(19, 'Android', 18),
+(20, 'IOS', 18),
+(21, 'Ram', 0),
+(22, 'Rom', 0),
+(23, '6gb', 21),
+(24, '3gb', 21),
+(25, '2gb', 21),
+(26, '1gb', 21),
+(27, '8gb', 22),
+(28, '16gb', 22),
+(29, '32gb', 22),
+(30, '64gb', 22),
+(31, '128gb', 22),
+(32, 'battery', 0),
+(33, 'cpu', 0),
+(35, 'weight', 0),
+(36, 'Rear camera', 0),
+(37, 'Front_camera', 0),
+(38, '15MP', 37),
+(39, '8MP', 37),
+(40, '13MP', 37),
+(41, '5MP', 36),
+(42, '2MP', 36),
+(43, '100', 35),
+(44, 'Qualcomm Snapdragon 450 8 nhân 64-bit', 33),
+(45, '3000', 32);
 
 -- --------------------------------------------------------
 
@@ -568,7 +613,7 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT cho bảng `product_specifications`
 --
 ALTER TABLE `product_specifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT cho bảng `roles`
 --
@@ -578,7 +623,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT cho bảng `specifications`
 --
 ALTER TABLE `specifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT cho bảng `subaddress`
 --

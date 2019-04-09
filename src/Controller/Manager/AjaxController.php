@@ -13,6 +13,7 @@ class AjaxController extends AppController {
         $this->loadComponent('products');
         $this->loadComponent('ajaxmanagers');
          $this->loadComponent('productgroups');
+         $this->loadComponent('specifications');
     }
 
     function getsubproducer() {
@@ -86,6 +87,14 @@ class AjaxController extends AppController {
             }
             $this->set('arrGroup', $arrGroup);
             $this->set('lstProduct', $lstProduct);
+        }
+    }
+    
+    function getoptiondetails(){
+        if ($this->request->is('ajax')) {
+            $req = $this->request->getData();
+            $lstOption = $this->specifications->where(['parent_id' => $req['parent_id']]);           
+            $this->set('lstOption', $lstOption);
         }
     }
 

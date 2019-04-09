@@ -36,12 +36,10 @@ class specificationsComponent extends Component {
     }
 
     public function delete($id) {
-        $exitSpecification = $this->where(['parent_id' => $id]);
+        $exitSpecification = $this->where(['parent_id' => $id]);         
         if (count($exitSpecification) > 0) {
             return FALSE;
-        }
-        var_dump($exitSpecification);
-        die;
+        }      
         $specification = $this->get($id);
         if ($this->Specifications->delete($specification)) {
             return TRUE;
@@ -53,8 +51,6 @@ class specificationsComponent extends Component {
     public function where($req = null) {
          
        $lstSpecification = $this->Specifications->find()->toArray();
-       var_dump($lstSpecification);
-       
         if (!empty($req)) {
             if (isset($req['parent_id'])) {
                 foreach ($lstSpecification as $key => $value) {
@@ -63,9 +59,10 @@ class specificationsComponent extends Component {
                     }
                 }
             }
-        } die;
+        } 
         return $lstSpecification;
-    }
+    }   
+
 
     public function getOptionParent($lstSpecification) {
         $arrOption = [];

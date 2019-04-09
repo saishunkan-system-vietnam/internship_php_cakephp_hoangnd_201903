@@ -20,6 +20,7 @@ class productspecificationsComponent extends Component {
 
     public function add($req) {
         $newProductSpecification = $this->ProductSpecification->newEntity();
+        $newProductSpecification->options=$req['options'];
         $newProductSpecification->products_id = $req['products_id'];
         $newProductSpecification->specifications_id = $req['specifications_id'];
         return $this->ProductSpecification->save($newProductSpecification);
@@ -70,4 +71,34 @@ class productspecificationsComponent extends Component {
 //        return $arrOption;
 //    }
 
+    public function count($req=null){
+         $lstProductSpecification = $this->ProductSpecification->find();
+         if(!empty($req)){
+             if(isset($req['products_id'])){
+                 $lstProductSpecification=$lstProductSpecification->where(['products_id'=>$req['products_id']]);
+             }
+             if(isset($req['specifications_id'])){
+                 $lstProductSpecification=$lstProductSpecification->where(['specifications_id'=>$req['specifications_id']]);
+             }
+         }
+         $result=$lstProductSpecification->count();         
+         return $result;
+    }
+
+
+    public function max($req=null, $maxField){
+         $lstProductSpecification = $this->ProductSpecification->find();
+         if(!empty($req)){
+             if(isset($req['products_id'])){
+                 $lstProductSpecification=$lstProductSpecification->where(['products_id'=>$req['products_id']]);
+             }
+             if(isset($req['specifications_id'])){
+                 $lstProductSpecification=$lstProductSpecification->where(['specifications_id'=>$req['specifications_id']]);
+             }
+         }
+         $result=$lstProductSpecification->max($maxField);
+         
+         return $result;
+    }
+    
 }

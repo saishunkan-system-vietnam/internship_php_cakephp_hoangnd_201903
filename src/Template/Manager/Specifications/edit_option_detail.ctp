@@ -2,7 +2,7 @@
     <div class="col-md-2">
         <h3>Edit option detail</h3> 
         <ul class="nav nav-pills nav-stacked">
-           <li><?=$this->Html->link('Back Option manager',['action'=>'index'],['class'=>'w3-bar-item w3-button'])?></li>
+           <li><?=$this->Html->link('Back option details',['action'=>'addoptions',$specification['parent_id']],['class'=>'w3-bar-item w3-button'])?></li>
         </ul>       
     </div>
     <div class="col-md-10">    

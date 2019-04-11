@@ -59,50 +59,49 @@
                         echo '<div class="error-contents">' . $errSubproducer . '</div>';
                     }
                     ?>
-                </div> 
-                <div class="tab">
-                    <?php
-                    $dem = 0;
-                    if (count($groupOption) > 0) {
-                        foreach ($groupOption as $itemOption) {
+                </div>                 
+                <?php if (count($groupOption) > 0) { ?>
+                    <div class="tab">
+                        <?php
+                        $dem = 0;
+                        foreach ($groupOption as $itemOption) {                            
                             ?>
-                            <div class="tab_link" onclick="tabLinkClick(<?= $dem ?>)">Options <?= $dem ?></div>
+                        <div class="tab_link" products_id="<?=$itemOption['products_id']?>" options="<?=$itemOption['options']?>" id="tabLink<?= $dem ?>" onclick="tabLinkClick(<?= $dem ?>)">Options <?= $dem + 1 ?> <div onclick="removeTab(<?=$dem?>)" class="remove_tab">x</div></div>
                             <?php
                             $dem++;
                         }
-                    }
-                    ?>                    
-                    <div class="add_tab" onclick="addTabClick()">+</div>
-                </div>  
-                <?php
-                if (count($groupOption) > 0) {
+                        ?>                    
+                        <div class="add_tab" onclick="addTabClick()">+</div>
+                    </div> <?php
                     foreach ($groupOption as $itemOption) {
-                        foreach ($optionProductSpecifition as $item) {
-                            
-                        }
                         ?>
-                        <div class="tab_content container-fluid">    
-                            <h3>Options <?= $itemOption['options'] ?>:</h3>
+                        <div id="tabContent<?= $itemOption['options'] ?>" class="tab_content container-fluid">    
+                            <h3>Options <?= $itemOption['options'] + 1 ?>:</h3>
                             <?php
                             if (isset($lstSpecification) and count($lstSpecification) > 0) {
                                 foreach ($lstSpecification as $key => $item) {
+                                    $default = $optionProduct[$itemOption['options']][$item['id']]['Specifications']['id'] . '_' . str_replace(' ', '_', $optionProduct[$itemOption['options']][$item['id']]['Specifications']['name']);
                                     ?>
                                     <div class="col-md-3">
-                                        <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '[]', $optionSpecification[$key], ['class' => 'form-control']) ?>                           
+                                        <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '_' . $item['name'] . '[]', $optionSpecification[$key], ['class' => 'form-control', 'default' => $default]) ?>                           
                                     </div>  
                                     <?php
                                 }
                             }
                             ?>
                             <div class="col-md-3">
-                                <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control', 'type' => 'number', 'step' => "1"]) ?>                           
+                                <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control', 'type' => 'number', 'step' => "1", 'value' => $optionProduct[$itemOption['options']][$item['id']]['price_option']]) ?>                           
                             </div>                     
                         </div>
                         <?php
                     }
                 } else {
                     ?>                            
-                    <div class="tab_content container-fluid">    
+                    <div class="tab">
+                        <div class="tab_link" onclick="tabLinkClick(0)" id="tabLink0">Options 1<div onclick="removeTab(0)" class="remove_tab">x</div></div>
+                        <div class="add_tab" onclick="addTabClick()">+</div>
+                    </div>                
+                    <div class="tab_content container-fluid" id="tabContent0">    
                         <h3>Options:</h3>
                         <?php
                         if (isset($lstSpecification) and count($lstSpecification) > 0) {
@@ -110,7 +109,7 @@
                             foreach ($lstSpecification as $key => $item) {
                                 ?>
                                 <div class="col-md-3">
-                                    <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '[]', $optionSpecification[$key], ['class' => 'form-control']) ?>                           
+                                    <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '_' . $item['name'] . '[]', $optionSpecification[$key], ['class' => 'form-control']) ?>                           
                                 </div>  
                                 <?php
                             }
@@ -119,7 +118,7 @@
                         <div class="col-md-3">
                             <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control', 'type' => 'number', 'step' => "1"]) ?>                           
                         </div>                     
-                    </div>  
+                    </div>           
                 <?php }
                 ?>  
                 <div class="form-group">

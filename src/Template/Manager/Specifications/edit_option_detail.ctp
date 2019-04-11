@@ -16,7 +16,7 @@
                 </div>  
                 <div class="form-group">    
                     <?= $this->Form->label('optionName', 'Option:') ?>
-                    <?= $this->Form->select('optionName',$option, ['class' => 'form-control', 'placeholder' => 'Enter Option detail name...','default'=>$specification['parent_id']]) ?> 
+                    <?= $this->Form->select('optionName',$option, ['class' => 'form-control','default'=>$specificationParent['id'].'_'.$specificationParent['name']]) ?> 
                 </div>
                 <span class="input-group-btn">
                     <?= $this->Form->submit('Apply', ['class' => 'btn btn-primary']) ?>                        

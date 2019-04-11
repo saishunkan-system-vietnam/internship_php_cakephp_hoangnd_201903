@@ -63,7 +63,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['prefix'=>'home','controller'=>'Products','action'=>'index']);
+    $routes->connect('/', ['prefix' => 'home', 'controller' => 'Products', 'action' => 'index']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
@@ -145,7 +145,8 @@ Router::prefix('manager', function ($routes) {
     $routes->connect('/saveimagesinram', ['controller' => 'Ajax', 'action' => 'saveimagesinram']);
     $routes->connect('/removeimageinram', ['controller' => 'Ajax', 'action' => 'removeimageinram']);
     $routes->connect('/saveimages', ['controller' => 'Ajax', 'action' => 'saveimages']);
-     $routes->connect('/getoptiondetails', ['controller' => 'Ajax', 'action' => 'getoptiondetails']);
+    $routes->connect('/getoptiondetails', ['controller' => 'Ajax', 'action' => 'getoptiondetails']);
+    $routes->connect('/removeoption', ['controller' => 'Ajax', 'action' => 'removeoption']);
 
 
     $routes->fallbacks(DashedRoute::class);

@@ -35,16 +35,16 @@ class ProductsController extends ManagersController {
         }
         $this->set('lstSpecification', $lstSpecification);
         $this->set('optionSpecification', $optionSpecification);
-        if ($this->request->isPost()) {
-            $reqProduct = $this->request->getData();
+        if ($this->request->isPost()) {  
+            $reqProduct = $this->request->getData();           
             $result = $this->products->add($reqProduct);
             if ($result === FALSE) {
                 $this->set('error', 'Add fail.');
             } else {
-                $productAdded = $this->products->max('id');
+                $productAdded = $this->products->max('id');                
                 foreach ($lstSpecification as $value) {
-                    foreach ($reqProduct[$value['id']] as $k => $v) {
-                        $this->productspecifications->add(['products_id' => $productAdded['id'], 'specifications_id' => $v, 'options' => $k, 'price_option' => $reqProduct['price'][$k]]);
+                    foreach ($reqProduct[$value['id'] . '_' . str_replace(' ', '_', $value['name'])] as $k => $v) {
+                        $this->productspecifications->add(['products_id' => $productAdded['id'], 'specifications_id' => strstr($v, '_', true), 'options' => $k, 'price_option' => $reqProduct['price'][$k]]);
                     }
                 }
                 $this->redirect(['action' => 'index']);
@@ -56,36 +56,39 @@ class ProductsController extends ManagersController {
         $option = $this->categories->getSelectOption();
         $this->set('option', $option);
         $product = $this->products->get($id);
-        $this->set('product', $product);    
+        $this->set('product', $product);
         $subproducer = $this->categories->get($product['categories_id']);
-        $producer = $this->categories->get($subproducer['parent_id']);        
+        $producer = $this->categories->get($subproducer['parent_id']);
         $optionSubproducer = $this->categories->getSubSelectOption($producer['id']);
         $this->set('optionSubproducer', $optionSubproducer);
         $this->set('producer', $producer);
         $this->set('subproducer', $subproducer);
-        
-        
+
+
         $lstSpecification = $this->specifications->where(['parent_id' => 0]);
-         
-         //lấy list specification
+
+        //lấy list specification
         $optionSpecification = [];
         foreach ($lstSpecification as $key => $value) {
             $optionSpecification[$key] = $this->specifications->getOptionParent($this->specifications->where(['parent_id' => $value['id']]));
         }
         $this->set('lstSpecification', $lstSpecification);
         $this->set('optionSpecification', $optionSpecification);
-        
+
         //láy option of product
-        $optionProductSpecifition=$this->productspecifications->where(['products_id'=>$id]);
-        
-        foreach ($optionProductSpecifition as $value){
-            
-        }
-        $groupOption=$this->productspecifications->group($id);
-        
-//        echo '<pre>';
-//        var_dump($countOption);
-//        die;
+        $optionProductSpecifition = $this->productspecifications->selectAll(['products_id' => $id]);
+        $groupOption = $this->productspecifications->group($id);
+        $optionProduct=[];
+        foreach ($groupOption as $value){
+            $optionProduct[$value['options']]=[];
+            foreach ($optionProductSpecifition as $v){ 
+               if($v['options']===$value['options']){
+                    $optionProduct[$value['options']][$v['Specifications']['parent_id']]= $v;
+                }
+            }
+        }       
+       
+        $this->set('optionProduct',$optionProduct);
         $this->set('groupOption', $groupOption);
         $this->set('optionProductSpecifition', $optionProductSpecifition);
         if ($this->request->isPost()) {
@@ -198,5 +201,5 @@ class ProductsController extends ManagersController {
             }
         }
     }
-   
+
 }

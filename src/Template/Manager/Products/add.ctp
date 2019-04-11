@@ -55,17 +55,18 @@
                 }
                 ?>
                 <div class="tab">
-                    <div class="tab_link" onclick="tabLinkClick(0)">Options</div>
+                    <div class="tab_link" onclick="tabLinkClick(0)" id="tabLink0">Options 1<div onclick="removeTab(0)" class="remove_tab">x</div></div>
                     <div class="add_tab" onclick="addTabClick()">+</div>
                 </div>                
-                <div class="tab_content container-fluid">    
+                <div class="tab_content container-fluid" id="tabContent0">    
                     <h3>Options:</h3>
                     <?php
                     if (isset($lstSpecification) and count($lstSpecification) > 0) {
-                       foreach ($lstSpecification as $key => $item) {
+                        $dem = 0;
+                        foreach ($lstSpecification as $key => $item) {
                             ?>
                             <div class="col-md-3">
-                                <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['name'].'_'.$item['id'] . '[]', $optionSpecification[$key], ['class' => 'form-control']) ?>                           
+                                <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '_' . $item['name'] . '[]', $optionSpecification[$key], ['class' => 'form-control']) ?>                           
                             </div>  
                             <?php
                         }
@@ -74,7 +75,7 @@
                     <div class="col-md-3">
                         <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control', 'type' => 'number', 'step' => "1"]) ?>                           
                     </div>                     
-                </div>                    
+                </div>                     
                 <div class="form-group col-md-12">
                     <br>
                     <?= $this->Form->submit('Add', ['class' => 'btn btn-primary']) ?>

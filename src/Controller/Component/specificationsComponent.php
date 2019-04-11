@@ -50,24 +50,21 @@ class specificationsComponent extends Component {
 
     public function where($req = null) {
          
-       $lstSpecification = $this->Specifications->find()->toArray();
+       $lstSpecification = $this->Specifications->find();
+       
         if (!empty($req)) {
             if (isset($req['parent_id'])) {
-                foreach ($lstSpecification as $key => $value) {
-                    if ($value['parent_id'] != $req['parent_id']) {
-                         unset($lstSpecification[$key]);
-                    }
-                }
+               $lstSpecification->where(['parent_id'=>$req['parent_id']]);
             }
         } 
-        return $lstSpecification;
+        return $lstSpecification->toArray();
     }   
 
 
     public function getOptionParent($lstSpecification) {
-        $arrOption = [['value'=>'chonoption','text'=>'--- Chọn option ---','hidden']];
+        $arrOption = [['value'=>'','text'=>'--- Chọn option ---','hidden']];
         foreach ($lstSpecification as $value) {
-            $arrOption[$value['name'].'_'.$value['id']] = $value['name'];
+            $arrOption[$value['id'].'_'.  str_replace(' ', '_', $value['name'])] = $value['name'];
         }
         return $arrOption;
     }

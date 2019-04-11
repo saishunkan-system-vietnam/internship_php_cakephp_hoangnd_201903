@@ -12,8 +12,9 @@ class AjaxController extends AppController {
         $this->loadComponent('categories');
         $this->loadComponent('products');
         $this->loadComponent('ajaxmanagers');
-         $this->loadComponent('productgroups');
-         $this->loadComponent('specifications');
+        $this->loadComponent('productgroups');
+        $this->loadComponent('specifications');
+        $this->loadComponent('productspecifications');
     }
 
     function getsubproducer() {
@@ -89,12 +90,20 @@ class AjaxController extends AppController {
             $this->set('lstProduct', $lstProduct);
         }
     }
-    
-    function getoptiondetails(){
+
+    function getoptiondetails() {
         if ($this->request->is('ajax')) {
             $req = $this->request->getData();
-            $lstOption = $this->specifications->where(['parent_id' => $req['parent_id']]);           
+            $lstOption = $this->specifications->where(['parent_id' => $req['parent_id']]);
             $this->set('lstOption', $lstOption);
+        }
+    }
+
+    function removeoption() {
+        $this->autoRender = FALSE;
+        if ($this->request->is('ajax')) {
+            $req = $this->request->getData();
+            $this->productspecifications->delete(['products_id'=>$req['products_id'],'options'=>$req['options']]);
         }
     }
 

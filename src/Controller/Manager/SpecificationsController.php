@@ -62,6 +62,8 @@ class SpecificationsController extends ManagersController {
     public function editOptionDetail($id = null) {
         $specification = $this->specifications->get($id);
         $this->set('specification', $specification);
+        $specificationParent=$this->specifications->get($specification['parent_id']);
+        $this->set('specificationParent',$specificationParent);
         $lstSpecification = $this->specifications->where(['parent_id' => 0]);
         if (count($lstSpecification) > 0) {
             $option = $this->specifications->getOptionParent($lstSpecification);
@@ -69,7 +71,7 @@ class SpecificationsController extends ManagersController {
         }
         if ($this->request->is('post')) {
             $req = $this->request->getData();
-            $return = $this->specifications->update(['name' => $req['name'], 'parent_id' => $req['optionName'], 'id' => $id]);
+            $return = $this->specifications->update(['name' => $req['name'], 'parent_id' => strstr($req['optionName'], '_',TRUE), 'id' => $id]);
             if ($return != FALSE) {
                 return $this->redirect(['action' => 'addoptions', $specification['parent_id']]);
             }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 09, 2019 lúc 12:48 PM
+-- Thời gian đã tạo: Th4 10, 2019 lúc 12:31 PM
 -- Phiên bản máy phục vụ: 10.1.25-MariaDB
 -- Phiên bản PHP: 7.1.7
 
@@ -201,7 +201,9 @@ INSERT INTO `products` (`id`, `name`, `price`, `quantity`, `status`, `descriptio
 (8, 'Điện thoại iPhone 8 Plus 256GB', 25700000, 1111, 1, '<h2 style=\"text-align:justify\">Đặc điểm nổi bật của iPhone 8 Plus 256GB</h2>\r\n\r\n<p style=\"text-align:justify\"><img src=\"https://cdn.tgdd.vn/Products/Images/42/114114/Slider/-1-thietke.jpg\" style=\"width:100%\" /></p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/tin-tuc/chi-tiet-a11-bionic-chip-co-nhieu-thanh-phan-apple-tu-trong-nhat-tu-truoc-den-nay-1021653\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/hoi-dap/mo-khoa-bang-dau-van-tay-645010\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/hoi-dap/cong-nghe-sac-khong-day-761328\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p style=\"text-align:justify\">Bộ sản phẩm chuẩn: Hộp, Pin, Sạc, Tai nghe, S&aacute;ch hướng dẫn, C&aacute;p, C&acirc;y lấy sim</p>\r\n\r\n<h2 style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/dtdd/iphone-8-plus-256gb\" target=\"_blank\" title=\"Chi tiết điện thoại iPhone 8 Plus 256GB\" type=\"Chi tiết điện thoại iPhone 8 Plus 256GB\">iPhone 8 Plus</a>&nbsp;l&agrave; bản n&acirc;ng cấp nhẹ của chiếc&nbsp;<a href=\"https://www.thegioididong.com/dtdd/iphone-7-plus-256gb\" target=\"_blank\" title=\"Chi tiết điện thoại iPhone 7 Plus\" type=\"Chi tiết điện thoại iPhone 7 Plus\">iPhone 7 Plus</a>&nbsp;đ&atilde; ra mắt trước đ&oacute; với cấu h&igrave;nh mạnh mẽ c&ugrave;ng camera c&oacute; nhiều cải tiến.</h2>\r\n\r\n<h3 style=\"text-align:justify\">Thiết kế quen thuộc vốn c&oacute; của d&ograve;ng&nbsp;<a href=\"https://www.thegioididong.com/dtdd-apple-iphone\" target=\"_blank\" title=\"Tham khảo các dòng điện thoại Apple iPhone tại Thegioididong.com\" type=\"Tham khảo các dòng điện thoại Apple iPhone tại Thegioididong.com\">iPhone Apple</a></h3>\r\n\r\n<p style=\"text-align:justify\">Về ngoại h&igrave;nh&nbsp;<a href=\"https://www.thegioididong.com/dtdd\" target=\"_blank\" title=\"Tham khảo các dòng điện thoại tại Thegioididong.com\" type=\"Tham khảo các dòng điện thoại tại Thegioididong.com\">điện thoại</a>&nbsp;iPhone 8 Plus kh&ocirc;ng c&oacute; qu&aacute; nhiều kh&aacute;c biệt so với người đ&agrave;n anh đi trước.</p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/images/42/114114/iphone-8-plus-256gb2-1.jpg\" onclick=\"return false;\"><img alt=\"Thiết kế điện thoại iPhone 8 Plus\" src=\"https://cdn.tgdd.vn/Products/Images/42/114114/iphone-8-plus-256gb2-1.jpg\" style=\"width:100%\" title=\"Thiết kế điện thoại iPhone 8 Plus\" /></a></p>\r\n\r\n<p style=\"text-align:justify\">Thay đổi lớn nhất ch&iacute;nh l&agrave; Apple đ&atilde; chuyển từ thiết kế kim loại nguy&ecirc;n khối sang mặt lưng k&iacute;nh nhằm mang t&iacute;nh năng sạc kh&ocirc;ng d&acirc;y l&ecirc;n 8 Plus.</p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/images/42/114114/iphone-8-plus-256gb-h1-1.jpg\" onclick=\"return false;\"><img alt=\"Thiết kế điện thoại iPhone 8 Plus\" src=\"https://cdn.tgdd.vn/Products/Images/42/114114/iphone-8-plus-256gb-h1-1.jpg\" style=\"width:100%\" title=\"Thiết kế điện thoại iPhone 8 Plus\" /></a></p>\r\n\r\n<h3 style=\"text-align:justify\">M&agrave;n h&igrave;nh rộng v&agrave; sắc n&eacute;t</h3>\r\n\r\n<p style=\"text-align:justify\">iPhone 8 Plus sở hữu m&agrave;n h&igrave;nh k&iacute;ch thước 5.5 inch độ ph&acirc;n giải&nbsp;<a href=\"https://www.thegioididong.com/tin-tuc/do-phan-giai-man-hinh-qhd-hd-fullhd-2k-4k-la-gi--592178#hd\" target=\"_blank\" title=\"Tìm hiểu độ phân giải Full HD (1080 x 1920 pixels)\">Full HD (1080 x 1920 pixels)</a>&nbsp;đem lại khả năng hiển thị sắc n&eacute;t.</p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/images/42/114114/iphone-8-plus-256gb-h3.jpg\" onclick=\"return false;\"><img alt=\"Màn hình điện thoại iPhone 8 Plus\" src=\"https://cdn.tgdd.vn/Products/Images/42/114114/iphone-8-plus-256gb-h3.jpg\" style=\"width:100%\" title=\"Màn hình điện thoại iPhone 8 Plus\" /></a></p>\r\n\r\n<p style=\"text-align:justify\">M&aacute;y vẫn sử dụng tấm nền&nbsp;LED-backlit IPS LCD kết hợp với c&ocirc;ng nghệ True Tone gi&uacute;p bạn dễ d&agrave;ng quan s&aacute;t với nhiều điều kiện kh&aacute;c nhau.</p>\r\n', 10);
 INSERT INTO `products` (`id`, `name`, `price`, `quantity`, `status`, `description`, `categories_id`) VALUES
 (9, 'Điện thoại OPPO R17 Pro', 14000000, 122, 1, '<h2 style=\"text-align:justify\">Đặc điểm nổi bật của OPPO R17 Pro</h2>\r\n\r\n<p style=\"text-align:justify\"><img src=\"https://cdn.tgdd.vn/Products/Images/42/186395/Slider/vi-vn-oppo-r17-pro-thietke.jpg\" style=\"width:100%\" /></p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/tin-tuc/tren-tay-oppo-r17-pro-chip-snapdragon-710-camera-3d-1127832\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/hoi-dap/cong-nghe-quet-van-tay-song-sieu-am-la-gi-912419\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/hoi-dap/man-hinh-giot-nuoc-moi-cua-oppo-co-gi-dac-biet-1107721\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/hoi-dap/tim-hieu-ve-cong-nghe-sac-nhanh-vooc-cua-oppo-918283\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/tin-tuc/test-hieu-nang-snapdragon-710-chip-moi-nay-manh-co-nao-1101930\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p style=\"text-align:justify\">Bộ sản phẩm chuẩn: Hộp, Tai nghe, S&aacute;ch hướng dẫn, Dock sạc, C&aacute;p, C&acirc;y lấy sim, Ốp lưng</p>\r\n\r\n<h2 style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/dtdd/oppo-r17-pro\" target=\"_blank\" title=\"Chi tiết điện thoại OPPO R17 Pro\" type=\"Chi tiết điện thoại OPPO R17 Pro\">OPPO R17 Pro</a>&nbsp;được xem l&agrave; chiếc&nbsp;<a href=\"https://www.thegioididong.com/dtdd\" target=\"_blank\" title=\"Tham khảo smartphone tại Thegioididong.com\" type=\"Tham khảo smartphone tại Thegioididong.com\">smartphone</a>&nbsp;sự hiện th&acirc;n của c&aacute;i đẹp khi được kho&aacute;c l&ecirc;n m&igrave;nh một thiết kế trẻ trung v&agrave; hiện đại, c&ugrave;ng với đ&oacute; l&agrave; h&agrave;ng loạt c&aacute;c trang bị cao cấp đi từ cấu h&igrave;nh cho đến camera.</h2>\r\n\r\n<h3 style=\"text-align:justify\">Thiết kế thời trang, ph&aacute; c&aacute;ch</h3>\r\n\r\n<p style=\"text-align:justify\">OPPO R17 Pro sở hữu cho m&igrave;nh lối thiết kế mới sẽ khiến bạn phải m&ecirc; mẩn đến từ chiếc tai thỏ h&igrave;nh giọt nước v&ocirc; c&ugrave;ng quyến rũ.</p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/images/42/186395/oppo-r17-pro-6-3.jpg\" onclick=\"return false;\"><img alt=\"Màn hình điện thoại OPPO R17 Pro chính hãng\" src=\"https://cdn.tgdd.vn/Products/Images/42/186395/oppo-r17-pro-6-3.jpg\" style=\"width:100%\" title=\"Màn hình điện thoại OPPO R17 Pro chính hãng\" /></a></p>\r\n\r\n<p style=\"text-align:justify\">Th&acirc;n h&igrave;nh uyển chuyển với c&aacute;c đường cong mềm mại v&agrave; cực k&igrave; thu h&uacute;t khi m&agrave;n h&igrave;nh của m&aacute;y gần như chiếm trọn mặt trước.</p>\r\n\r\n<p style=\"text-align:justify\"><a href=\"https://www.thegioididong.com/images/42/186395/oppo-r17-pro-9-1.jpg\" onclick=\"return false;\"><img alt=\"Thiết kế điện thoại OPPO R17 Pro chính hãng\" src=\"https://cdn.tgdd.vn/Products/Images/42/186395/oppo-r17-pro-9-1.jpg\" style=\"width:100%\" title=\"Thiết kế điện thoại OPPO R17 Pro chính hãng\" /></a></p>\r\n\r\n<p style=\"text-align:justify\">Ấn tượng hơn với mặt lưng k&iacute;nh, trong sự kết hợp h&agrave;i h&ograve;a giữa m&agrave;u xanh v&agrave; t&iacute;m tạo n&ecirc;n hiệu ứng gradient đa sắc độ khi bạn ngắm nh&igrave;n ở c&aacute;c g&oacute;c nghi&ecirc;ng kh&aacute;c nhau.</p>\r\n', 10),
-(10, 'Điện thoại OPPO F7', 6000000, 125, 1, '<h2>Đặc điểm nổi bật của OPPO F7</h2>\r\n\r\n<p><img src=\"https://cdn.tgdd.vn/Products/Images/42/155261/Slider/vi-vn-1-thietke-oppo-f7.jpg\" style=\"width:100%\" /></p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/hoi-dap/cong-nghe-selfie-ai-beauty-la-gi-1049958\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/tin-tuc/do-phan-giai-man-hinh-qhd-hd-fullhd-2k-4k-la-gi--592178\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/tin-tuc/mediatek-gioi-thieu-helio-p60-tai-mwc-2018-tap-trung-ai-va-hieu-suat-1069899\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/tin-tuc/bao-mat-khuon-mat-se-thanh-tieu-chuan-moi-tren-smartphone-1066760\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p>Bộ sản phẩm chuẩn: Hộp, Sạc, Tai nghe, C&aacute;p, C&acirc;y lấy sim, Ốp lưng</p>\r\n\r\n<h2>Tiếp nối sự th&agrave;nh c&ocirc;ng của&nbsp;<a href=\"https://www.thegioididong.com/dtdd/oppo-f5-6gb\" target=\"_blank\" title=\"Chi tiết điện thoại OPPO F5\" type=\"Chi tiết điện thoại OPPO F5\">OPPO F5</a>&nbsp;th&igrave; OPPO tiếp tục tung ra&nbsp;<a href=\"https://www.thegioididong.com/dtdd/oppo-f7\" target=\"_blank\" title=\"Chi tiết điện thoại OPPO F7\" type=\"Chi tiết điện thoại OPPO F7\">OPPO F7</a>&nbsp;với điểm nhấn vẫn l&agrave; camera selfie v&agrave; thiết kế &quot;tai thỏ độc đ&aacute;o&quot;.</h2>\r\n\r\n<h3>Thiết kế tai thỏ độc đ&aacute;o</h3>\r\n\r\n<p>OPPO F7 vẫn đi theo thiết kế &quot;tai thỏ&quot; m&agrave;&nbsp;<a href=\"https://www.thegioididong.com/dtdd-apple-iphone\" target=\"_blank\" title=\"Tham khảo các dòng điện thoại Apple iPhone\" type=\"Tham khảo các dòng điện thoại Apple iPhone\">Apple</a>&nbsp;đ&atilde; từng l&agrave;m tr&ecirc;n&nbsp;<a href=\"https://www.thegioididong.com/dtdd/iphone-x-64gb-gray\" target=\"_blank\" title=\"Chi tiết điện thoại iPhone X 64GB Gray\" type=\"Chi tiết điện thoại iPhone X 64GB Gray\">iPhone X</a>.</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/images/42/155261/oppo-f71.jpg\" onclick=\"return false;\"><img alt=\"Thiết kế điện thoại OPPO F7\" src=\"https://cdn.tgdd.vn/Products/Images/42/155261/oppo-f71.jpg\" style=\"width:100%\" title=\"Thiết kế điện thoại OPPO F7\" /></a></p>\r\n\r\n<p><em>OPPO F7 với thiết kế &quot;tai thỏ&quot;</em></p>\r\n\r\n<p>M&aacute;y sẽ sở hữu m&agrave;n h&igrave;nh c&oacute; k&iacute;ch thước&nbsp;6.23 inch với độ ph&acirc;n giải Full HD+.</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/images/42/155261/oppo-f76.jpg\" onclick=\"return false;\"><img alt=\"Thiết kế điện thoại OPPO F7\" src=\"https://cdn.tgdd.vn/Products/Images/42/155261/oppo-f76.jpg\" style=\"width:100%\" title=\"Thiết kế điện thoại OPPO F7\" /></a></p>\r\n\r\n<p><em>M&agrave;n h&igrave;nh tỉ lệ 19:9</em></p>\r\n\r\n<p>Diện t&iacute;ch m&agrave;n h&igrave;nh của m&aacute;y chiếm tới&nbsp;89.09% gi&uacute;p tổng thể m&aacute;y kh&ocirc;ng qu&aacute; lớn so với c&aacute;c thiết bị c&ugrave;ng k&iacute;ch cỡ m&agrave;n h&igrave;nh.</p>\r\n\r\n<p>Mặt lưng với c&aacute;c g&oacute;c cạnh được bo cong cũng sẽ gi&uacute;p cho m&aacute;y &ocirc;m tay khi sử dụng.</p>\r\n\r\n<h3>Camera độ ph&acirc;n giải cao</h3>\r\n\r\n<p><a href=\"https://www.thegioididong.com/dtdd\" target=\"_blank\" title=\"Tham khảo các dòng điện thoại tại Thegioididong.com\" type=\"Tham khảo các dòng điện thoại tại Thegioididong.com\">Điện thoại</a>&nbsp;OPPO F7 sẽ sở hữu một m&aacute;y ảnh ph&iacute;a trước độ ph&acirc;n giải 25 MP.</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/images/42/155261/oppo-f72.jpg\" onclick=\"return false;\"><img alt=\"Cụm camera selfie của điện thoại OPPO F7\" src=\"https://cdn.tgdd.vn/Products/Images/42/155261/oppo-f72.jpg\" style=\"width:100%\" title=\"Cụm camera selfie của điện thoại OPPO F7\" /></a></p>\r\n\r\n<p><em>Camera selfie vẫn l&agrave; lợi thế của m&aacute;y</em></p>\r\n\r\n<p>OPPO lu&ocirc;n tiếp thị sản phẩm của họ l&agrave; chuy&ecirc;n gia selfie, v&agrave; với F7 cũng kh&ocirc;ng phải l&agrave; ngoại lệ.</p>\r\n\r\n<p>T&iacute;nh năng l&agrave;m đẹp bằng tr&iacute; tuệ th&ocirc;ng minh nh&acirc;n tạo AI vốn đ&atilde; xuất hiện tr&ecirc;n&nbsp;<a href=\"https://www.thegioididong.com/dtdd-oppo\" target=\"_blank\" title=\"Các dòng điện thoại OPPO tại Thegioididong.com\" type=\"Các dòng điện thoại OPPO tại Thegioididong.com\">điện thoại OPPO</a>&nbsp;d&ograve;ng cũ, nay t&iacute;ch hợp ở F7 hứa hẹn cũng sẽ được cải tiến đem lại chất lượng tốt hơn.</p>\r\n\r\n<p>C&aacute;c t&iacute;nh năng bổ sung kh&aacute;c của thiết bị bao gồm chụp ảnh HDR thời gian thực, chế độ l&agrave;m đẹp n&acirc;ng cao v&agrave; nh&atilde;n d&aacute;n AR.</p>\r\n', 10);
+(10, 'Điện thoại OPPO F7', 6000000, 125, 1, '<h2>Đặc điểm nổi bật của OPPO F7</h2>\r\n\r\n<p><img src=\"https://cdn.tgdd.vn/Products/Images/42/155261/Slider/vi-vn-1-thietke-oppo-f7.jpg\" style=\"width:100%\" /></p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/hoi-dap/cong-nghe-selfie-ai-beauty-la-gi-1049958\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/tin-tuc/do-phan-giai-man-hinh-qhd-hd-fullhd-2k-4k-la-gi--592178\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/tin-tuc/mediatek-gioi-thieu-helio-p60-tai-mwc-2018-tap-trung-ai-va-hieu-suat-1069899\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/tin-tuc/bao-mat-khuon-mat-se-thanh-tieu-chuan-moi-tren-smartphone-1066760\" target=\"_blank\">T&igrave;m hiểu th&ecirc;m</a></p>\r\n\r\n<p>Bộ sản phẩm chuẩn: Hộp, Sạc, Tai nghe, C&aacute;p, C&acirc;y lấy sim, Ốp lưng</p>\r\n\r\n<h2>Tiếp nối sự th&agrave;nh c&ocirc;ng của&nbsp;<a href=\"https://www.thegioididong.com/dtdd/oppo-f5-6gb\" target=\"_blank\" title=\"Chi tiết điện thoại OPPO F5\" type=\"Chi tiết điện thoại OPPO F5\">OPPO F5</a>&nbsp;th&igrave; OPPO tiếp tục tung ra&nbsp;<a href=\"https://www.thegioididong.com/dtdd/oppo-f7\" target=\"_blank\" title=\"Chi tiết điện thoại OPPO F7\" type=\"Chi tiết điện thoại OPPO F7\">OPPO F7</a>&nbsp;với điểm nhấn vẫn l&agrave; camera selfie v&agrave; thiết kế &quot;tai thỏ độc đ&aacute;o&quot;.</h2>\r\n\r\n<h3>Thiết kế tai thỏ độc đ&aacute;o</h3>\r\n\r\n<p>OPPO F7 vẫn đi theo thiết kế &quot;tai thỏ&quot; m&agrave;&nbsp;<a href=\"https://www.thegioididong.com/dtdd-apple-iphone\" target=\"_blank\" title=\"Tham khảo các dòng điện thoại Apple iPhone\" type=\"Tham khảo các dòng điện thoại Apple iPhone\">Apple</a>&nbsp;đ&atilde; từng l&agrave;m tr&ecirc;n&nbsp;<a href=\"https://www.thegioididong.com/dtdd/iphone-x-64gb-gray\" target=\"_blank\" title=\"Chi tiết điện thoại iPhone X 64GB Gray\" type=\"Chi tiết điện thoại iPhone X 64GB Gray\">iPhone X</a>.</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/images/42/155261/oppo-f71.jpg\" onclick=\"return false;\"><img alt=\"Thiết kế điện thoại OPPO F7\" src=\"https://cdn.tgdd.vn/Products/Images/42/155261/oppo-f71.jpg\" style=\"width:100%\" title=\"Thiết kế điện thoại OPPO F7\" /></a></p>\r\n\r\n<p><em>OPPO F7 với thiết kế &quot;tai thỏ&quot;</em></p>\r\n\r\n<p>M&aacute;y sẽ sở hữu m&agrave;n h&igrave;nh c&oacute; k&iacute;ch thước&nbsp;6.23 inch với độ ph&acirc;n giải Full HD+.</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/images/42/155261/oppo-f76.jpg\" onclick=\"return false;\"><img alt=\"Thiết kế điện thoại OPPO F7\" src=\"https://cdn.tgdd.vn/Products/Images/42/155261/oppo-f76.jpg\" style=\"width:100%\" title=\"Thiết kế điện thoại OPPO F7\" /></a></p>\r\n\r\n<p><em>M&agrave;n h&igrave;nh tỉ lệ 19:9</em></p>\r\n\r\n<p>Diện t&iacute;ch m&agrave;n h&igrave;nh của m&aacute;y chiếm tới&nbsp;89.09% gi&uacute;p tổng thể m&aacute;y kh&ocirc;ng qu&aacute; lớn so với c&aacute;c thiết bị c&ugrave;ng k&iacute;ch cỡ m&agrave;n h&igrave;nh.</p>\r\n\r\n<p>Mặt lưng với c&aacute;c g&oacute;c cạnh được bo cong cũng sẽ gi&uacute;p cho m&aacute;y &ocirc;m tay khi sử dụng.</p>\r\n\r\n<h3>Camera độ ph&acirc;n giải cao</h3>\r\n\r\n<p><a href=\"https://www.thegioididong.com/dtdd\" target=\"_blank\" title=\"Tham khảo các dòng điện thoại tại Thegioididong.com\" type=\"Tham khảo các dòng điện thoại tại Thegioididong.com\">Điện thoại</a>&nbsp;OPPO F7 sẽ sở hữu một m&aacute;y ảnh ph&iacute;a trước độ ph&acirc;n giải 25 MP.</p>\r\n\r\n<p><a href=\"https://www.thegioididong.com/images/42/155261/oppo-f72.jpg\" onclick=\"return false;\"><img alt=\"Cụm camera selfie của điện thoại OPPO F7\" src=\"https://cdn.tgdd.vn/Products/Images/42/155261/oppo-f72.jpg\" style=\"width:100%\" title=\"Cụm camera selfie của điện thoại OPPO F7\" /></a></p>\r\n\r\n<p><em>Camera selfie vẫn l&agrave; lợi thế của m&aacute;y</em></p>\r\n\r\n<p>OPPO lu&ocirc;n tiếp thị sản phẩm của họ l&agrave; chuy&ecirc;n gia selfie, v&agrave; với F7 cũng kh&ocirc;ng phải l&agrave; ngoại lệ.</p>\r\n\r\n<p>T&iacute;nh năng l&agrave;m đẹp bằng tr&iacute; tuệ th&ocirc;ng minh nh&acirc;n tạo AI vốn đ&atilde; xuất hiện tr&ecirc;n&nbsp;<a href=\"https://www.thegioididong.com/dtdd-oppo\" target=\"_blank\" title=\"Các dòng điện thoại OPPO tại Thegioididong.com\" type=\"Các dòng điện thoại OPPO tại Thegioididong.com\">điện thoại OPPO</a>&nbsp;d&ograve;ng cũ, nay t&iacute;ch hợp ở F7 hứa hẹn cũng sẽ được cải tiến đem lại chất lượng tốt hơn.</p>\r\n\r\n<p>C&aacute;c t&iacute;nh năng bổ sung kh&aacute;c của thiết bị bao gồm chụp ảnh HDR thời gian thực, chế độ l&agrave;m đẹp n&acirc;ng cao v&agrave; nh&atilde;n d&aacute;n AR.</p>\r\n', 10),
+(15, 'a', 0, 1, 1, '', 10),
+(16, 'f', 0, 1, 1, '<p>f</p>\r\n', 10);
 
 -- --------------------------------------------------------
 
@@ -255,22 +257,69 @@ CREATE TABLE `product_specifications` (
   `id` int(11) NOT NULL,
   `products_id` int(11) NOT NULL,
   `specifications_id` int(11) NOT NULL,
-  `options` int(11) NOT NULL
+  `options` int(11) NOT NULL,
+  `price_option` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `product_specifications`
 --
 
-INSERT INTO `product_specifications` (`id`, `products_id`, `specifications_id`, `options`) VALUES
-(17, 1, 13, 1),
-(18, 1, 19, 1),
-(19, 1, 23, 1),
-(20, 1, 27, 1),
-(21, 1, 15, 2),
-(22, 1, 19, 2),
-(23, 1, 24, 2),
-(24, 1, 28, 2);
+INSERT INTO `product_specifications` (`id`, `products_id`, `specifications_id`, `options`, `price_option`) VALUES
+(115, 15, 13, 0, 10000),
+(116, 15, 16, 1, 20000),
+(117, 15, 19, 0, 10000),
+(118, 15, 20, 1, 20000),
+(119, 15, 23, 0, 10000),
+(120, 15, 26, 1, 20000),
+(121, 15, 27, 0, 10000),
+(122, 15, 31, 1, 20000),
+(123, 15, 45, 0, 10000),
+(124, 15, 45, 1, 20000),
+(125, 15, 44, 0, 10000),
+(126, 15, 44, 1, 20000),
+(127, 15, 43, 0, 10000),
+(128, 15, 43, 1, 20000),
+(129, 15, 41, 0, 10000),
+(130, 15, 42, 1, 20000),
+(131, 15, 38, 0, 10000),
+(132, 15, 40, 1, 20000),
+(133, 16, 13, 0, 10000),
+(134, 16, 13, 1, 2000),
+(135, 16, 13, 2, 300000),
+(136, 16, 13, 3, 4000000),
+(137, 16, 19, 0, 10000),
+(138, 16, 19, 1, 2000),
+(139, 16, 19, 2, 300000),
+(140, 16, 19, 3, 4000000),
+(141, 16, 23, 0, 10000),
+(142, 16, 23, 1, 2000),
+(143, 16, 23, 2, 300000),
+(144, 16, 23, 3, 4000000),
+(145, 16, 27, 0, 10000),
+(146, 16, 27, 1, 2000),
+(147, 16, 27, 2, 300000),
+(148, 16, 27, 3, 4000000),
+(149, 16, 45, 0, 10000),
+(150, 16, 45, 1, 2000),
+(151, 16, 45, 2, 300000),
+(152, 16, 45, 3, 4000000),
+(153, 16, 44, 0, 10000),
+(154, 16, 44, 1, 2000),
+(155, 16, 44, 2, 300000),
+(156, 16, 44, 3, 4000000),
+(157, 16, 43, 0, 10000),
+(158, 16, 43, 1, 2000),
+(159, 16, 43, 2, 300000),
+(160, 16, 43, 3, 4000000),
+(161, 16, 41, 0, 10000),
+(162, 16, 41, 1, 2000),
+(163, 16, 41, 2, 300000),
+(164, 16, 41, 3, 4000000),
+(165, 16, 38, 0, 10000),
+(166, 16, 38, 1, 2000),
+(167, 16, 38, 2, 300000),
+(168, 16, 38, 3, 4000000);
 
 -- --------------------------------------------------------
 
@@ -598,7 +647,7 @@ ALTER TABLE `order_details`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT cho bảng `product_groups`
 --
@@ -613,7 +662,7 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT cho bảng `product_specifications`
 --
 ALTER TABLE `product_specifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 --
 -- AUTO_INCREMENT cho bảng `roles`
 --

@@ -38,18 +38,18 @@
                                 <tr>
                                     <th>Address</th><td><p><?= $order['Users']['name'] ?></p><p><?= $order['Users']['phonenumber'] ?></p><p><?= $order['Subaddress']['address'] ?></p></td>
                                 </tr>
-                                <tr>
+<!--                                <tr>
                                     <th>Custonmer note:</th><td><p><?= $order['customer_note'] ?></td>
-                                </tr>
+                                </tr>-->
                             </table>    
                         </div>         
                         <div class="col-md-8">
                             <?= $this->Form->create(null) ?>
                              <?= $this->Form->label('status', ['text' => 'Status:']) ?><br>
-                            <?=$this->Form->radio('status',['0'=>'Chưa xác nhận','1'=>'Đã xác nhận, đang giao hàng','2'=>'Đã thanh toán','3'=>'Đã hủy'],['default'=>$order['status']])?><br>
+                            <?=$this->Form->radio('status',['0'=>'Chưa xác nhận','1'=>'Đã xác nhận, đang giao hàng','2'=>'Đã thanh toán','3'=>'Đã hủy'],['default'=>$order['status'],'class'=>'form-contronl'])?><br>
                             <?= $this->Form->label('note', ['text' => 'Note:']) ?><br>
-                            <?= $this->Form->textarea('note',['value'=>$order['note']]) ?>
-                            <?= $this->Form->submit('update') ?>
+                            <?= $this->Form->textarea('note',['value'=>$order['note'],'class'=>'form-control']) ?><br>  
+                            <?= $this->Form->submit('update',['class'=>'btn btn-primary']) ?>
                             <?= $this->Form->end() ?>
                         </div>
                     </div>

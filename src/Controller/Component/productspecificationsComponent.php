@@ -20,6 +20,7 @@ class productspecificationsComponent extends Component {
 
     public function add($req) {
         $newProductSpecification = $this->ProductSpecification->newEntity();
+        $newProductSpecification->price_option=$req['price_option'];
         $newProductSpecification->options=$req['options'];
         $newProductSpecification->products_id = $req['products_id'];
         $newProductSpecification->specifications_id = $req['specifications_id'];
@@ -99,6 +100,29 @@ class productspecificationsComponent extends Component {
          $result=$lstProductSpecification->max($maxField);
          
          return $result;
+    }
+    public function where($req=null){
+         $lstProductSpecification = $this->ProductSpecification->find();
+         if(!empty($req)){
+             if(isset($req['products_id'])){
+                 $lstProductSpecification=$lstProductSpecification->where(['products_id'=>$req['products_id']]);
+             }
+             if(isset($req['specifications_id'])){
+                 $lstProductSpecification=$lstProductSpecification->where(['specifications_id'=>$req['specifications_id']]);
+             }
+             if(isset($req['options'])){
+                 $lstProductSpecification=$lstProductSpecification->where(['options'=>$req['options']]);
+             }
+         }        
+         return $lstProductSpecification->toArray();
+    }
+    
+     public function group($id){
+        $query=  $this->ProductSpecification->find();
+        $query->select('options')
+                ->where(['products_id'=>$id])
+                ->group('options');       
+        return $query->toArray();
     }
     
 }

@@ -84,12 +84,12 @@ class productsComponent extends Component {
 
     public function add($reqProduct) {
         $newProduct = $this->Products->newEntity();
-        $newProduct->name = $reqProduct['name'];
-        $newProduct->price = $reqProduct['price'];
+        $newProduct->name = $reqProduct['name']; 
+//        $newProduct->price = $reqProduct['price'];
         $newProduct->quantity = $reqProduct['quantity'];
         $newProduct->status = $reqProduct['status'];
         $newProduct->description = $reqProduct['description'];
-        $newProduct->categories_id = $reqProduct['categories_id'];
+        $newProduct->categories_id = $reqProduct['categories_id'];        
         return $this->Products->save($newProduct);
     }
 
@@ -124,6 +124,14 @@ class productsComponent extends Component {
         }
         $count = $lstProduct->count();
         return $count;
+    }
+    
+    public function max($field){
+        $lstProduct=$this->Products->find();
+        if($field=='id'){
+            $lstProduct=$lstProduct->max($field);
+        }
+        return $lstProduct;
     }
 
 }

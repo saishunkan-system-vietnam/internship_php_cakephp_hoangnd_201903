@@ -1,4 +1,5 @@
 <?= $this->Html->script('ckeditor/ckeditor.js') ?>
+<?= $this->Html->css("Manager/products.css") ?>
 <div class="container-fluid">
     <div class="col-md-2">
         <h3>Add category</h3> 
@@ -10,7 +11,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Add producer</div>
             <div class="panel-body">
-                <?= $this->Form->create() ?>
+                <?= $this->Form->create(null, ['onsubmit' => 'return validateForm()', "name" => 'frmProduct']) ?>
                 <div class="form-group">
                     <?= $this->Form->label('name', 'Name product:') ?>
                     <?= $this->Form->text('name', ['class' => 'form-control', 'placeholder' => 'Enter producer name...']) ?>      
@@ -52,36 +53,28 @@
                 if (isset($errSubproducer)) {
                     echo '<div class="error-contents">' . $errSubproducer . '</div>';
                 }
-                ?>   
-
-                <div class="options">   
-                    <p><strong>Options:</strong></p>
-                    <div class="options1">
-                        <div class="container-fluid">                            
-                            <?php
-                            if (isset($lstSpecification) and count($lstSpecification) > 0) {
-                                $dem = 0;
-                                foreach ($lstSpecification as $key => $item) {
-                                    ?>
-                                    <div class="col-md-3">
-                                        <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '[]', $optionSpecification[$key], ['class' => 'form-control']) ?>                           
-                                    </div>  
-                                    <?php
-                                }
-                            }
+                ?>
+                <div class="tab">
+                    <div class="tab_link" onclick="tabLinkClick(0)">Options</div>
+                    <div class="add_tab" onclick="addTabClick()">+</div>
+                </div>                
+                <div class="tab_content container-fluid">    
+                    <h3>Options:</h3>
+                    <?php
+                    if (isset($lstSpecification) and count($lstSpecification) > 0) {
+                       foreach ($lstSpecification as $key => $item) {
                             ?>
                             <div class="col-md-3">
-                                <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control', 'type' => 'number', 'step' => "1"]) ?>                           
-                            </div> 
-                            <div class="col-md-1 col-md-offset-11"><div class="remove-icon" onclick="removeOption()">-</div></div>
-                        </div>  <hr> 
-                    </div>             
-                </div> 
-                <div class="col-md-12">
-                    <div class="add-icon" onclick="addOption()">
-                        +
-                    </div>
-                </div>
+                                <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['name'].'_'.$item['id'] . '[]', $optionSpecification[$key], ['class' => 'form-control']) ?>                           
+                            </div>  
+                            <?php
+                        }
+                    }
+                    ?>
+                    <div class="col-md-3">
+                        <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control', 'type' => 'number', 'step' => "1"]) ?>                           
+                    </div>                     
+                </div>                    
                 <div class="form-group col-md-12">
                     <br>
                     <?= $this->Form->submit('Add', ['class' => 'btn btn-primary']) ?>
@@ -91,10 +84,5 @@
         </div>        
     </div>
 </div>
-<script>
-    function addOption() {
-        $('.options').append($('.options1').html());
-    }
-</script>
 
-
+<?= $this->Html->script('tab.js') ?>

@@ -65,9 +65,9 @@ class specificationsComponent extends Component {
 
 
     public function getOptionParent($lstSpecification) {
-        $arrOption = [];
+        $arrOption = [['value'=>'chonoption','text'=>'--- Chọn option ---','hidden']];
         foreach ($lstSpecification as $value) {
-            $arrOption[$value['id']] = $value['name'];
+            $arrOption[$value['name'].'_'.$value['id']] = $value['name'];
         }
         return $arrOption;
     }

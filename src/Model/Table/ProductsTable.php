@@ -56,11 +56,11 @@ class ProductsTable extends Table {
                 ->allowEmptyString('name', false);
         // ->add('name', 'unique',['rule'=>'validateUnique','provider'=>'table']);
 
-        $validator
-                ->numeric('price', 'Price must be numberic.')
-                ->requirePresence('price', 'create')
-                ->allowEmptyString('price', false, 'Price should be different null')
-                ->greaterThanOrEqual('price', 0, 'Price must be greater than equal zero.', FALSE);
+//        $validator
+//                ->numeric('price', 'Price must be numberic.')
+//                ->requirePresence('price', 'create')
+//                ->allowEmptyString('price', false, 'Price should be different null')
+//                ->greaterThanOrEqual('price', 0, 'Price must be greater than equal zero.', FALSE);
 
         $validator
                 ->numeric('quantity', 'Price must be numberic.')

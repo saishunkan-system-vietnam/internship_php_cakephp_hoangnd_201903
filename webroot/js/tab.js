@@ -29,23 +29,29 @@ function removeTab(id) {
         var products_id = $('#tabLink' + id).attr('products_id');
         var options = $('#tabLink' + id).attr('options');
         if (products_id && options) {
-            $.ajax({
-                headers: {'X-CSRF-Token': $('meta[name="csrfToken"]').attr('content')},
-                url: '/shopdienthoai/manager/removeoption',
-                type: 'post',
-                data: {products_id: products_id, options: options}
-            }).done(function (rp) {
-                $('#tabLink' + id).remove();
-                $('#tabContent' + id).remove();
-            });
-        } else {
-            $('#tabLink' + id).remove();
-            $('#tabContent' + id).remove();
+
+//            $.ajax({
+//                headers: {'X-CSRF-Token': $('meta[name="csrfToken"]').attr('content')},
+//                url: '/shopdienthoai/manager/removeoption',
+//                type: 'post',
+//                data: {products_id: products_id, options: options}
+//            }).done(function (rp) {
+//                $('#tabLink' + id).remove();
+//                $('#tabContent' + id).remove();
+//            });
         }
+//        var dem = $('.inputOptionRemove').length;
+//        var newInputRemove = $('.inputOptionRemove');
+//        newInputRemove.eq(0).removeAttr('disabled');
+//        $('.inputOptionRemove').eq(dem - 1).after(newInputRemove[0].outerHTML);
+//        $('.inputOptionRemove').eq(dem).val(options);
+//        newInputRemove.eq(0).attr('disabled', 'disabled');
+//        dem++;
+        $('#tabLink' + id).remove();
+        $('#tabContent' + id).remove();
     }
 }
 function tabLinkClick(id) {
-
     var tabContent = $('.tab_content');
     for (var i = 0, max = tabContent.length; i < max; i++) {
         tabContent.eq(i).css('display', 'none');
@@ -58,7 +64,7 @@ function tabLinkClick(id) {
 function validateForm() {
     var name = $('input[name="name"]');
     var quantity = $('input[name="quantity"]');
-    var price = $('input[name="price[]"]');
+    var options = $('.options');
     if (name) {
         if (name.val() == "") {
             alert('Product name must be different null.');
@@ -71,14 +77,22 @@ function validateForm() {
             return false;
         }
     }
-//    alert(price);
-//    if (price) {
-//        for (var i = 0, max = price.length; i < max; i++) {
-//            if (price.eq(i).val() == "" || quantity.eq(i).val() < 0) {
+
+    for (var i = 0, max = options.length; i < max; i++) {
+        if (options.eq(i).val() == "") {
+            alert('Product options must be different null.');
+            options.eq(i).focus();
+            return false;
+        }
+    }
+
+//    if (options) {
+//        for (var i = 0, max = options.length; i < max; i++) {
+//            if (options.eq(i).val() == "" || quantity.eq(i).val() < 0) {
 //                alert('Product price must be number greater than or equal to 0.');
 //                tabLinkClick(i);
-//                price.eq(i).css('border', '1px soild red ');
-//                price.eq(i).focus();
+//                options.eq(i).css('border', '1px soild red ');
+//                options.eq(i).focus();
 //                return false;
 //            }
 //        }

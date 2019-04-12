@@ -97,7 +97,6 @@ class productsComponent extends Component {
     public function update($reqProduct) {
         $product = $this->get($reqProduct['id']);
         $product->name = $reqProduct['name'];
-        $product->price = $reqProduct['price'];
         $product->quantity = $reqProduct['quantity'];
         $product->status = $reqProduct['status'];
         $product->description = $reqProduct['description'];

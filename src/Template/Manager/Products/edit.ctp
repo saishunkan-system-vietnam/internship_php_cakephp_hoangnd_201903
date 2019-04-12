@@ -11,7 +11,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Add producer</div>
             <div class="panel-body">
-                <?= $this->Form->create() ?>
+                <?= $this->Form->create(null, ['onsubmit' => 'return validateForm()', "name" => 'frmProduct']) ?>
                 <div class="form-group">
                     <?= $this->Form->label('name', 'Name product:') ?>
                     <?= $this->Form->text('name', ['class' => 'form-control', 'placeholder' => 'Enter producer name...', 'value' => $product['name']]) ?>      
@@ -20,16 +20,7 @@
                         echo '<div class="error-contents">' . $errName . '</div>';
                     }
                     ?>
-                </div>      
-                <div class="form-group">
-                    <?= $this->Form->label('price', 'Price:') ?>
-                    <?= $this->Form->text('price', ['class' => 'form-control', 'type' => 'number', 'value' => 0, 'value' => $product['price']]) ?>     
-                    <?php
-                    if (isset($errPrice)) {
-                        echo '<div class="error-contents">' . $errPrice . '</div>';
-                    }
-                    ?>
-                </div>   
+                </div>
                 <div class="form-group">
                     <?= $this->Form->label('quantity', 'Quantity:') ?>
                     <?= $this->Form->text('quantity', ['class' => 'form-control', 'type' => 'number', 'value' => 0, 'value' => $product['quantity']]) ?>      
@@ -59,41 +50,49 @@
                         echo '<div class="error-contents">' . $errSubproducer . '</div>';
                     }
                     ?>
-                </div>                 
+                </div>     
+                <?php //echo $this->Form->text('removeOptions[]',['disabled'=>'disabled','value'=>'a','class'=>'inputOptionRemove'])?>
                 <?php if (count($groupOption) > 0) { ?>
                     <div class="tab">
                         <?php
                         $dem = 0;
-                        foreach ($groupOption as $itemOption) {                            
+                        foreach ($groupOption as $itemOption) {
                             ?>
-                        <div class="tab_link" products_id="<?=$itemOption['products_id']?>" options="<?=$itemOption['options']?>" id="tabLink<?= $dem ?>" onclick="tabLinkClick(<?= $dem ?>)">Options <?= $dem + 1 ?> <div onclick="removeTab(<?=$dem?>)" class="remove_tab">x</div></div>
+                            <div class="tab_link" products_id="<?= $itemOption['products_id'] ?>" options="<?= $itemOption['options'] ?>" id="tabLink<?= $dem ?>" onclick="tabLinkClick(<?= $dem ?>)">Options <?= $dem + 1 ?> <div onclick="removeTab(<?= $dem ?>)" class="remove_tab">x</div></div>
                             <?php
                             $dem++;
                         }
                         ?>                    
                         <div class="add_tab" onclick="addTabClick()">+</div>
                     </div> <?php
+                    $dem = 0;
                     foreach ($groupOption as $itemOption) {
                         ?>
-                        <div id="tabContent<?= $itemOption['options'] ?>" class="tab_content container-fluid">    
-                            <h3>Options <?= $itemOption['options'] + 1 ?>:</h3>
+                        <div id="tabContent<?= $dem ?>" class="tab_content container-fluid">    
+                            <h3>Options <?= $dem + 1 ?>:</h3>
                             <?php
                             if (isset($lstSpecification) and count($lstSpecification) > 0) {
                                 foreach ($lstSpecification as $key => $item) {
-                                    $default = $optionProduct[$itemOption['options']][$item['id']]['Specifications']['id'] . '_' . str_replace(' ', '_', $optionProduct[$itemOption['options']][$item['id']]['Specifications']['name']);
+                                    $default = "";
+                                    $value = "";
+                                    if (isset($itemOption['options']) and count($itemOption['options']) > 0) {
+                                        $default = $optionProduct[$itemOption['options']][$item['id']]['Specifications']['id'] . '_' . str_replace(' ', '_', $optionProduct[$itemOption['options']][$item['id']]['Specifications']['name']);
+                                        $value = $optionProduct[$itemOption['options']][$item['id']]['price_option'];
+                                    }
                                     ?>
                                     <div class="col-md-3">
-                                        <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '_' . $item['name'] . '[]', $optionSpecification[$key], ['class' => 'form-control', 'default' => $default]) ?>                           
+                                        <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '_' . $item['name'] . '[]', $optionSpecification[$key], ['class' => 'form-control options', 'default' => $default]) ?>                           
                                     </div>  
                                     <?php
                                 }
                             }
                             ?>
                             <div class="col-md-3">
-                                <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control', 'type' => 'number', 'step' => "1", 'value' => $optionProduct[$itemOption['options']][$item['id']]['price_option']]) ?>                           
+                                <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control options', 'type' => 'number', 'step' => "1", 'value' => $value]) ?>                           
                             </div>                     
                         </div>
                         <?php
+                        $dem++;
                     }
                 } else {
                     ?>                            
@@ -109,14 +108,14 @@
                             foreach ($lstSpecification as $key => $item) {
                                 ?>
                                 <div class="col-md-3">
-                                    <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '_' . $item['name'] . '[]', $optionSpecification[$key], ['class' => 'form-control']) ?>                           
+                                    <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '_' . $item['name'] . '[]', $optionSpecification[$key], ['class' => 'form-control options']) ?>                           
                                 </div>  
                                 <?php
                             }
                         }
                         ?>
                         <div class="col-md-3">
-                            <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control', 'type' => 'number', 'step' => "1"]) ?>                           
+                            <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control options', 'type' => 'number', 'step' => "1"]) ?>                           
                         </div>                     
                     </div>           
                 <?php }

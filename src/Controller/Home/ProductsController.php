@@ -9,6 +9,8 @@ class ProductsController extends HomesController {
     public function initialize() {
         parent::initialize();
         $this->loadComponent('products');
+        $this->loadComponent('specifications');
+        $this->loadComponent('productspecifications');
     }
 
     public function index() {
@@ -34,6 +36,25 @@ class ProductsController extends HomesController {
     public function view($id = null) {        
         $product = $this->products->selectAll(['id' => $id]);
         $product= array_pop($product);
+        $groupOptions=$this->productspecifications->group($id);
+        $this->set('groupOptions',$groupOptions);
+        $lstOptions=$this->productspecifications->selectAll(['products_id'=>$id]);
+        $arrOptions=[];
+        $lstSpecification=$this->specifications->where(['parent_id'=>0]);
+        $this->set('lstSpecification',$lstSpecification);
+//         echo '<pre>';
+//        var_dump($lstSpecification);
+//        die;
+        foreach ($groupOptions as $value){
+            $arrOptions[$value['options']]=[];
+            foreach ($lstOptions as $v){                
+                if($value['options']==$v['options']){
+                    $arrOptions[$value['options']][$v['Specifications']['parent_id']]=$v;
+                }
+            }
+        }
+        
+        $this->set('lstOptions',$arrOptions);       
         $this->set('product',$product);
         $this->set("title",$product['name']);
        

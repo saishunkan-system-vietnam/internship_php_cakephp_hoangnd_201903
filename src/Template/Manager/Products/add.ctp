@@ -66,14 +66,14 @@
                         foreach ($lstSpecification as $key => $item) {
                             ?>
                             <div class="col-md-3">
-                                <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '_' . $item['name'] . '[]', $optionSpecification[$key], ['class' => 'form-control']) ?>                           
+                                <strong><?= $item['name'] ?></strong> : <?= $this->Form->select($item['id'] . '_' . $item['name'] . '[]', $optionSpecification[$key], ['class' => 'form-control options']) ?>                           
                             </div>  
                             <?php
                         }
                     }
                     ?>
                     <div class="col-md-3">
-                        <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control', 'type' => 'number', 'step' => "1"]) ?>                           
+                        <strong>Price</strong> : <?= $this->Form->text('price[]', ['class' => 'form-control options', 'type' => 'number', 'step' => "1"]) ?>                           
                     </div>                     
                 </div>                     
                 <div class="form-group col-md-12">

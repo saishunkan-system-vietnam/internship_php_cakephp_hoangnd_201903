@@ -35,13 +35,13 @@ class ProductsController extends ManagersController {
         }
         $this->set('lstSpecification', $lstSpecification);
         $this->set('optionSpecification', $optionSpecification);
-        if ($this->request->isPost()) {  
-            $reqProduct = $this->request->getData();           
+        if ($this->request->isPost()) {
+            $reqProduct = $this->request->getData();
             $result = $this->products->add($reqProduct);
             if ($result === FALSE) {
                 $this->set('error', 'Add fail.');
             } else {
-                $productAdded = $this->products->max('id');                
+                $productAdded = $this->products->max('id');
                 foreach ($lstSpecification as $value) {
                     foreach ($reqProduct[$value['id'] . '_' . str_replace(' ', '_', $value['name'])] as $k => $v) {
                         $this->productspecifications->add(['products_id' => $productAdded['id'], 'specifications_id' => strstr($v, '_', true), 'options' => $k, 'price_option' => $reqProduct['price'][$k]]);
@@ -78,21 +78,25 @@ class ProductsController extends ManagersController {
         //láy option of product
         $optionProductSpecifition = $this->productspecifications->selectAll(['products_id' => $id]);
         $groupOption = $this->productspecifications->group($id);
-        $optionProduct=[];
-        foreach ($groupOption as $value){
-            $optionProduct[$value['options']]=[];
-            foreach ($optionProductSpecifition as $v){ 
-               if($v['options']===$value['options']){
-                    $optionProduct[$value['options']][$v['Specifications']['parent_id']]= $v;
+        $optionProduct = [];
+        foreach ($groupOption as $value) {
+            $optionProduct[$value['options']] = [];
+            foreach ($optionProductSpecifition as $v) {
+                if ($v['options'] === $value['options']) {
+                    $optionProduct[$value['options']][$v['Specifications']['parent_id']] = $v;
                 }
             }
-        }       
-       
-        $this->set('optionProduct',$optionProduct);
+        }
+
+        $this->set('optionProduct', $optionProduct);
         $this->set('groupOption', $groupOption);
         $this->set('optionProductSpecifition', $optionProductSpecifition);
         if ($this->request->isPost()) {
             $reqProduct = $this->request->getData();
+//            echo '<pre>';
+//            var_dump($reqProduct['removeOptions']);
+//            die;
+            $this->productspecifications->delete(['products_id' => $id]);
             $validation = $this->Products->newEntity($reqProduct);
             $validationError = $validation->errors();
             if (empty($validationError)) {
@@ -100,7 +104,12 @@ class ProductsController extends ManagersController {
                 $result = $this->products->update($reqProduct);
                 if ($result === FALSE) {
                     $this->set('error', 'Add fail.');
-                } else {
+                } else { 
+                    foreach ($lstSpecification as $value) {
+                        foreach ($reqProduct[$value['id'] . '_' . str_replace(' ', '_', $value['name'])] as $k => $v) {
+                            $this->productspecifications->add(['products_id' => $id, 'specifications_id' => strstr($v, '_', true), 'options' => $k, 'price_option' => $reqProduct['price'][$k]]);
+                        }
+                    }
                     $this->redirect(['action' => 'index']);
                 }
             } else {

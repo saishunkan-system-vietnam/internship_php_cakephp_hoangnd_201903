@@ -14,34 +14,96 @@
             echo $this->Html->image('/img/phone/' . $product['Images']['name'], ['alt' => $product['Images']['name'], 'width' => '100%']);
         }
         ?>
-
     </div>
 
     <div class="col-md-9">
-        <?php
-        if (isset($product)) {
-             echo '<div class="products-price-view">'.number_format($product['price']) . ' vnd</div>';
-            echo '<br>' . $this->Html->link('Buy now', ['controller' => 'Order', 'action' => 'buyconfirm', $product['id']],['class'=>'btn btn-danger']);
-            echo '<br>';
-            echo '<br>' . $this->Form->button('Add cart', ['productId' => $product['id'], 'name' => 'addCart','class'=>'btn btn-primary']);
-        }
+        <?php if (isset($product)) { ?>          
+
+            <div>
+                <?php
+                if (isset($groupOptions) and count($groupOptions) > 0) {
+                    $dem = 1;
+                    ?>
+                    <div class="products-price-view"> <?= number_format($groupOptions[0]['price_option']) ?> vnd</div>
+                    <?php
+                    foreach ($groupOptions as $val) {
+                        ?><div <?php
+                        if (count($groupOptions) == 1) {
+                            echo 'hidden';
+                        }                       
+                        ?> >
+                        <input <?php
+                        if ($dem == 1) {
+                            echo 'checked';
+                        }                       
+                        ?> type="radio" option="<?= $val['options'] ?>" products_id="<?= $val['products_id'] ?>" price_option="<?= $val['price_option'] ?>" name="rdbOptions" value="<?= $val['options'] ?>">Options <?= $dem ?></div>
+
+                        <?php
+                        $dem++;
+                    }
+                }
+                ?>
+            </div>
+
+            <br><?= $this->Html->link('Buy now', ['controller' => 'Order', 'action' => 'buyconfirm', $product['id']], ['class' => 'btn btn-danger']) ?>
+            <br>
+            <br><?= $this->Form->button('Add cart', ['productId' => $product['id'], 'name' => 'addCart', 'class' => 'btn btn-primary']) ?>
+        <?php }
         ?>
     </div>
 </div>
 <div class="container-fluid">
-<div  class="col-md-8">
-    
-         <?php
-    if (isset($product)) {
-        echo $product['description'];
-    }
-    ?>
-    
-</div>
-<div class="col-md-4">
+    <div  class="col-md-8">
 
-</div>
-    
+        <?php
+        if (isset($product)) {
+            echo $product['description'];
+        }
+        ?>
+
+    </div>
+    <div class="col-md-4">
+        <h3>Specification of Products</h3>
+
+        <?php
+        if (isset($groupOptions) and count($groupOptions) > 0) {
+            foreach ($groupOptions as $v) {
+                ?>
+                <table <?php
+                if ($v['options'] != 0) {
+                    echo 'hidden="hidden"';
+                }
+                ?> class="table table-condensed optionProduct" id="<?= $v['options'] ?>">
+                    <?php
+                    foreach ($lstSpecification as $item) {
+                        ?>
+                        <tr>
+                            <th>
+                                <?= $item['name'] ?>
+                            </th>
+                            <?php
+                            foreach ($lstOptions as $key => $val) {
+                                if ($key == $v['options']) {
+                                    ?>
+                                    <td>
+                                        <?= $val[$item['id']]['Specifications']['name'] ?>
+                                    </td>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </table>
+                <?php
+            }
+        }
+        ?>
+
+    </div>
+
 </div>
 <script>
     $('button[name="addCart"]').click(function () {
@@ -56,5 +118,17 @@
             location.reload();
             alert('Add product to cart successful!');
         });
+    });
+
+    $(document).on("click", 'input[name="rdbOptions"]', function () {
+        var _this = $(this);
+        $('.products-price-view').text(_this.attr('price_option').replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + ' vnd');
+        for (var i = 0, max = $('.optionProduct').length; i < max; i++) {
+            if ($('.optionProduct').eq(i).attr('id') === _this.val()) {
+                $('.optionProduct').eq(i).removeAttr('hidden');
+            } else {
+                $('.optionProduct').eq(i).attr('hidden', 'hidden');
+            }
+        }
     });
 </script>

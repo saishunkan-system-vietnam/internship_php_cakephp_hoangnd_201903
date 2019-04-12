@@ -40,9 +40,8 @@ class productspecificationsComponent extends Component {
     }
 
     public function delete($req) {
-        return $this->ProductSpecifications->deleteAll([
-            'products_id'=>$req['products_id'],
-            'options'=>$req['options']
+       return $this->ProductSpecifications->deleteAll([
+            'products_id'=>$req['products_id']
         ]);
     }   
 
@@ -95,9 +94,11 @@ class productspecificationsComponent extends Component {
         $query=  $this->ProductSpecifications->find();
         $query->select('options')
                 ->select('products_id')
+                ->select('price_option')
                 ->where(['products_id'=>$id])
                 ->group('options')      
-                ->group('products_id');
+                ->group('products_id')
+                ->group('price_option');
         return $query->toArray();
     }
     

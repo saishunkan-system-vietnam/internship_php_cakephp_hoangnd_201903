@@ -12,6 +12,6 @@ class InvoiceController extends HomesController {
     }
 
     public function index() {
-      
+        $this->set("title",'invoice');
     }
 }

@@ -86,11 +86,11 @@ class AjaxController extends HomesController {
         if ($this->request->is('ajax')) {             
             $req=  $this->request->getData();  
             if (isset($req["key"]) and $req["key"]!="") {
-                $lstProduct = $this->products->selectAll(['keySearch' => $req['key'], 'limit' => 4,'offset'=>($req['page']-1)*4]);
+                $lstProduct = $this->products->selectAll(['keySearch' => $req['key'], 'limit' => 4,'offset'=>($req['page']-1)*4,'joinLeft' => 1]);
                 $this->set('key', $req['key']);
                 $this->set('lstProduct', $lstProduct);
             } else {
-                $lstProduct = $this->products->selectAll(['limit' => 4,'offset'=>($req['page']-1)*4]);
+                $lstProduct = $this->products->selectAll(['limit' => 4,'offset'=>($req['page']-1)*4,'joinLeft' => 1]);
             }
             $this->set('lstProduct', $lstProduct);
         }

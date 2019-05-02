@@ -14,6 +14,8 @@ class ProductsController extends HomesController {
     }
 
     public function index() {
+       
+      
         $this->set("title","Trang chủ");
         $req = $this->request->getQuery();
         $key="";
@@ -21,21 +23,21 @@ class ProductsController extends HomesController {
             if($req["key"]==""){
                 return $this->redirect(['action'=>'index']);
             }
-            $countProduct = $this->products->count(['keySearch' => $req["key"]]);
+            $countProduct = $this->products->count(['keySearch' => $req["key"],'joinLeft' => 1]);
             $key=$req["key"];
             $this->set("title","Tìm kiếm");
         } else{            
-            $countProduct = $this->products->count();            
-        }
+            $countProduct = $this->products->count(['joinLeft' => 1]);            
+        }          
         $pageNumber = ($countProduct % 4 == 0) ? $countProduct / 4 : (int) ($countProduct / 4) + 1;
         $this->set('countProduct', $countProduct);
         $this->set('pageNumber', $pageNumber);
         $this->set("key",$key);
     }
 
-    public function view($id = null) {        
-        $product = $this->products->selectAll(['id' => $id]);
-        $product= array_pop($product);
+    public function view($id = null,$options=null) { 
+        $product = $this->products->selectAll(['id' => $id,'joinLeft'=>1,'option'=>$options]);
+        $product= array_pop($product);       
         $groupOptions=$this->productspecifications->group($id);
         $this->set('groupOptions',$groupOptions);
         $lstOptions=$this->productspecifications->selectAll(['products_id'=>$id]);

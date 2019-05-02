@@ -21,25 +21,24 @@
 
             <div>
                 <?php
-                if (isset($groupOptions) and count($groupOptions) > 0) {
-                    $dem = 1;
+                if (isset($groupOptions) and count($groupOptions) > 0) {                   
                     ?>
-                    <div class="products-price-view"> <?= number_format($groupOptions[0]['price_option']) ?> vnd</div>
+                    <div class="products-price-view"> <?= number_format($product['ProductSpecifications']['price_option']) ?> vnd</div>
                     <?php
                     foreach ($groupOptions as $val) {
-                        ?><div <?php
-                        if (count($groupOptions) == 1) {
-                            echo 'hidden';
-                        }                       
+                        ?>
+                    <div <?php
+//                        if (count($groupOptions) == 1) {
+//                            echo 'hidden';
+//                        }                       
                         ?> >
                         <input <?php
-                        if ($dem == 1) {
+                        if ($val['options']==$product['ProductSpecifications']['options']) {
                             echo 'checked';
                         }                       
-                        ?> type="radio" option="<?= $val['options'] ?>" products_id="<?= $val['products_id'] ?>" price_option="<?= $val['price_option'] ?>" name="rdbOptions" value="<?= $val['options'] ?>">Options <?= $dem ?></div>
+                        ?> type="radio" option="<?= $val['options'] ?>" products_id="<?= $val['products_id'] ?>" price_option="<?= $val['price_option'] ?>" name="rdbOptions" value="<?= $val['options'] ?>">Options <?=$val['options']+1 ?></div>
 
                         <?php
-                        $dem++;
                     }
                 }
                 ?>
@@ -47,7 +46,7 @@
 
             <br><?= $this->Html->link('Buy now', ['controller' => 'Order', 'action' => 'buyconfirm', $product['id']], ['class' => 'btn btn-danger']) ?>
             <br>
-            <br><?= $this->Form->button('Add cart', ['productId' => $product['id'], 'name' => 'addCart', 'class' => 'btn btn-primary']) ?>
+            <br><?= $this->Form->button('Add cart', ['productId' => $product['id'],'option'=> $product['ProductSpecifications']['options'] ,'name' => 'addCart', 'class' => 'btn btn-primary']) ?>
         <?php }
         ?>
     </div>
@@ -70,7 +69,7 @@
             foreach ($groupOptions as $v) {
                 ?>
                 <table <?php
-                if ($v['options'] != 0) {
+                if ($v['options'] != $product['ProductSpecifications']['options']) {
                     echo 'hidden="hidden"';
                 }
                 ?> class="table table-condensed optionProduct" id="<?= $v['options'] ?>">
@@ -108,6 +107,8 @@
 <script>
     $('button[name="addCart"]').click(function () {
         var productId = $(this).attr('productId');
+        var option= $(this).attr('option');
+        alert(option);
         var url = "<?= $this->Url->build(['controller' => 'Ajax', 'action' => 'addCart']); ?>";
         $.ajax({
             headers: {'X-CSRF-Token': $('meta[name="csrfToken"]').attr('content')},
@@ -123,9 +124,10 @@
     $(document).on("click", 'input[name="rdbOptions"]', function () {
         var _this = $(this);
         $('.products-price-view').text(_this.attr('price_option').replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + ' vnd');
+         $('button[name="addCart"]').attr('option',_this.attr('option'));
         for (var i = 0, max = $('.optionProduct').length; i < max; i++) {
             if ($('.optionProduct').eq(i).attr('id') === _this.val()) {
-                $('.optionProduct').eq(i).removeAttr('hidden');
+                $('.optionProduct').eq(i).removeAttr('hidden');               
             } else {
                 $('.optionProduct').eq(i).attr('hidden', 'hidden');
             }

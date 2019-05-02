@@ -11,6 +11,7 @@ class productsComponent extends Component {
     private $Categories;
     private $ProductImages;
     private $Images;
+    private $ProductSpecifications;
 
     public function initialize(array $config) {
         parent::initialize($config);        
@@ -18,6 +19,7 @@ class productsComponent extends Component {
         $this->Categories = TableRegistry::getTableLocator()->get('Categories');
         $this->ProductImages = TableRegistry::getTableLocator()->get('ProductImages');
         $this->Images = TableRegistry::getTableLocator()->get('Images');
+        $this->ProductSpecifications=  TableRegistry::getTableLocator()->get("ProductSpecifications");
     }
 
     public function get($id) {
@@ -50,7 +52,7 @@ class productsComponent extends Component {
                 'type' => 'LEFT',
                 'conditions' => 'ProductImages.images_id=Images.id'
             ]
-        ]);
+        ]) ;
         if (!empty($req)) {
             if (isset($req['keySearch'])) {
                 $lstProduct = $lstProduct->where(['Products.name LIKE' => '%' . $req['keySearch'] . '%']);
@@ -61,10 +63,29 @@ class productsComponent extends Component {
             if (isset($req['offset']) and $req['offset'] >= 0) {
                 $lstProduct = $lstProduct->offset($req['offset']);
             }
+            if(isset($req['joinLeft'])){
+                $lstProduct=$lstProduct->select($this->ProductSpecifications)
+                        ->join([
+                            'ProductSpecifications'=>[
+                                'table'=>'product_specifications',
+                                'type'=>'LEFT',
+                                'conditions'=>'products.id=ProductSpecifications.products_id'
+                            ]
+                        ])
+                    ->group('options')
+                        ->group('Products.id');
+            }
             $lstProduct = $lstProduct->toArray();
             if (isset($req['id'])) {
                 foreach ($lstProduct as $key => $value) {
                     if ($value['id'] != $req['id']) {
+                        unset($lstProduct[$key]);
+                    }
+                }
+            }
+             if (isset($req['option'])) {
+                foreach ($lstProduct as $key => $value) {
+                    if ($value['ProductSpecifications']['options'] != $req['option']) {
                         unset($lstProduct[$key]);
                     }
                 }
@@ -79,6 +100,7 @@ class productsComponent extends Component {
         } else {
             $lstProduct = $lstProduct->toArray();
         }
+       
         return $lstProduct;
     }
 
@@ -117,6 +139,18 @@ class productsComponent extends Component {
     public function count($req=null) {
         $lstProduct = $this->Products->find();
         if (!empty($req)) {
+            if(isset($req['joinLeft'])){
+                $lstProduct=$lstProduct->select($this->ProductSpecifications)
+                        ->join([
+                            'ProductSpecifications'=>[
+                                'table'=>'product_specifications',
+                                'type'=>'LEFT',
+                                'conditions'=>'products.id=ProductSpecifications.products_id'
+                            ]
+                        ])
+                    ->group('options')
+                        ->group('Products.id');
+            }
             if (isset($req['keySearch'])) {
                 $lstProduct = $lstProduct->where(['Products.name LIKE' => '%' . $req['keySearch'] . '%']);
             }            

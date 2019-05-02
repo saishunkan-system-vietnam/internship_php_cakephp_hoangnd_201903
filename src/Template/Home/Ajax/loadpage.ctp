@@ -1,15 +1,15 @@
 <?php
 if (isset($lstProduct)) {
-    if (count($lstProduct) > 0) {
+    if (count($lstProduct) > 0) {       
         echo '<div class="box-products">';
         foreach ($lstProduct as $item) {
             ?>
             <div class="col-md-3 line-products">
-                <a href="<?= $this->Url->build(['controller' => 'Products', 'action' => 'view', $item['id']]) ?>">
+                <a href="<?= $this->Url->build(['controller' => 'Products', 'action' => 'view', $item['id'],$item['ProductSpecifications']['options']]) ?>">
                     <?= $this->Html->image('/img/phone/' . $item['Images']['name'], ['alt' => $item['Images']['name'], 'width' => '100%']) ?>
                     <p><br><?= $item['name'] ?></p>
                     <div class="products-price">
-                        <p><?= number_format($item['price']) ?> vnđ</p>
+                        <p><?= number_format($item['ProductSpecifications']['price_option']) ?> vnđ</p>
                     </div>
                 </a>
             </div>
